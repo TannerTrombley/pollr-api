@@ -7,7 +7,7 @@
 # using cloud.google.com/console use the "project id" for your application
 # id.
 application: pollr-api
-version: 1
+version: 0dot0dot1
 runtime: python27
 api_version: 1
 threadsafe: yes
@@ -24,7 +24,7 @@ handlers:
 # The script value is in the format <path.to.module>.<wsgi_application>
 # where <wsgi_application> is a WSGI application object.
 - url: .*  # This regex directs all routes to main.app
-  script: main.app
+  script: app.app
 
 # Third party libraries that are included in the App Engine SDK must be listed
 # here if you want to use them.  See
@@ -34,5 +34,5 @@ handlers:
 # project directory, either as a git submodule or as a plain subdirectory.
 # TODO: List any other App Engine SDK libs you may need here.
 #libraries:
-#- name: jinja2
+#- name: flask_restful
 #  version: latest
