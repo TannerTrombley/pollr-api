@@ -35,33 +35,15 @@ class CreatePollViewController: UIViewController {
 	}
 	
 	@IBAction func userWantsTwoResponses(_ sender: UIButton) {
-//		revealReponseFields(first: true, second: true, third: false, fourth: false)
-
-		responseStack.isHidden = false
-		submitButton.isHidden = false
-		
-		thirdResponse.isHidden = true
-		fourthResponse.isHidden = true
+		revealReponseFields(first: true, second: true, third: false, fourth: false)
 	}
 	
 	@IBAction func userWantsThreeResponses(_ sender: UIButton) {
-//		revealReponseFields(first: true, second: true, third: true, fourth: false)
-		
-		responseStack.isHidden = false
-		submitButton.isHidden = false
-		
-		thirdResponse.isHidden = false
-		fourthResponse.isHidden = true
+		revealReponseFields(first: true, second: true, third: true, fourth: false)
 	}
 	
 	@IBAction func userWantsFourResponses(_ sender: AnyObject) {
-//		revealReponseFields(first: true, second: true, third: true, fourth: true)
-		
-		responseStack.isHidden = false
-		submitButton.isHidden = false
-		
-		thirdResponse.isHidden = false
-		fourthResponse.isHidden = false
+		revealReponseFields(first: true, second: true, third: true, fourth: true)
 	}
 	
 	// Show which text fields the user wants
@@ -70,30 +52,25 @@ class CreatePollViewController: UIViewController {
 		if !first && !second && !third && !fourth {
 			responseStack.isHidden = true
 			submitButton.isHidden = true
-			
-			print("Hide everything")
 		} else {
 			responseStack.isHidden = false
 			submitButton.isHidden = false
-			
-			print("Display the response stack and submit button")
 		}
 		
-		print("The first value is: |\(first)|")
-		print("The first value is: |\(second)|")
-		print("The first value is: |\(third)|")
-		print("The first value is: |\(fourth)|")
-		
-		firstResponse.isHidden = !first
-		secondResponse.isHidden = !second
-		thirdResponse.isHidden = !third
-		fourthResponse.isHidden = !fourth
-		
+		firstResponse?.isHidden = !first
+		secondResponse?.isHidden = !second
+		thirdResponse?.isHidden = !third
+		fourthResponse?.isHidden = !fourth
 	}
 	
 	
 	@IBAction func submitPoll(_ sender: UIButton) {
 		// validate user data
+		print("User's chosen repsonses:")
+		print("\(firstResponse.text)")
+		print("\(secondResponse.text)")
+		print("\(thirdResponse.text)")
+		print("\(fourthResponse.text)")
 	}
 	
     override func viewDidLoad() {
@@ -103,7 +80,6 @@ class CreatePollViewController: UIViewController {
 		
 		responseStack.isHidden = true
 		submitButton.isHidden = true
-        // Do any additional setup after loading the view.
     }
 
     override func didReceiveMemoryWarning() {

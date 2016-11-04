@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Alamofire
 
 class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
 
@@ -20,6 +21,8 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
 	
 	override func viewDidLoad() {
 		super.viewDidLoad()
+		
+		Alamofire.request("https://pollr-api.appspot.com/api/v1.0/demo")
 		
 		pollId = 0
 		
@@ -38,7 +41,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
 		             "USA",
 		             "Michigan"]
 		
-		answers = ["Yes", "No", "Maybe"]
+		answers = ["Yes", "No", "Maybe", "Decline to answer"]
 	}
 
 	
@@ -65,7 +68,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
 		}
 		
 		if indexPaths.count > 0 {
-			print("Need to reload rows: \(indexPaths)")
+//			print("Need to reload rows: \(indexPaths)")
 			tableView.reloadRows(at: indexPaths, with: UITableViewRowAnimation.automatic)
 		}
 	}
@@ -81,23 +84,29 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
 		let cell = tableView.dequeueReusableCell(withIdentifier: "PollQuestionTableViewCell", for: indexPath) as? PollQuestionTableViewCell
 		let responseStack = cell?.contentView.viewWithTag(1) as! UIStackView
 		
-		for answer in answers {
+		if responseStack.subviews.isEmpty {
+
+//			answers = httpsClient.getAnswersForPoll('poll-id')
 			
-			// Create button
-			let button = UIButton(type: UIButtonType.system)
-			button.frame = CGRect(x: 0, y: 0, width: responseStack.frame.width, height: 44)
-			button.setTitle(answer, for: UIControlState.normal)
-			
-			// Give it an action
-			button.addTarget(cell, action: #selector(PollQuestionTableViewCell.userCastedVote(_:)), for: UIControlEvents.touchUpInside)
-			
-			// Add button to the stack of selectable repsonses
-			responseStack.addArrangedSubview(button)
+			for answer in answers {
+				// Create button
+				let button = UIButton(type: UIButtonType.system)
+				button.setTitle(answer, for: UIControlState.normal)
+				
+				// Give it an action
+				button.addTarget(cell, action: #selector(PollQuestionTableViewCell.userCastedVote(_:)), for: UIControlEvents.touchUpInside)
+				
+				// Add button to the stack of selectable repsonses
+				responseStack.addArrangedSubview(button)
+				
+				// Constrain it to the leading edge of the stack (i'm not sure why it's showing up in the center, but that works too)
+				button.trailingAnchor.constraint(equalTo: responseStack.layoutMarginsGuide.trailingAnchor).isActive = true
+			}
 		}
-			
 		let row = indexPath.row
 		cell?.pollTitle.text = questions[row]
 		return cell!
+
 	}
 	
 	func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {

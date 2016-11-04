@@ -10,40 +10,16 @@ import UIKit
 
 class PollQuestionTableViewCell: UITableViewCell {
 	
+	// Used to supress NSException thrown when you try to removeObserver before addObvserver gets called
 	var observerAdded = false
 	
-	// MARK: Heights
-	class var defaultHeight: CGFloat { get { return 44 } }
-	class var expandedHeight: CGFloat { get { return 250 } }
+	// MARK: Cell Heights
+	class var defaultHeight: CGFloat { get { return 50 } }
+	class var expandedHeight: CGFloat { get { return 175 } }
 	
 	// MARK: Cell Contents
 	@IBOutlet weak var pollTitle: UILabel!
-	
 	@IBOutlet weak var responseStack: UIStackView!
-	
-	@IBOutlet weak var firstResponse: UIButton!
-	@IBOutlet weak var secondResponse: UIButton!
-	@IBOutlet weak var thirdResponse: UIButton!
-	@IBOutlet weak var fourthResponse: UIButton!
-	
-	
-	// MARK: User Votes Actions
-	@IBAction func userVotesFirstResponse(_ sender: UIButton) {
-		// Send vote to server
-		// Show the user the results of the poll
-	}
-
-	@IBAction func userVotesSecondReponse(_ sender: UIButton) {
-		
-	}
-	
-	@IBAction func userVotesThirdResponse(_ sender: UIButton) {
-		
-	}
-	
-	@IBAction func userVotesFourthResponse(_ sender: UIButton) {
-		
-	}
 	
 	
 	func checkHeight() {

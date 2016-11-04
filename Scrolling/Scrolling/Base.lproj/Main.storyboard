@@ -22,11 +22,11 @@
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="145" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="GlG-Kl-2MO">
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="PollQuestionTableViewCell" rowHeight="175" id="tTx-Bj-oBU" userLabel="PollQuestionTableViewCell" customClass="PollQuestionTableViewCell" customModule="Scrolling" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="28" width="375" height="175"/>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="PollQuestionTableViewCell" rowHeight="200" id="tTx-Bj-oBU" userLabel="PollQuestionTableViewCell" customClass="PollQuestionTableViewCell" customModule="Scrolling" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="28" width="375" height="200"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="tTx-Bj-oBU" id="BFT-EA-OEe">
-                                            <frame key="frameInset" width="375" height="174.5"/>
+                                            <frame key="frameInset" width="375" height="199.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="B4p-09-LtP">
@@ -37,50 +37,20 @@
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <stackView opaque="NO" tag="1" contentMode="scaleToFill" axis="vertical" alignment="top" translatesAutoresizingMaskIntoConstraints="NO" id="CFH-Dy-NWV">
-                                                    <subviews>
-                                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Alw-9o-EEU">
-                                                            <state key="normal" title="first"/>
-                                                            <connections>
-                                                                <action selector="userVotesFirstResponse:" destination="tTx-Bj-oBU" eventType="touchUpInside" id="t29-GS-Gj1"/>
-                                                            </connections>
-                                                        </button>
-                                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DUs-bm-HUm">
-                                                            <state key="normal" title="second"/>
-                                                            <connections>
-                                                                <action selector="userVotesSecondReponse:" destination="tTx-Bj-oBU" eventType="touchUpInside" id="zJO-8R-WXP"/>
-                                                            </connections>
-                                                        </button>
-                                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3Ln-lm-8Ix">
-                                                            <state key="normal" title="third"/>
-                                                            <connections>
-                                                                <action selector="userVotesThirdResponse:" destination="tTx-Bj-oBU" eventType="touchUpInside" id="vAt-Qd-4ul"/>
-                                                            </connections>
-                                                        </button>
-                                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4eD-Cd-Zgl">
-                                                            <state key="normal" title="fourth"/>
-                                                            <connections>
-                                                                <action selector="userVotesFourthResponse:" destination="tTx-Bj-oBU" eventType="touchUpInside" id="8px-z8-p67"/>
-                                                            </connections>
-                                                        </button>
-                                                    </subviews>
-                                                </stackView>
+                                                <stackView opaque="NO" tag="1" contentMode="scaleToFill" axis="vertical" alignment="top" translatesAutoresizingMaskIntoConstraints="NO" id="CFH-Dy-NWV"/>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstItem="CFH-Dy-NWV" firstAttribute="trailing" secondItem="BFT-EA-OEe" secondAttribute="trailingMargin" id="3j3-sZ-xT6"/>
-                                                <constraint firstItem="CFH-Dy-NWV" firstAttribute="top" secondItem="B4p-09-LtP" secondAttribute="bottom" constant="8" symbolic="YES" id="8FY-91-QwZ"/>
-                                                <constraint firstItem="B4p-09-LtP" firstAttribute="top" secondItem="BFT-EA-OEe" secondAttribute="topMargin" id="IAL-Qg-njG"/>
-                                                <constraint firstItem="CFH-Dy-NWV" firstAttribute="leading" secondItem="B4p-09-LtP" secondAttribute="leading" id="OSy-jN-lXb"/>
+                                                <constraint firstItem="B4p-09-LtP" firstAttribute="top" secondItem="BFT-EA-OEe" secondAttribute="topMargin" constant="8" id="KUN-z9-iY5"/>
                                                 <constraint firstItem="B4p-09-LtP" firstAttribute="leading" secondItem="BFT-EA-OEe" secondAttribute="leadingMargin" id="Pcf-GK-0sG"/>
+                                                <constraint firstAttribute="bottomMargin" secondItem="CFH-Dy-NWV" secondAttribute="bottom" constant="-2" id="Ue6-V5-q5F"/>
+                                                <constraint firstItem="CFH-Dy-NWV" firstAttribute="leading" secondItem="B4p-09-LtP" secondAttribute="leading" id="fTb-ie-B1a"/>
+                                                <constraint firstItem="CFH-Dy-NWV" firstAttribute="trailing" secondItem="BFT-EA-OEe" secondAttribute="trailingMargin" id="qz3-e5-ndt"/>
+                                                <constraint firstItem="CFH-Dy-NWV" firstAttribute="top" secondItem="B4p-09-LtP" secondAttribute="bottom" constant="8" symbolic="YES" id="uFJ-cG-caI"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
-                                            <outlet property="firstResponse" destination="Alw-9o-EEU" id="p0i-GL-HsF"/>
-                                            <outlet property="fourthResponse" destination="4eD-Cd-Zgl" id="OCb-O9-ea1"/>
                                             <outlet property="pollTitle" destination="B4p-09-LtP" id="Yin-kZ-uKh"/>
                                             <outlet property="responseStack" destination="CFH-Dy-NWV" id="cAt-4O-ZId"/>
-                                            <outlet property="secondResponse" destination="DUs-bm-HUm" id="5GK-Eu-AbE"/>
-                                            <outlet property="thirdResponse" destination="3Ln-lm-8Ix" id="2pz-jK-b4m"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
@@ -93,10 +63,10 @@
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <gestureRecognizers/>
                         <constraints>
-                            <constraint firstItem="GlG-Kl-2MO" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="3eg-I2-XXt"/>
-                            <constraint firstItem="GlG-Kl-2MO" firstAttribute="bottom" secondItem="wfy-db-euE" secondAttribute="top" id="CTi-T4-Gsy"/>
-                            <constraint firstAttribute="trailing" secondItem="GlG-Kl-2MO" secondAttribute="trailing" id="PMj-ix-lmO"/>
-                            <constraint firstItem="GlG-Kl-2MO" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="tRX-5V-Nl6"/>
+                            <constraint firstItem="GlG-Kl-2MO" firstAttribute="bottom" secondItem="wfy-db-euE" secondAttribute="top" id="B01-qO-pxw"/>
+                            <constraint firstAttribute="trailing" secondItem="GlG-Kl-2MO" secondAttribute="trailing" id="Rno-jP-EbF"/>
+                            <constraint firstItem="GlG-Kl-2MO" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="Vbd-wB-7sZ"/>
+                            <constraint firstItem="GlG-Kl-2MO" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="b2g-Ef-XCi"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Polls Near You" id="jyL-LQ-OhV">
@@ -241,6 +211,7 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="firstResponse" destination="7bh-h3-qiU" id="ZEd-dp-dXn"/>
                         <outlet property="fourthResponse" destination="LiK-W5-OcP" id="PIX-Tc-Eys"/>
                         <outlet property="numberReponseSelectionRow" destination="rGH-62-hYK" id="aak-2v-gVz"/>
                         <outlet property="questionText" destination="4D2-ux-xzb" id="BeX-S3-9Qx"/>
@@ -275,6 +246,6 @@
     </scenes>
     <inferredMetricsTieBreakers>
         <segue reference="0ax-dP-m4K"/>
-        <segue reference="GpN-vB-uDn"/>
+        <segue reference="Apz-Ds-2TX"/>
     </inferredMetricsTieBreakers>
 </document>
