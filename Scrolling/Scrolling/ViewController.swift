@@ -32,6 +32,10 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
 //		
 //			answers = ["Yes", "No", "Maybe", "Decline to answer"]
 			self.polls = polls.reversed()
+			for poll in polls {
+				print("Question -> \(poll.getQuestion())")
+				print("Answers  -> \(poll.getAnswers())")
+			}
 			
 			DispatchQueue.main.async {
 				self.table.reloadData()
@@ -79,22 +83,27 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
 	
 	// Retrieve the cell and populate the responses
 	func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-		
+
 		let cell = tableView.dequeueReusableCell(withIdentifier: "PollQuestionTableViewCell", for: indexPath) as? PollQuestionTableViewCell
-//		let responseStack = cell?.contentView.viewWithTag(1) as! UIStackView
-//		print("All of the cells subviews: *******\(cell?.contentView.subviews)********")
 		let responseStack = cell?.contentView.subviews[1] as! UIStackView
-		
 		let row = indexPath.row
+		
+		// Just remove all subviews to be sure
+		let subViews = responseStack.subviews
+		for view in subViews {
+			view.removeFromSuperview()
+		}
 		
 		// Only add the buttons for voting if they haven't already been loaded
 		if responseStack.subviews.isEmpty {
 			
-			print("There are not buttons, so we need to make some")
+//			let numAnswers : CGFloat = CGFloat(polls[row].getAnswers().count)
+//			let oldFrame = responseStack.frame
+//			let newHeight : CGFloat = numAnswers * CGFloat(44)
+//			let newFrame = CGRect(x: 0, y: 44, width: oldFrame.width, height: newHeight)
+//			responseStack.frame = newFrame
 			
 			for answer in polls[row].getAnswers() {
-				print("Making |\(answer)| into a button")
-				
 				// Create button
 				let button = UIButton(type: UIButtonType.system)
 				button.setTitle(answer, for: UIControlState.normal)

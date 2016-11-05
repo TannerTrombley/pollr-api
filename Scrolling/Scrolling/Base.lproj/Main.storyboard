@@ -23,29 +23,26 @@
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="PollQuestionTableViewCell" rowHeight="200" id="tTx-Bj-oBU" userLabel="PollQuestionTableViewCell" customClass="PollQuestionTableViewCell" customModule="Scrolling" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="92" width="375" height="200"/>
+                                        <rect key="frame" x="0.0" y="28" width="375" height="200"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="tTx-Bj-oBU" id="BFT-EA-OEe">
-                                            <frame key="frameInset" width="375" height="199"/>
+                                            <frame key="frameInset" width="375" height="200"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="B4p-09-LtP">
-                                                    <constraints>
-                                                        <constraint firstAttribute="height" constant="21" id="u18-Gd-MN3"/>
-                                                    </constraints>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <stackView opaque="NO" tag="1" contentMode="scaleToFill" axis="vertical" alignment="top" translatesAutoresizingMaskIntoConstraints="NO" id="CFH-Dy-NWV"/>
+                                                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" translatesAutoresizingMaskIntoConstraints="NO" id="CFH-Dy-NWV"/>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstItem="B4p-09-LtP" firstAttribute="top" secondItem="BFT-EA-OEe" secondAttribute="topMargin" constant="8" id="KUN-z9-iY5"/>
-                                                <constraint firstItem="B4p-09-LtP" firstAttribute="leading" secondItem="BFT-EA-OEe" secondAttribute="leadingMargin" id="Pcf-GK-0sG"/>
-                                                <constraint firstAttribute="bottomMargin" secondItem="CFH-Dy-NWV" secondAttribute="bottom" constant="-2" id="Ue6-V5-q5F"/>
-                                                <constraint firstItem="CFH-Dy-NWV" firstAttribute="leading" secondItem="B4p-09-LtP" secondAttribute="leading" id="fTb-ie-B1a"/>
-                                                <constraint firstItem="CFH-Dy-NWV" firstAttribute="trailing" secondItem="BFT-EA-OEe" secondAttribute="trailingMargin" id="qz3-e5-ndt"/>
-                                                <constraint firstItem="CFH-Dy-NWV" firstAttribute="top" secondItem="B4p-09-LtP" secondAttribute="bottom" constant="8" symbolic="YES" id="uFJ-cG-caI"/>
+                                                <constraint firstItem="CFH-Dy-NWV" firstAttribute="leading" secondItem="B4p-09-LtP" secondAttribute="leading" id="G9M-fy-SEx"/>
+                                                <constraint firstItem="B4p-09-LtP" firstAttribute="top" secondItem="BFT-EA-OEe" secondAttribute="topMargin" constant="8" id="afR-at-veC"/>
+                                                <constraint firstItem="CFH-Dy-NWV" firstAttribute="top" secondItem="B4p-09-LtP" secondAttribute="bottom" constant="8" symbolic="YES" id="bzj-UM-fEA"/>
+                                                <constraint firstAttribute="bottomMargin" secondItem="CFH-Dy-NWV" secondAttribute="bottom" constant="-3" id="fFu-iT-aOi"/>
+                                                <constraint firstItem="CFH-Dy-NWV" firstAttribute="trailing" secondItem="BFT-EA-OEe" secondAttribute="trailingMargin" id="nJX-1D-i01"/>
+                                                <constraint firstItem="B4p-09-LtP" firstAttribute="leading" secondItem="BFT-EA-OEe" secondAttribute="leadingMargin" id="nVf-kP-Vmr"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
@@ -63,10 +60,10 @@
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <gestureRecognizers/>
                         <constraints>
-                            <constraint firstItem="GlG-Kl-2MO" firstAttribute="bottom" secondItem="wfy-db-euE" secondAttribute="top" id="B01-qO-pxw"/>
-                            <constraint firstAttribute="trailing" secondItem="GlG-Kl-2MO" secondAttribute="trailing" id="Rno-jP-EbF"/>
-                            <constraint firstItem="GlG-Kl-2MO" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="Vbd-wB-7sZ"/>
-                            <constraint firstItem="GlG-Kl-2MO" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="b2g-Ef-XCi"/>
+                            <constraint firstItem="GlG-Kl-2MO" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="F5D-5F-sRm"/>
+                            <constraint firstAttribute="trailing" secondItem="GlG-Kl-2MO" secondAttribute="trailing" id="ijD-Az-ccg"/>
+                            <constraint firstItem="GlG-Kl-2MO" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="oaC-Df-BED"/>
+                            <constraint firstItem="GlG-Kl-2MO" firstAttribute="bottom" secondItem="wfy-db-euE" secondAttribute="top" id="sZb-UQ-weu"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Polls Near You" id="jyL-LQ-OhV">
