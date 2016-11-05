@@ -32,10 +32,10 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
 //		
 //			answers = ["Yes", "No", "Maybe", "Decline to answer"]
 			self.polls = polls.reversed()
-			for poll in polls {
-				print("Question -> \(poll.getQuestion())")
-				print("Answers  -> \(poll.getAnswers())")
-			}
+//			for poll in polls {
+//				print("Question -> \(poll.getQuestion())")
+//				print("Answers  -> \(poll.getAnswers())")
+//			}
 			
 			DispatchQueue.main.async {
 				self.table.reloadData()
@@ -45,6 +45,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
 		client.getDemoPolls(done: done)
 		client.getPoll(pollId: 5649391675244544) { (Poll) in
 		}
+		client.voteOnPoll(pollId: 5639445604728832, userVote: "no")
 	}
 
 	

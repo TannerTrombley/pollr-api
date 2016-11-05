@@ -10,7 +10,7 @@ import Alamofire
 import SwiftyJSON
 
 class clientAPI {
-	var authToken = "eyJhbGciOiJSUzI1NiIsImtpZCI6IjRmMGQ4YWEwNWU5NjA4ZmQ4ODk4ZWI3MjhlMTE3NzU1YzU3MGZmZDQifQ.eyJpc3MiOiJodHRwczovL3NlY3VyZXRva2VuLmdvb2dsZS5jb20vcG9sbHItYXBpIiwibmFtZSI6IkRhdmlkIEhlbmRlcnNob3QiLCJwaWN0dXJlIjoiaHR0cHM6Ly9zY29udGVudC54eC5mYmNkbi5uZXQvdi90MS4wLTEvcDEwMHgxMDAvMTIxMTE5MjNfMTAyMDgyNjQ3OTEyODQzODRfNTkzNDUwNTQ3NjQ3NjI0NjIyM19uLmpwZz9vaD02NzZhZjRmYjE5OGYzYmY3YmE3MTRkNzRjYzk1MGFkOSZvZT01ODlCMkY4QyIsImF1ZCI6InBvbGxyLWFwaSIsImF1dGhfdGltZSI6MTQ3ODMxMzU3NiwidXNlcl9pZCI6IkZGYjN5VndsTkhQYmYwZmhwMjJmV3BpQ0U1aDEiLCJzdWIiOiJGRmIzeVZ3bE5IUGJmMGZocDIyZldwaUNFNWgxIiwiaWF0IjoxNDc4MzEzNTc2LCJleHAiOjE0NzgzMTcxNzYsImVtYWlsIjoiZGF2aWRoZW5kZXJzaG90MjAxMkBnbWFpbC5jb20iLCJlbWFpbF92ZXJpZmllZCI6ZmFsc2UsImZpcmViYXNlIjp7ImlkZW50aXRpZXMiOnsiZmFjZWJvb2suY29tIjpbIjEwMjExMTA1MjkxOTc1MTI2Il0sImVtYWlsIjpbImRhdmlkaGVuZGVyc2hvdDIwMTJAZ21haWwuY29tIl19LCJzaWduX2luX3Byb3ZpZGVyIjoiZmFjZWJvb2suY29tIn19.M4p7CEKeMihO7yoht1hfj7Icoq0u1laRIQP_sbzsXrlO1PdtpRNbWB_Dq_TQoQFj7LKYFunE19EMMrT7yvju9wnCD7sYY6Ric7BXSzwoFTm9I4MMsRxED5OPmOB1bLCcRIeNTFjWdogsGsultElLuMAgHogbSj4z_mbk3GqmHxjBDx9yxhvhmlyKTCkuS-DziHfJf_ZO8xtkggMqRTYqGiIlyr-6lc8j2JEqkxYU6nMAkzALdVxGiJN9EDTK2Gtq0PhudaZrqzfjBv8rBajbkUw7tAambMXsIk-elLCWmhK7hiNQOcGPSePgdvK2S88MgaeBwmzt6pbFFnyQXr8khw"
+	var authToken = "eyJhbGciOiJSUzI1NiIsImtpZCI6ImQyYzI5OTZhMjFjZDAzZmNlNjdlODVhZjk1MjVmNDBjNzIzZmFhMTYifQ.eyJpc3MiOiJodHRwczovL3NlY3VyZXRva2VuLmdvb2dsZS5jb20vcG9sbHItYXBpIiwibmFtZSI6IkRhdmlkIEhlbmRlcnNob3QiLCJwaWN0dXJlIjoiaHR0cHM6Ly9zY29udGVudC54eC5mYmNkbi5uZXQvdi90MS4wLTEvcDEwMHgxMDAvMTIxMTE5MjNfMTAyMDgyNjQ3OTEyODQzODRfNTkzNDUwNTQ3NjQ3NjI0NjIyM19uLmpwZz9vaD02NzZhZjRmYjE5OGYzYmY3YmE3MTRkNzRjYzk1MGFkOSZvZT01ODlCMkY4QyIsImF1ZCI6InBvbGxyLWFwaSIsImF1dGhfdGltZSI6MTQ3ODM1Nzc4OSwidXNlcl9pZCI6IkZGYjN5VndsTkhQYmYwZmhwMjJmV3BpQ0U1aDEiLCJzdWIiOiJGRmIzeVZ3bE5IUGJmMGZocDIyZldwaUNFNWgxIiwiaWF0IjoxNDc4MzU3Nzg5LCJleHAiOjE0NzgzNjEzODksImVtYWlsIjoiZGF2aWRoZW5kZXJzaG90MjAxMkBnbWFpbC5jb20iLCJlbWFpbF92ZXJpZmllZCI6ZmFsc2UsImZpcmViYXNlIjp7ImlkZW50aXRpZXMiOnsiZmFjZWJvb2suY29tIjpbIjEwMjExMTA1MjkxOTc1MTI2Il0sImVtYWlsIjpbImRhdmlkaGVuZGVyc2hvdDIwMTJAZ21haWwuY29tIl19LCJzaWduX2luX3Byb3ZpZGVyIjoiZmFjZWJvb2suY29tIn19.iqSuWrAQGUPLB0jid41Kbt2BL9wBSZT6KbBX7frpGNVUcsBThRPzKWnI6jE601Pxh4jerONFLesmLnm8BlLYc8ArUOgVAYFWW14laBo-2HYMYxiGNHy3Q7X64Tr1MD_oe7DMCD3VYBPpq898er7tJirLkn838e-MPAVWlOc8sM95b0Emr4PWHowHmgRFVGgvQX5jWIQVf6hhJqhMKn1eWz33XCLXa2b_wFtoqirmVjmgNCle-6RlSKrf6FbHpkTIxy4xpYFgzX-2LiOQVL0wUJndPTG-P5WKEZ5KBs2d9Gy8i53f_fBkvOgb3ydXHRpM9YN1DhNZYuD-tdA18AhxrA"
 	
 	func getDemoPolls(done:@escaping ([Poll]) -> Void) {
 		let header : HTTPHeaders = [
@@ -81,11 +81,9 @@ class clientAPI {
 			
 			if let result = response.result.value {
 				let json = JSON(result)
-				print("Json \(json)")
+//				print("Json \(json)")
 				let poll = json["result"]
 			
-				
-				
 				var responses = [String]()
 				for answer in poll["answers"] {
 					responses.append(answer.1["answer_text"].stringValue)
@@ -102,7 +100,9 @@ class clientAPI {
 		}
 	}
 	
-	func voteOnPoll(pollId: Int, responseIndex: Int) {
+	func voteOnPoll(pollId: Int, userVote: String) {
+		
+//		print("Vote on \(pollId) with answer \(responseIndex)")
 		
 		let headers : HTTPHeaders = [
 			"Authorization": authToken,
@@ -110,10 +110,12 @@ class clientAPI {
 		]
 		
 		let parameters : Parameters = [
-			"answer_id": responseIndex
+			"answer_id": userVote
 		]
 		
-		Alamofire.request("https://pollr-api.appspot.com/api/v1.0/demo", method: .post, parameters: parameters, encoding: JSONEncoding.default, headers: headers)
+		Alamofire.request("https://pollr-api.appspot.com/api/v1.0/polls/" + String(pollId), method: .post, parameters: parameters, encoding: JSONEncoding.default, headers: headers).responseJSON { response in
+			print(response.result.value)
+		}
 	}
 }
 
