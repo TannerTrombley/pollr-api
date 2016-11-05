@@ -8,8 +8,9 @@
 
 import UIKit
 
-class CreatePollViewController: UIViewController {
+class CreatePollViewController: UIViewController, UITextFieldDelegate {
 
+	// MARK: View Outlets
 	@IBOutlet weak var questionText: UITextField!
 	
 	// Row of number of responses the user selects from
@@ -18,13 +19,31 @@ class CreatePollViewController: UIViewController {
 	// The stack the user's reponses are contained in
 	@IBOutlet weak var responseStack: UIStackView!
 
-	// The response text fields
+	@IBOutlet weak var submitButton: UIButton!
+	
+	// MARK: Text Fields
 	@IBOutlet weak var fourthResponse: UITextField!
 	@IBOutlet weak var thirdResponse: UITextField!
 	@IBOutlet weak var secondResponse: UITextField!
 	@IBOutlet weak var firstResponse: UITextField!
 	
-	@IBOutlet weak var submitButton: UIButton!
+	// MARK: Text View Delegate Methods
+	func textFieldDidEndEditing(_ textField: UITextField) {
+		print("event triggered")
+		
+		if questionText?.text == ""
+			|| !((fourthResponse?.isHidden)!) && fourthResponse?.text == ""
+			|| !((thirdResponse?.isHidden)!) && thirdResponse?.text == ""
+			|| !((secondResponse?.isHidden)!) && secondResponse?.text == ""
+			|| !((firstResponse?.isHidden)!) && firstResponse?.text == "" {
+			
+			print("One or more text fields are empty")
+			submitButton.isUserInteractionEnabled = false
+		} else {
+			submitButton.isUserInteractionEnabled = true
+		}
+	}
+	
 	
 	@IBAction func createDefeaultResponsePoll(_ sender: UIButton) {
 		
@@ -55,6 +74,7 @@ class CreatePollViewController: UIViewController {
 		} else {
 			responseStack.isHidden = false
 			submitButton.isHidden = false
+			submitButton.isUserInteractionEnabled = false
 		}
 		
 		firstResponse?.isHidden = !first
@@ -66,11 +86,30 @@ class CreatePollViewController: UIViewController {
 	
 	@IBAction func submitPoll(_ sender: UIButton) {
 		// validate user data
-		print("User's chosen repsonses:")
-		print("\(firstResponse.text)")
-		print("\(secondResponse.text)")
-		print("\(thirdResponse.text)")
-		print("\(fourthResponse.text)")
+//		print("User's chosen repsonses:")
+//		print("\(firstResponse.text)")
+//		print("\(secondResponse.text)")
+//		print("\(thirdResponse.text)")
+//		print("\(fourthResponse.text)")
+
+		var question = questionText.text
+		var answers = [String]()
+		
+		if !((firstResponse?.isHidden)!) {
+			answers.append(firstResponse.text!)
+		}
+		if !((secondResponse?.isHidden)!) {
+			answers.append(secondResponse.text!)
+		}
+		if !((thirdResponse?.isHidden)!) {
+			answers.append(thirdResponse.text!)
+		}
+		if !((fourthResponse?.isHidden)!) {
+			answers.append(fourthResponse.text!)
+		}
+		
+		var client = clientAPI()
+		client.createPoll(question: question!, answers: answers)
 	}
 	
     override func viewDidLoad() {
@@ -80,6 +119,12 @@ class CreatePollViewController: UIViewController {
 		
 		responseStack.isHidden = true
 		submitButton.isHidden = true
+		
+		questionText.delegate = self
+		firstResponse.delegate = self
+		secondResponse.delegate = self
+		thirdResponse.delegate = self
+		fourthResponse.delegate = self
     }
 
     override func didReceiveMemoryWarning() {

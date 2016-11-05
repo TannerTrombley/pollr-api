@@ -23,10 +23,10 @@
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="PollQuestionTableViewCell" rowHeight="200" id="tTx-Bj-oBU" userLabel="PollQuestionTableViewCell" customClass="PollQuestionTableViewCell" customModule="Scrolling" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="28" width="375" height="200"/>
+                                        <rect key="frame" x="0.0" y="92" width="375" height="200"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="tTx-Bj-oBU" id="BFT-EA-OEe">
-                                            <frame key="frameInset" width="375" height="199.5"/>
+                                            <frame key="frameInset" width="375" height="199"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="B4p-09-LtP">
@@ -77,6 +77,9 @@
                             </connections>
                         </barButtonItem>
                     </navigationItem>
+                    <connections>
+                        <outlet property="table" destination="GlG-Kl-2MO" id="ggO-nL-heQ"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
@@ -182,25 +185,25 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <gestureRecognizers/>
                         <constraints>
-                            <constraint firstItem="Dyh-2y-I0m" firstAttribute="top" secondItem="MO9-bo-u0s" secondAttribute="bottom" constant="6" id="7S7-Or-Wbu"/>
-                            <constraint firstItem="fda-dB-Rry" firstAttribute="leading" secondItem="4D2-ux-xzb" secondAttribute="leading" id="ADw-D8-C3l"/>
-                            <constraint firstItem="4D2-ux-xzb" firstAttribute="leading" secondItem="MO9-bo-u0s" secondAttribute="leading" id="Bsj-by-ivP"/>
-                            <constraint firstItem="AJd-U3-dJB" firstAttribute="centerX" secondItem="Dyh-2y-I0m" secondAttribute="centerX" id="F5b-Wb-fB6"/>
-                            <constraint firstItem="Odo-c4-Gvk" firstAttribute="top" secondItem="AJd-U3-dJB" secondAttribute="bottom" constant="144" id="GYe-Uk-JuB"/>
-                            <constraint firstItem="uUD-mZ-rwr" firstAttribute="top" secondItem="Dyh-2y-I0m" secondAttribute="bottom" constant="7" id="HHk-uD-jIY"/>
-                            <constraint firstItem="fda-dB-Rry" firstAttribute="top" secondItem="muC-vf-xSw" secondAttribute="bottom" constant="8" symbolic="YES" id="HT0-HO-TfF"/>
-                            <constraint firstItem="fda-dB-Rry" firstAttribute="leading" secondItem="KtX-Qy-ZMa" secondAttribute="leadingMargin" id="R2g-Vj-LFD"/>
-                            <constraint firstItem="MO9-bo-u0s" firstAttribute="top" secondItem="4D2-ux-xzb" secondAttribute="bottom" constant="7" id="RLc-VA-2EH"/>
-                            <constraint firstItem="rGH-62-hYK" firstAttribute="leading" secondItem="XfO-Hm-1ZC" secondAttribute="leading" id="Xzw-1N-FN5"/>
-                            <constraint firstItem="4D2-ux-xzb" firstAttribute="top" secondItem="fda-dB-Rry" secondAttribute="bottom" constant="4" id="aTL-hl-THa"/>
-                            <constraint firstItem="MO9-bo-u0s" firstAttribute="leading" secondItem="Dyh-2y-I0m" secondAttribute="leading" id="bBG-aF-D4B"/>
-                            <constraint firstItem="rGH-62-hYK" firstAttribute="top" secondItem="Dyh-2y-I0m" secondAttribute="bottom" constant="8" symbolic="YES" id="fBB-z4-PMG"/>
-                            <constraint firstItem="4D2-ux-xzb" firstAttribute="trailing" secondItem="KtX-Qy-ZMa" secondAttribute="trailingMargin" id="fca-9J-Wap"/>
-                            <constraint firstItem="XfO-Hm-1ZC" firstAttribute="leading" secondItem="KtX-Qy-ZMa" secondAttribute="leadingMargin" constant="63" id="gN8-Ww-3Lb"/>
-                            <constraint firstItem="XfO-Hm-1ZC" firstAttribute="top" secondItem="rGH-62-hYK" secondAttribute="bottom" constant="8" symbolic="YES" id="hJ2-FH-1cn"/>
-                            <constraint firstItem="4D2-ux-xzb" firstAttribute="trailing" secondItem="Dyh-2y-I0m" secondAttribute="trailing" id="iuE-Hr-nDS"/>
-                            <constraint firstItem="Dyh-2y-I0m" firstAttribute="leading" secondItem="uUD-mZ-rwr" secondAttribute="leading" id="j2z-Gh-NV4"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="XfO-Hm-1ZC" secondAttribute="trailing" constant="80" id="tLj-Vx-35l"/>
+                            <constraint firstItem="fda-dB-Rry" firstAttribute="leading" secondItem="4D2-ux-xzb" secondAttribute="leading" id="3j6-KD-cim"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="XfO-Hm-1ZC" secondAttribute="trailing" constant="80" id="4Ov-IA-rL0"/>
+                            <constraint firstItem="XfO-Hm-1ZC" firstAttribute="top" secondItem="rGH-62-hYK" secondAttribute="bottom" constant="8" symbolic="YES" id="HZT-Mf-U8D"/>
+                            <constraint firstItem="4D2-ux-xzb" firstAttribute="trailing" secondItem="KtX-Qy-ZMa" secondAttribute="trailingMargin" id="NbK-Ow-OuJ"/>
+                            <constraint firstItem="4D2-ux-xzb" firstAttribute="top" secondItem="fda-dB-Rry" secondAttribute="bottom" constant="4" id="POu-80-cpn"/>
+                            <constraint firstItem="Dyh-2y-I0m" firstAttribute="top" secondItem="MO9-bo-u0s" secondAttribute="bottom" constant="5" id="YJF-Ig-Ngm"/>
+                            <constraint firstItem="fda-dB-Rry" firstAttribute="leading" secondItem="KtX-Qy-ZMa" secondAttribute="leadingMargin" id="Yoe-SY-nfI"/>
+                            <constraint firstItem="rGH-62-hYK" firstAttribute="leading" secondItem="XfO-Hm-1ZC" secondAttribute="leading" id="c4b-K9-DNM"/>
+                            <constraint firstItem="XfO-Hm-1ZC" firstAttribute="leading" secondItem="KtX-Qy-ZMa" secondAttribute="leadingMargin" constant="63" id="evB-is-HbM"/>
+                            <constraint firstItem="uUD-mZ-rwr" firstAttribute="top" secondItem="Dyh-2y-I0m" secondAttribute="bottom" constant="7" id="lLT-eG-61M"/>
+                            <constraint firstItem="MO9-bo-u0s" firstAttribute="top" secondItem="4D2-ux-xzb" secondAttribute="bottom" constant="7" id="oGJ-2e-0CZ"/>
+                            <constraint firstItem="4D2-ux-xzb" firstAttribute="trailing" secondItem="Dyh-2y-I0m" secondAttribute="trailing" id="oQT-ha-VyF"/>
+                            <constraint firstItem="Dyh-2y-I0m" firstAttribute="leading" secondItem="uUD-mZ-rwr" secondAttribute="leading" id="oYP-4s-IjN"/>
+                            <constraint firstItem="AJd-U3-dJB" firstAttribute="centerX" secondItem="Dyh-2y-I0m" secondAttribute="centerX" id="ppH-em-tNd"/>
+                            <constraint firstItem="fda-dB-Rry" firstAttribute="top" secondItem="muC-vf-xSw" secondAttribute="bottom" constant="8" symbolic="YES" id="w1d-Qs-Sh1"/>
+                            <constraint firstItem="Odo-c4-Gvk" firstAttribute="top" secondItem="AJd-U3-dJB" secondAttribute="bottom" constant="60" id="wC6-54-2yo"/>
+                            <constraint firstItem="MO9-bo-u0s" firstAttribute="leading" secondItem="Dyh-2y-I0m" secondAttribute="leading" id="wOV-rY-jt6"/>
+                            <constraint firstItem="rGH-62-hYK" firstAttribute="top" secondItem="Dyh-2y-I0m" secondAttribute="bottom" constant="8" symbolic="YES" id="y1o-F1-7fa"/>
+                            <constraint firstItem="4D2-ux-xzb" firstAttribute="leading" secondItem="MO9-bo-u0s" secondAttribute="leading" id="zXu-vU-bU7"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Create a Poll" id="JnW-E5-rZI">

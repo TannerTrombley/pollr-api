@@ -13,35 +13,34 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
 
 	var cellTapped = true
 	var selectedIndexPath: IndexPath?
-	var pollId: Int?
 	
-	var questions = [String]()
-	var locations = [String]()
-	var answers = [String]()
+	var polls = [Poll]()
+	
+	@IBOutlet weak var table: UITableView!
 	
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		
-		Alamofire.request("https://pollr-api.appspot.com/api/v1.0/demo")
+		var client = clientAPI()
 		
-		pollId = 0
+		func done(polls: [Poll]) {
+//			questions = ["What are your spring break plans?",
+//						 "How do you feel about the deer cull in A2?",
+//						 "Best first date restaurant?",
+//						 "Floss before or after brushing?",
+//						 "How often do you utilize public transport?"]
+//		
+//			answers = ["Yes", "No", "Maybe", "Decline to answer"]
+			self.polls = polls.reversed()
+			
+			DispatchQueue.main.async {
+				self.table.reloadData()
+			}
+		}
 		
-		// Turns out these requests could be dispatched in prepareForSeque by the instigator viewController
-//		questions = requestClientClass.pleaseGetSomePollTitles(myLocation or sumptin)
-		
-		questions = ["What are your spring break plans?",
-		             "How do you feel about the deer cull in A2?",
-		             "Best first date restaurant?",
-		             "Floss before or after brushing?",
-		             "How often do you utilize public transport?"]
-		
-		locations = ["UofM",
-		             "Ann Arbor",
-		             "Ann Arbor",
-		             "USA",
-		             "Michigan"]
-		
-		answers = ["Yes", "No", "Maybe", "Decline to answer"]
+		client.getDemoPolls(done: done)
+		client.getPoll(pollId: 5649391675244544) { (Poll) in
+		}
 	}
 
 	
@@ -75,23 +74,33 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
 	
 	
 	func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-		return questions.count
+		return polls.count
 	}
 	
-	// Setup the cell with the appropriate number of responses
+	// Retrieve the cell and populate the responses
 	func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 		
 		let cell = tableView.dequeueReusableCell(withIdentifier: "PollQuestionTableViewCell", for: indexPath) as? PollQuestionTableViewCell
-		let responseStack = cell?.contentView.viewWithTag(1) as! UIStackView
+//		let responseStack = cell?.contentView.viewWithTag(1) as! UIStackView
+//		print("All of the cells subviews: *******\(cell?.contentView.subviews)********")
+		let responseStack = cell?.contentView.subviews[1] as! UIStackView
 		
+		let row = indexPath.row
+		
+		// Only add the buttons for voting if they haven't already been loaded
 		if responseStack.subviews.isEmpty {
-
-//			answers = httpsClient.getAnswersForPoll('poll-id')
 			
-			for answer in answers {
+			print("There are not buttons, so we need to make some")
+			
+			for answer in polls[row].getAnswers() {
+				print("Making |\(answer)| into a button")
+				
 				// Create button
 				let button = UIButton(type: UIButtonType.system)
 				button.setTitle(answer, for: UIControlState.normal)
+				
+				// Set the tag to the poll ID so the action knows which poll to set the vote to
+				button.tag = polls[row].getId()
 				
 				// Give it an action
 				button.addTarget(cell, action: #selector(PollQuestionTableViewCell.userCastedVote(_:)), for: UIControlEvents.touchUpInside)
@@ -103,20 +112,22 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
 				button.trailingAnchor.constraint(equalTo: responseStack.layoutMarginsGuide.trailingAnchor).isActive = true
 			}
 		}
-		let row = indexPath.row
-		cell?.pollTitle.text = questions[row]
+		
+		cell?.pollTitle.text = polls[row].getQuestion()
 		return cell!
-
 	}
 	
+	// Adds
 	func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
 		(cell as! PollQuestionTableViewCell).watchFrameChanges()
 	}
 	
+	//
 	func tableView(_ tableView: UITableView, didEndDisplaying cell: UITableViewCell, forRowAt indexPath: IndexPath) {
 		(cell as! PollQuestionTableViewCell).ignoreFrameChanges()
 	}
 	
+	// Return the cell's height
 	func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
 		if indexPath == selectedIndexPath {
 			return PollQuestionTableViewCell.expandedHeight

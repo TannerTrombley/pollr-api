@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		623C5C7C1DCD032500FBDA71 /* Poll.swift in Sources */ = {isa = PBXBuildFile; fileRef = 623C5C7B1DCD032500FBDA71 /* Poll.swift */; };
 		624A6BFE1DC24EE600EF38A2 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 624A6BFD1DC24EE600EF38A2 /* AppDelegate.swift */; };
 		624A6C001DC24EE600EF38A2 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 624A6BFF1DC24EE600EF38A2 /* ViewController.swift */; };
 		624A6C031DC24EE600EF38A2 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 624A6C011DC24EE600EF38A2 /* Main.storyboard */; };
@@ -34,6 +35,7 @@
 
 /* Begin PBXFileReference section */
 		53C9D1D189F3B273351907DE /* Pods-ScrollingTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ScrollingTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-ScrollingTests/Pods-ScrollingTests.release.xcconfig"; sourceTree = "<group>"; };
+		623C5C7B1DCD032500FBDA71 /* Poll.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Poll.swift; sourceTree = "<group>"; };
 		624A6BFA1DC24EE600EF38A2 /* Scrolling.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Scrolling.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		624A6BFD1DC24EE600EF38A2 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		624A6BFF1DC24EE600EF38A2 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -121,6 +123,7 @@
 			children = (
 				624A6BFD1DC24EE600EF38A2 /* AppDelegate.swift */,
 				62F8AAD41DCCE17A00AADC85 /* httpsClient.swift */,
+				623C5C7B1DCD032500FBDA71 /* Poll.swift */,
 				624A6BFF1DC24EE600EF38A2 /* ViewController.swift */,
 				62E7DBF41DC8D92400105009 /* SegueFromLeft.swift */,
 				62E7DBF61DC9021A00105009 /* SegueFromRight.swift */,
@@ -349,6 +352,7 @@
 				624A6C1E1DC2523B00EF38A2 /* PollQuestionTableViewCell.swift in Sources */,
 				62E7DBF51DC8D92400105009 /* SegueFromLeft.swift in Sources */,
 				629582BF1DC6CCF100DE5B44 /* CreatePollViewController.swift in Sources */,
+				623C5C7C1DCD032500FBDA71 /* Poll.swift in Sources */,
 				62F8AAD51DCCE17A00AADC85 /* httpsClient.swift in Sources */,
 				62E7DBF71DC9021A00105009 /* SegueFromRight.swift in Sources */,
 				624A6BFE1DC24EE600EF38A2 /* AppDelegate.swift in Sources */,

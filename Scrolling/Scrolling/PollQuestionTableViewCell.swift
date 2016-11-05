@@ -51,7 +51,7 @@ class PollQuestionTableViewCell: UITableViewCell {
 	
 	func userCastedVote(_ sender: UIButton) {
 		// Dispatch request based on how they voted
-		print("The user voted for \(sender.titleLabel?.text)")
+		print("The user voted for \((sender.titleLabel?.text)!) on poll \(sender.tag)")
 	}
 	
 	
