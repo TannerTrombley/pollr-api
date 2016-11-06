@@ -254,12 +254,37 @@
                     <view key="view" contentMode="scaleToFill" id="E90-c1-eRC">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Welcome to Pollr!" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hl1-eF-jlp">
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="DFW-JV-Xe7">
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <string key="text">Please authenticate with your Facebook account so we can ensure the integrity of polls you post and participate in. Don't worry, we don't post anything to Facebook!</string>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="tW7-JB-Lay" firstAttribute="top" secondItem="DFW-JV-Xe7" secondAttribute="bottom" constant="391" id="3t3-Zu-bze"/>
+                            <constraint firstItem="hl1-eF-jlp" firstAttribute="centerX" secondItem="E90-c1-eRC" secondAttribute="centerX" id="HMV-jo-i4F"/>
+                            <constraint firstItem="hl1-eF-jlp" firstAttribute="top" secondItem="m61-aT-2IW" secondAttribute="bottom" constant="83" id="Nyn-KU-uvY"/>
+                            <constraint firstItem="DFW-JV-Xe7" firstAttribute="leading" secondItem="E90-c1-eRC" secondAttribute="leadingMargin" constant="51" id="SLS-FA-neQ"/>
+                            <constraint firstItem="hl1-eF-jlp" firstAttribute="centerX" secondItem="DFW-JV-Xe7" secondAttribute="centerX" id="owB-dR-hHO"/>
+                            <constraint firstItem="DFW-JV-Xe7" firstAttribute="top" secondItem="hl1-eF-jlp" secondAttribute="bottom" constant="24" id="zpf-L2-bT3"/>
+                        </constraints>
                     </view>
+                    <connections>
+                        <outlet property="authenticationExplanation" destination="DFW-JV-Xe7" id="zIg-Xu-y17"/>
+                        <outlet property="welcomeText" destination="hl1-eF-jlp" id="I8q-ND-gcY"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="3Ei-K7-q7W" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="257" y="139"/>
+            <point key="canvasLocation" x="192.80000000000001" y="138.98050974512745"/>
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>

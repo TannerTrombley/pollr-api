@@ -12,16 +12,41 @@ import FirebaseAuth
 
 class LoginScreen: UIViewController, FBSDKLoginButtonDelegate {
 
+	@IBOutlet weak var welcomeText: UILabel!
+	@IBOutlet weak var authenticationExplanation: UITextView!
+	
 	let loginButton = FBSDKLoginButton()
 	
     override func viewDidLoad() {
         super.viewDidLoad()
 
-		// Optional: Place the button in the center of your view.
-		self.loginButton.center = self.view.center
-		self.loginButton.readPermissions = ["public_profile", "email", "user_friends"]
-		self.loginButton.delegate = self
-		self.view!.addSubview(loginButton)
+		welcomeText.isHidden = true
+		authenticationExplanation.isHidden = true
+		loginButton.isHidden = true
+		
+		FIRAuth.auth()?.addStateDidChangeListener { auth, user in
+			// User is signed in.
+			if let user = user {
+
+				let mainStoryBoard : UIStoryboard  = UIStoryboard(name: "Main", bundle: nil)
+				let homeViewController : UIViewController = mainStoryBoard.instantiateViewController(withIdentifier: "mainNavigationController")
+				
+				self.present(homeViewController, animated: true, completion: nil)
+
+			} else { // No user is signed in.
+				// Optional: Place the button in the center of your view.
+				self.loginButton.center = self.view.center
+				self.loginButton.readPermissions = ["public_profile", "email", "user_friends"]
+				self.loginButton.delegate = self
+				self.view!.addSubview(self.loginButton)
+				
+				self.welcomeText.isHidden = false
+				self.authenticationExplanation.isHidden = false
+				self.loginButton.isHidden = false
+			}
+		}
+	
+		
     }
 
 	func loginButton(_ loginButton: FBSDKLoginButton!, didCompleteWith result: FBSDKLoginManagerLoginResult!, error: Error!) {
