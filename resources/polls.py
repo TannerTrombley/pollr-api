@@ -1,9 +1,9 @@
 from flask_restful import Resource
 from flask import request
-from common import auth, AuthException
+from common import auth, AuthException, distance_ll
 from models import Poll, Answer
 # from google.appengine.ext import ndb
-# from google.appengine.api import search
+from google.appengine.api import search
 import logging
 
 
@@ -118,21 +118,31 @@ class Post_poll(Resource):
             lon=data['lon'],
             radius=data['radius']
         )
-        #
-        # fields = [
-        #     search.TextField(name="poll_id", value=newPoll.key.id()),
-        #     search.GeoField(name="location", value=search.GeoPoint(request.form['lat'], request.form['lon']))
-        # ]
-        #
-        # d = search.Document(fields=fields)
-        # try:
-        #     add_result = search.Index(name="Poll").put(d)
-        # except search.Error:
-        #     logging.error("error creating index of poll")
-        #     return {"error": "Error creating index"}
-
 
         poll_key = newPoll.put()
+
+        logging.info("Created the pool and put it in the datastore")
+
+        #
+        fields = [
+            search.TextField(name="poll_id", value=str(poll_key.id())),
+            search.NumberField(name="radius", value=data['radius']),
+            search.GeoField(name="location", value=search.GeoPoint(data['lat'], data['lon']))
+        ]
+
+        logging.info("Created the fields object")
+
+        d = search.Document(doc_id=str(poll_key.id()), fields=fields)
+        logging.info("Created the searc.document")
+        try:
+            add_result = search.Index(name="Polls").put(d)
+            logging.info('added the document to the index')
+        except search.Error:
+            logging.error("error creating index of poll")
+            return {"error": "Error creating index"}
+
+
+
 
         logging.info("poll id ")
         logging.info(poll_key.id())
@@ -162,7 +172,11 @@ class User_polls(Resource):
 
 
 class Location_polls(Resource):
-
+    '''
+    pass along JSON:
+    lat: float
+    lon: float
+    '''
     def get(self):
         claims = None
         try:
@@ -170,9 +184,27 @@ class Location_polls(Resource):
         except AuthException as e:
             return {"error": "Unauthorized"}, 401
 
-        logging.info(claims)
+        # logging.info(claims)
 
-        # query goes here
+        query = "distance(location, geopoint({}, {})) < 160000".format(request.args.get('lat'), request.args.get('lon'))
+
+
+        # preform the search
+        result = []
+        try:
+            index = search.Index('Polls')
+            search_results = index.search(query)
+            for doc in search_results:
+                print(doc.location)
+                if distance_ll(request.args.get('lat'), request.args.get('lon'), doc)
+
+        except search.Error as e:
+            logging.error("Error tryin to search for polls")
+            logging.error(e)
+
+
+
+        # query
 
         # result = []
         # for i in res:
