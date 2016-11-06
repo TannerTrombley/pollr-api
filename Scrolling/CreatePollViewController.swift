@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Firebase
 
 class CreatePollViewController: UIViewController, UITextFieldDelegate {
 
@@ -108,8 +109,16 @@ class CreatePollViewController: UIViewController, UITextFieldDelegate {
 			answers.append(fourthResponse.text!)
 		}
 		
-		var client = clientAPI()
-		client.createPoll(question: question!, answers: answers)
+		let currentUser = FIRAuth.auth()?.currentUser
+		currentUser?.getTokenForcingRefresh(true) {idToken, error in
+			if let error = error {
+				// Handle error
+				return;
+			}
+			
+			var client = clientAPI(token: idToken!)
+			client.createPoll(question: question!, answers: answers)
+		}
 	}
 	
     override func viewDidLoad() {

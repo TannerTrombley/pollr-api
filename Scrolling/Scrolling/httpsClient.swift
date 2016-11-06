@@ -8,9 +8,15 @@
 
 import Alamofire
 import SwiftyJSON
+import FBSDKLoginKit
+import Firebase
 
 class clientAPI {
-	var authToken = "eyJhbGciOiJSUzI1NiIsImtpZCI6ImQyYzI5OTZhMjFjZDAzZmNlNjdlODVhZjk1MjVmNDBjNzIzZmFhMTYifQ.eyJpc3MiOiJodHRwczovL3NlY3VyZXRva2VuLmdvb2dsZS5jb20vcG9sbHItYXBpIiwibmFtZSI6IkRhdmlkIEhlbmRlcnNob3QiLCJwaWN0dXJlIjoiaHR0cHM6Ly9zY29udGVudC54eC5mYmNkbi5uZXQvdi90MS4wLTEvcDEwMHgxMDAvMTIxMTE5MjNfMTAyMDgyNjQ3OTEyODQzODRfNTkzNDUwNTQ3NjQ3NjI0NjIyM19uLmpwZz9vaD02NzZhZjRmYjE5OGYzYmY3YmE3MTRkNzRjYzk1MGFkOSZvZT01ODlCMkY4QyIsImF1ZCI6InBvbGxyLWFwaSIsImF1dGhfdGltZSI6MTQ3ODM1Nzc4OSwidXNlcl9pZCI6IkZGYjN5VndsTkhQYmYwZmhwMjJmV3BpQ0U1aDEiLCJzdWIiOiJGRmIzeVZ3bE5IUGJmMGZocDIyZldwaUNFNWgxIiwiaWF0IjoxNDc4MzU3Nzg5LCJleHAiOjE0NzgzNjEzODksImVtYWlsIjoiZGF2aWRoZW5kZXJzaG90MjAxMkBnbWFpbC5jb20iLCJlbWFpbF92ZXJpZmllZCI6ZmFsc2UsImZpcmViYXNlIjp7ImlkZW50aXRpZXMiOnsiZmFjZWJvb2suY29tIjpbIjEwMjExMTA1MjkxOTc1MTI2Il0sImVtYWlsIjpbImRhdmlkaGVuZGVyc2hvdDIwMTJAZ21haWwuY29tIl19LCJzaWduX2luX3Byb3ZpZGVyIjoiZmFjZWJvb2suY29tIn19.iqSuWrAQGUPLB0jid41Kbt2BL9wBSZT6KbBX7frpGNVUcsBThRPzKWnI6jE601Pxh4jerONFLesmLnm8BlLYc8ArUOgVAYFWW14laBo-2HYMYxiGNHy3Q7X64Tr1MD_oe7DMCD3VYBPpq898er7tJirLkn838e-MPAVWlOc8sM95b0Emr4PWHowHmgRFVGgvQX5jWIQVf6hhJqhMKn1eWz33XCLXa2b_wFtoqirmVjmgNCle-6RlSKrf6FbHpkTIxy4xpYFgzX-2LiOQVL0wUJndPTG-P5WKEZ5KBs2d9Gy8i53f_fBkvOgb3ydXHRpM9YN1DhNZYuD-tdA18AhxrA"
+	var authToken : String
+	
+	init(token: String) {
+		self.authToken = token
+	}
 	
 	func getDemoPolls(done:@escaping ([Poll]) -> Void) {
 		let header : HTTPHeaders = [
@@ -18,10 +24,6 @@ class clientAPI {
 		]
 		
 		Alamofire.request("https://pollr-api.appspot.com/api/v1.0/demo", headers: header).responseJSON { response in
-			
-//			var polls = [Poll(id: 1,
-//			                  question: "What's your relationship with hunting?",
-//			                  answers: ["Semi-serious", "On and off", "Exclusive", "Open"])]
 			
 			if let result = response.result.value {
 				let json = JSON(result)

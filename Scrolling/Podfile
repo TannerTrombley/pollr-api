@@ -10,6 +10,8 @@ target 'Scrolling' do
   # Pods for Scrolling
 	pod 'Alamofire', '~> 4.0'
   pod 'SwiftyJSON'
+	pod 'Firebase/Core'
+	pod 'Firebase/Auth'
 
   target 'ScrollingTests' do
     inherit! :search_paths

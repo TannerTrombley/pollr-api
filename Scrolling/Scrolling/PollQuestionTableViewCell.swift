@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Firebase
 
 class PollQuestionTableViewCell: UITableViewCell {
 	
@@ -54,8 +55,17 @@ class PollQuestionTableViewCell: UITableViewCell {
 		let pollId = sender.tag
 		
 //		print("The user voted for \((sender.titleLabel?.text)!) on poll \(sender.tag)")
-		let client = clientAPI()
-		client.voteOnPoll(pollId: pollId, userVote: selectedAnswer!)
+		
+		let currentUser = FIRAuth.auth()?.currentUser
+		currentUser?.getTokenForcingRefresh(true) {idToken, error in
+			if let error = error {
+				// Handle error
+				return;
+			}
+			
+			let client = clientAPI(token: idToken!)
+			client.voteOnPoll(pollId: pollId, userVote: selectedAnswer!)
+		}
 	}
 	
 	

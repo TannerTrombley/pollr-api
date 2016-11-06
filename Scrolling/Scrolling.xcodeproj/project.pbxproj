@@ -9,13 +9,19 @@
 /* Begin PBXBuildFile section */
 		623C5C7C1DCD032500FBDA71 /* Poll.swift in Sources */ = {isa = PBXBuildFile; fileRef = 623C5C7B1DCD032500FBDA71 /* Poll.swift */; };
 		624A6BFE1DC24EE600EF38A2 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 624A6BFD1DC24EE600EF38A2 /* AppDelegate.swift */; };
-		624A6C001DC24EE600EF38A2 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 624A6BFF1DC24EE600EF38A2 /* ViewController.swift */; };
+		624A6C001DC24EE600EF38A2 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 624A6BFF1DC24EE600EF38A2 /* MainViewController.swift */; };
 		624A6C031DC24EE600EF38A2 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 624A6C011DC24EE600EF38A2 /* Main.storyboard */; };
 		624A6C051DC24EE600EF38A2 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 624A6C041DC24EE600EF38A2 /* Assets.xcassets */; };
 		624A6C081DC24EE600EF38A2 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 624A6C061DC24EE600EF38A2 /* LaunchScreen.storyboard */; };
 		624A6C131DC24EE600EF38A2 /* ScrollingTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 624A6C121DC24EE600EF38A2 /* ScrollingTests.swift */; };
 		624A6C1E1DC2523B00EF38A2 /* PollQuestionTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 624A6C1D1DC2523B00EF38A2 /* PollQuestionTableViewCell.swift */; };
+		628310AC1DCEAF540019F2BE /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 628310AB1DCEAF540019F2BE /* GoogleService-Info.plist */; };
+		628310AE1DCEBC760019F2BE /* FBSDKShareKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 628310AD1DCEBC760019F2BE /* FBSDKShareKit.framework */; };
 		629582BF1DC6CCF100DE5B44 /* CreatePollViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 629582BE1DC6CCF100DE5B44 /* CreatePollViewController.swift */; };
+		62CF9B021DCE3A9C00B66099 /* LoginScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62CF9B011DCE3A9C00B66099 /* LoginScreen.swift */; };
+		62CF9B0C1DCE3FFF00B66099 /* FBSDKLoginKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 62CF9B0B1DCE3FFF00B66099 /* FBSDKLoginKit.framework */; };
+		62CF9B0E1DCE400600B66099 /* FBSDKCoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 62CF9B0D1DCE400600B66099 /* FBSDKCoreKit.framework */; };
+		62CF9B121DCE42BD00B66099 /* Bolts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 62CF9B111DCE42BD00B66099 /* Bolts.framework */; };
 		62E7DBF51DC8D92400105009 /* SegueFromLeft.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E7DBF41DC8D92400105009 /* SegueFromLeft.swift */; };
 		62E7DBF71DC9021A00105009 /* SegueFromRight.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E7DBF61DC9021A00105009 /* SegueFromRight.swift */; };
 		62F8AAD51DCCE17A00AADC85 /* httpsClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62F8AAD41DCCE17A00AADC85 /* httpsClient.swift */; };
@@ -38,7 +44,7 @@
 		623C5C7B1DCD032500FBDA71 /* Poll.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Poll.swift; sourceTree = "<group>"; };
 		624A6BFA1DC24EE600EF38A2 /* Scrolling.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Scrolling.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		624A6BFD1DC24EE600EF38A2 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		624A6BFF1DC24EE600EF38A2 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		624A6BFF1DC24EE600EF38A2 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		624A6C021DC24EE600EF38A2 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		624A6C041DC24EE600EF38A2 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		624A6C071DC24EE600EF38A2 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -47,8 +53,15 @@
 		624A6C121DC24EE600EF38A2 /* ScrollingTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScrollingTests.swift; sourceTree = "<group>"; };
 		624A6C141DC24EE600EF38A2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		624A6C1D1DC2523B00EF38A2 /* PollQuestionTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PollQuestionTableViewCell.swift; sourceTree = "<group>"; };
+		628310AB1DCEAF540019F2BE /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		628310AD1DCEBC760019F2BE /* FBSDKShareKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBSDKShareKit.framework; sourceTree = "<group>"; };
+		628310AF1DCF7E040019F2BE /* Scrolling.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Scrolling.entitlements; sourceTree = "<group>"; };
 		629582BE1DC6CCF100DE5B44 /* CreatePollViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CreatePollViewController.swift; path = ../CreatePollViewController.swift; sourceTree = "<group>"; };
 		629BC147A3E8A541C3E49512 /* Pods-ScrollingTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ScrollingTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ScrollingTests/Pods-ScrollingTests.debug.xcconfig"; sourceTree = "<group>"; };
+		62CF9B011DCE3A9C00B66099 /* LoginScreen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginScreen.swift; sourceTree = "<group>"; };
+		62CF9B0B1DCE3FFF00B66099 /* FBSDKLoginKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBSDKLoginKit.framework; sourceTree = "<group>"; };
+		62CF9B0D1DCE400600B66099 /* FBSDKCoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBSDKCoreKit.framework; sourceTree = "<group>"; };
+		62CF9B111DCE42BD00B66099 /* Bolts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Bolts.framework; sourceTree = "<group>"; };
 		62E7DBF41DC8D92400105009 /* SegueFromLeft.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SegueFromLeft.swift; sourceTree = "<group>"; };
 		62E7DBF61DC9021A00105009 /* SegueFromRight.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SegueFromRight.swift; sourceTree = "<group>"; };
 		62F8AAD41DCCE17A00AADC85 /* httpsClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = httpsClient.swift; sourceTree = "<group>"; };
@@ -63,7 +76,11 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				62CF9B0C1DCE3FFF00B66099 /* FBSDKLoginKit.framework in Frameworks */,
+				62CF9B0E1DCE400600B66099 /* FBSDKCoreKit.framework in Frameworks */,
+				628310AE1DCEBC760019F2BE /* FBSDKShareKit.framework in Frameworks */,
 				86352343D9F18CC2C78F956B /* Pods_Scrolling.framework in Frameworks */,
+				62CF9B121DCE42BD00B66099 /* Bolts.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -81,6 +98,10 @@
 		28EBDC0AB8C375E035AB5129 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				628310AD1DCEBC760019F2BE /* FBSDKShareKit.framework */,
+				62CF9B111DCE42BD00B66099 /* Bolts.framework */,
+				62CF9B0D1DCE400600B66099 /* FBSDKCoreKit.framework */,
+				62CF9B0B1DCE3FFF00B66099 /* FBSDKLoginKit.framework */,
 				A24573A56C052AA2C5EFA9BF /* Pods_Scrolling.framework */,
 				F92F55576A2817C430A93C94 /* Pods_ScrollingTests.framework */,
 			);
@@ -121,17 +142,20 @@
 		624A6BFC1DC24EE600EF38A2 /* Scrolling */ = {
 			isa = PBXGroup;
 			children = (
+				628310AF1DCF7E040019F2BE /* Scrolling.entitlements */,
 				624A6BFD1DC24EE600EF38A2 /* AppDelegate.swift */,
 				62F8AAD41DCCE17A00AADC85 /* httpsClient.swift */,
 				623C5C7B1DCD032500FBDA71 /* Poll.swift */,
-				624A6BFF1DC24EE600EF38A2 /* ViewController.swift */,
+				624A6BFF1DC24EE600EF38A2 /* MainViewController.swift */,
 				62E7DBF41DC8D92400105009 /* SegueFromLeft.swift */,
 				62E7DBF61DC9021A00105009 /* SegueFromRight.swift */,
 				629582BE1DC6CCF100DE5B44 /* CreatePollViewController.swift */,
 				624A6C011DC24EE600EF38A2 /* Main.storyboard */,
+				62CF9B011DCE3A9C00B66099 /* LoginScreen.swift */,
 				624A6C1D1DC2523B00EF38A2 /* PollQuestionTableViewCell.swift */,
 				624A6C041DC24EE600EF38A2 /* Assets.xcassets */,
 				624A6C061DC24EE600EF38A2 /* LaunchScreen.storyboard */,
+				628310AB1DCEAF540019F2BE /* GoogleService-Info.plist */,
 				624A6C091DC24EE600EF38A2 /* Info.plist */,
 			);
 			path = Scrolling;
@@ -202,7 +226,13 @@
 				TargetAttributes = {
 					624A6BF91DC24EE500EF38A2 = {
 						CreatedOnToolsVersion = 8.0;
+						DevelopmentTeam = V77B2J7UZ6;
 						ProvisioningStyle = Automatic;
+						SystemCapabilities = {
+							com.apple.Keychain = {
+								enabled = 1;
+							};
+						};
 					};
 					624A6C0D1DC24EE600EF38A2 = {
 						CreatedOnToolsVersion = 8.0;
@@ -236,6 +266,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				624A6C081DC24EE600EF38A2 /* LaunchScreen.storyboard in Resources */,
+				628310AC1DCEAF540019F2BE /* GoogleService-Info.plist in Resources */,
 				624A6C051DC24EE600EF38A2 /* Assets.xcassets in Resources */,
 				624A6C031DC24EE600EF38A2 /* Main.storyboard in Resources */,
 			);
@@ -348,8 +379,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				624A6C001DC24EE600EF38A2 /* ViewController.swift in Sources */,
+				624A6C001DC24EE600EF38A2 /* MainViewController.swift in Sources */,
 				624A6C1E1DC2523B00EF38A2 /* PollQuestionTableViewCell.swift in Sources */,
+				62CF9B021DCE3A9C00B66099 /* LoginScreen.swift in Sources */,
 				62E7DBF51DC8D92400105009 /* SegueFromLeft.swift in Sources */,
 				629582BF1DC6CCF100DE5B44 /* CreatePollViewController.swift in Sources */,
 				623C5C7C1DCD032500FBDA71 /* Poll.swift in Sources */,
@@ -495,13 +527,20 @@
 			baseConfigurationReference = CD0B39270E3227752E65FBF9 /* Pods-Scrolling.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = Scrolling/Scrolling.entitlements;
+				DEVELOPMENT_TEAM = V77B2J7UZ6;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Carthage/Build/iOS",
+					"$(PROJECT_DIR)",
 				);
 				INFOPLIST_FILE = Scrolling/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = School.441.Scrolling;
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "-";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
 			};
@@ -512,13 +551,20 @@
 			baseConfigurationReference = BD68415B4AA7D8940B2CDCC2 /* Pods-Scrolling.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = Scrolling/Scrolling.entitlements;
+				DEVELOPMENT_TEAM = V77B2J7UZ6;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Carthage/Build/iOS",
+					"$(PROJECT_DIR)",
 				);
 				INFOPLIST_FILE = Scrolling/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = School.441.Scrolling;
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "-";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
 			};

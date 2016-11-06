@@ -8,8 +8,9 @@
 
 import UIKit
 import Alamofire
+import Firebase
 
-class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+class MainViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
 
 	var cellTapped = true
 	var selectedIndexPath: IndexPath?
@@ -21,31 +22,30 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		
-		var client = clientAPI()
-		
 		func done(polls: [Poll]) {
-//			questions = ["What are your spring break plans?",
-//						 "How do you feel about the deer cull in A2?",
-//						 "Best first date restaurant?",
-//						 "Floss before or after brushing?",
-//						 "How often do you utilize public transport?"]
-//		
-//			answers = ["Yes", "No", "Maybe", "Decline to answer"]
 			self.polls = polls.reversed()
-//			for poll in polls {
-//				print("Question -> \(poll.getQuestion())")
-//				print("Answers  -> \(poll.getAnswers())")
-//			}
 			
 			DispatchQueue.main.async {
 				self.table.reloadData()
 			}
 		}
 		
-		client.getDemoPolls(done: done)
-		client.getPoll(pollId: 5649391675244544) { (Poll) in
+		let currentUser = FIRAuth.auth()?.currentUser
+		currentUser?.getTokenForcingRefresh(true) {idToken, error in
+			if let error = error {
+				// Handle error
+				return;
+			}
+			
+			let client = clientAPI(token: idToken!)
+			client.getDemoPolls(done: done)
 		}
-		client.voteOnPoll(pollId: 5639445604728832, userVote: "no")
+		
+		
+		
+//		client.getPoll(pollId: 5649391675244544) { (Poll) in
+//		}
+//		client.voteOnPoll(pollId: 5639445604728832, userVote: "noV")
 	}
 
 	
