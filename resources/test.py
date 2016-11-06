@@ -1,7 +1,7 @@
 from flask_restful import Resource
 from flask import request
 from common import verify_auth_token
-from models import Poll
+from models import Poll, Answer
 from google.appengine.ext import ndb
 import logging
 
@@ -15,11 +15,10 @@ class Test_route(Resource):
 
         # get all of the users poll
         logging.info("In the get route")
-        print("hello")
-        query = Poll.query(Poll.created_by == "Tanner")
+
+        query = Poll.query()
         res = query.fetch()
         # logging.info("the query: ", res)
-        print(type(res))
         result = []
         for i in res:
             result.append(i.serialize())
@@ -33,11 +32,11 @@ class Test_route(Resource):
         logging.info("In the put route")
 
         newPoll = Poll(
-            created_by="Tanner",
-            question="Is this working?",
-            answers=["yes", "no"],
+            created_by="Carlos",
+            question="Como Estas?",
+            answers=[Answer(answer_text="yes"), Answer(answer_text="no")],
             location=ndb.GeoPt(42.2808,83.7430),
-            radius=10
+            radius=15
         )
 
         newPoll.put()

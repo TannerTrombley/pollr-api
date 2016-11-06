@@ -1,1 +1,1 @@
-from poll import Poll
+from poll import Poll, Answer

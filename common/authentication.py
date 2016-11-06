@@ -75,6 +75,15 @@ def extract_public_key_from_certificate(x509_certificate):
     return subject_public_key_info
 # [END extract_public_key_from_certificate]
 
+class AuthException(Exception):
+    pass
+
+
+def auth(request):
+    claims = verify_auth_token(request)
+    if not claims:
+        raise AuthException()
+    return claims
 
 # [START verify_auth_token]
 def verify_auth_token(request):
