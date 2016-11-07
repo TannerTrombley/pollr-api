@@ -17,6 +17,7 @@ class PollResultsViewController: UIViewController {
 	var pollId = Int()
 	var answers = [String]()
 	var voteCounts = [Int]()
+	var question = String()
 	
 //	override func viewWillAppear(_ animated: Bool) {
 //		print("The pollID is \(pollId)")
@@ -37,15 +38,17 @@ class PollResultsViewController: UIViewController {
 		}
 		
 		answers = ["First", "Second", "Third"]
-		voteCounts = [10, 12, 14]
+		voteCounts = [2, 25, 14]
 		
 		setChart(dataPoints: answers, values: voteCounts)
     }
 
 	
 	func done(poll: Poll) {
-		let results = poll.getAnswers()
+		self.question = poll.getQuestion()
+		print("The question is -> \(self.question)")
 		
+		let results = poll.getAnswers()
 		for answer in results {
 			answers.append(answer.0)
 			voteCounts.append(answer.1)
@@ -60,17 +63,36 @@ class PollResultsViewController: UIViewController {
 	func setChart(dataPoints: [String], values: [Int]) {
 		barChartView.noDataText = "Loading data..."
 		
+		let formatter = BarChartFormatter()
+		formatter.setValues(values: dataPoints)
+		let xaxis:XAxis = XAxis()
+		
 		var dataEntries: [BarChartDataEntry] = []
 		
 		for i in 0..<dataPoints.count {
-			let dataEntry = BarChartDataEntry(x: Double(i), y: Double(values[i]))
+			let dataEntry = BarChartDataEntry(x: Double(i), yValues: [Double(values[i])])
 			dataEntries.append(dataEntry)
 		}
 		
-		let chartDataSet = BarChartDataSet(values: dataEntries, label: "Who da best?")
+		let chartDataSet = BarChartDataSet(values: dataEntries, label: self.question)
+		chartDataSet.colors = ChartColorTemplates.liberty()
 		let chartData = BarChartData(dataSet: chartDataSet)
+		
+		
+		xaxis.valueFormatter = formatter
+		barChartView.xAxis.valueFormatter = xaxis.valueFormatter
+		
 		barChartView.data = chartData
 		barChartView.xAxis.labelPosition = .bottom
+		barChartView.xAxis.drawGridLinesEnabled = false
+		barChartView.xAxis.granularityEnabled = true
+		barChartView.xAxis.granularity = 1.0
+		barChartView.xAxis.decimals = 0
+		
+		barChartView.chartDescription?.enabled = false
+		barChartView.rightAxis.enabled = false
+		barChartView.xAxis.labelRotationAngle = 270.0
+		barChartView.animate(xAxisDuration: 2.0, yAxisDuration: 2.0)
 	}
 	
 	

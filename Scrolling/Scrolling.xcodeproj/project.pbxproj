@@ -17,6 +17,7 @@
 		624A6C081DC24EE600EF38A2 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 624A6C061DC24EE600EF38A2 /* LaunchScreen.storyboard */; };
 		624A6C131DC24EE600EF38A2 /* ScrollingTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 624A6C121DC24EE600EF38A2 /* ScrollingTests.swift */; };
 		624A6C1E1DC2523B00EF38A2 /* PollQuestionTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 624A6C1D1DC2523B00EF38A2 /* PollQuestionTableViewCell.swift */; };
+		6276EF901DD03BF200FF4E8A /* ChartsAxisFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6276EF8F1DD03BF200FF4E8A /* ChartsAxisFormatter.swift */; };
 		628310AC1DCEAF540019F2BE /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 628310AB1DCEAF540019F2BE /* GoogleService-Info.plist */; };
 		628310AE1DCEBC760019F2BE /* FBSDKShareKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 628310AD1DCEBC760019F2BE /* FBSDKShareKit.framework */; };
 		628310B11DCFE0EA0019F2BE /* MyPollsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 628310B01DCFE0EA0019F2BE /* MyPollsTableViewController.swift */; };
@@ -58,6 +59,7 @@
 		624A6C121DC24EE600EF38A2 /* ScrollingTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScrollingTests.swift; sourceTree = "<group>"; };
 		624A6C141DC24EE600EF38A2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		624A6C1D1DC2523B00EF38A2 /* PollQuestionTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PollQuestionTableViewCell.swift; sourceTree = "<group>"; };
+		6276EF8F1DD03BF200FF4E8A /* ChartsAxisFormatter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChartsAxisFormatter.swift; sourceTree = "<group>"; };
 		628310AB1DCEAF540019F2BE /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		628310AD1DCEBC760019F2BE /* FBSDKShareKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBSDKShareKit.framework; sourceTree = "<group>"; };
 		628310AF1DCF7E040019F2BE /* Scrolling.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Scrolling.entitlements; sourceTree = "<group>"; };
@@ -157,6 +159,7 @@
 				62E7DBF61DC9021A00105009 /* SegueFromRight.swift */,
 				629582BE1DC6CCF100DE5B44 /* CreatePollViewController.swift */,
 				624A6C011DC24EE600EF38A2 /* Main.storyboard */,
+				6276EF8F1DD03BF200FF4E8A /* ChartsAxisFormatter.swift */,
 				6228B21C1DCFF97A00404D05 /* PollResultsViewController.swift */,
 				628310B01DCFE0EA0019F2BE /* MyPollsTableViewController.swift */,
 				6228B21A1DCFF59A00404D05 /* MyPollsTableViewCell.swift */,
@@ -390,6 +393,7 @@
 			files = (
 				628310B11DCFE0EA0019F2BE /* MyPollsTableViewController.swift in Sources */,
 				624A6C001DC24EE600EF38A2 /* MainViewController.swift in Sources */,
+				6276EF901DD03BF200FF4E8A /* ChartsAxisFormatter.swift in Sources */,
 				624A6C1E1DC2523B00EF38A2 /* PollQuestionTableViewCell.swift in Sources */,
 				62CF9B021DCE3A9C00B66099 /* LoginScreen.swift in Sources */,
 				62E7DBF51DC8D92400105009 /* SegueFromLeft.swift in Sources */,
