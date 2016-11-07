@@ -16,14 +16,6 @@ class PollResultsViewController: UIViewController {
 	
 	var pollId = Int()
 	
-	func fakeItTillYouMakeIt(answer : String) -> Int {
-		switch answer {
-			case "imma": return 35
-			case "starboy": return 69
-			default: return 10
-		}
-	}
-	
     override func viewDidLoad() {
         super.viewDidLoad()
 		
@@ -37,18 +29,14 @@ class PollResultsViewController: UIViewController {
 			let client = clientAPI(token: idToken!)
 			client.getPoll(pollId: self.pollId, done: self.done)
 		}
-		
-//		answers = ["First", "Second", "Third"]
-//		voteCounts = [2, 25, 14]
-	
+
     }
 
 	
 	func done(poll: Poll) {
-		var question = poll.getQuestion()
+		let question = poll.getQuestion()
 		
 		let results = poll.getAnswers()
-		print("Results in 'done' -> \(results)")
 		
 		var answers = [String]()
 		var voteCounts = [Int]()

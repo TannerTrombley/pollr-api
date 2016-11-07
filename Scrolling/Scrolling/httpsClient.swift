@@ -125,7 +125,6 @@ class clientAPI {
 			
 				var responses = [String: Int]()
 				for answer in poll["answers"] {
-					print("Answer json... \(answer)")
 					responses[(answer.1["answer_text"].stringValue)] = answer.1["count"].intValue
 				}
 				
@@ -141,8 +140,6 @@ class clientAPI {
 	
 	func voteOnPoll(pollId: Int, userVote: String) {
 		
-//		print("Vote on \(pollId) with answer \(responseIndex)")
-		
 		let headers : HTTPHeaders = [
 			"Authorization": authToken,
 			"Content-Type": "application/json"
@@ -153,7 +150,6 @@ class clientAPI {
 		]
 		
 		Alamofire.request("https://pollr-api.appspot.com/api/v1.0/polls/" + String(pollId), method: .post, parameters: parameters, encoding: JSONEncoding.default, headers: headers).responseJSON { response in
-			print(response.result.value)
 		}
 	}
 }

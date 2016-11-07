@@ -35,22 +35,26 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" translatesAutoresizingMaskIntoConstraints="NO" id="CFH-Dy-NWV"/>
-                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="N0o-rH-FIl">
-                                                    <state key="normal" title="Results"/>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="N0o-rH-FIl">
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="26" id="trZ-Yy-HBQ"/>
+                                                    </constraints>
+                                                    <state key="normal" title="Results" image="alreadyVoted"/>
                                                     <connections>
-                                                        <action selector="takeUserToResults:" destination="tTx-Bj-oBU" eventType="touchUpInside" id="YKT-HL-n9V"/>
+                                                        <action selector="showPollResults:" destination="tTx-Bj-oBU" eventType="touchUpInside" id="8iG-EP-341"/>
+                                                        <segue destination="k6h-KV-xPd" kind="showDetail" identifier="showPollResults" action="showViewController:sender:" id="8nh-ZK-kTL"/>
                                                     </connections>
                                                 </button>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstItem="N0o-rH-FIl" firstAttribute="trailing" secondItem="CFH-Dy-NWV" secondAttribute="trailing" id="3JY-3v-L2I"/>
-                                                <constraint firstItem="N0o-rH-FIl" firstAttribute="top" secondItem="BFT-EA-OEe" secondAttribute="topMargin" id="6rr-6K-YDu"/>
-                                                <constraint firstItem="CFH-Dy-NWV" firstAttribute="leading" secondItem="B4p-09-LtP" secondAttribute="leading" id="G9M-fy-SEx"/>
-                                                <constraint firstItem="B4p-09-LtP" firstAttribute="top" secondItem="BFT-EA-OEe" secondAttribute="topMargin" constant="8" id="afR-at-veC"/>
-                                                <constraint firstItem="CFH-Dy-NWV" firstAttribute="top" secondItem="B4p-09-LtP" secondAttribute="bottom" constant="8" symbolic="YES" id="bzj-UM-fEA"/>
-                                                <constraint firstAttribute="bottomMargin" secondItem="CFH-Dy-NWV" secondAttribute="bottom" constant="-3" id="fFu-iT-aOi"/>
-                                                <constraint firstItem="CFH-Dy-NWV" firstAttribute="trailing" secondItem="BFT-EA-OEe" secondAttribute="trailingMargin" id="nJX-1D-i01"/>
-                                                <constraint firstItem="B4p-09-LtP" firstAttribute="leading" secondItem="BFT-EA-OEe" secondAttribute="leadingMargin" id="nVf-kP-Vmr"/>
+                                                <constraint firstItem="CFH-Dy-NWV" firstAttribute="top" secondItem="B4p-09-LtP" secondAttribute="bottom" constant="8" symbolic="YES" id="BSj-u0-1QC"/>
+                                                <constraint firstItem="N0o-rH-FIl" firstAttribute="trailing" secondItem="CFH-Dy-NWV" secondAttribute="trailing" id="CTA-xP-t5h"/>
+                                                <constraint firstItem="N0o-rH-FIl" firstAttribute="top" secondItem="BFT-EA-OEe" secondAttribute="topMargin" id="G8T-cb-kRb"/>
+                                                <constraint firstItem="B4p-09-LtP" firstAttribute="leading" secondItem="BFT-EA-OEe" secondAttribute="leadingMargin" id="Meh-uX-qHa"/>
+                                                <constraint firstItem="B4p-09-LtP" firstAttribute="leading" secondItem="CFH-Dy-NWV" secondAttribute="leading" id="Q0a-gT-CBf"/>
+                                                <constraint firstItem="N0o-rH-FIl" firstAttribute="trailing" secondItem="BFT-EA-OEe" secondAttribute="trailingMargin" id="Yuk-6w-bIq"/>
+                                                <constraint firstAttribute="bottomMargin" secondItem="CFH-Dy-NWV" secondAttribute="bottom" constant="-3" id="bMF-va-Q3l"/>
+                                                <constraint firstItem="CFH-Dy-NWV" firstAttribute="top" secondItem="N0o-rH-FIl" secondAttribute="bottom" constant="13" id="rnw-mZ-i6s"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
@@ -108,7 +112,7 @@
                                 <rect key="frame" x="0.0" y="92" width="375" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="li9-NA-BxQ" id="fRJ-o2-7cr">
-                                    <frame key="frameInset" width="342" height="44"/>
+                                    <frame key="frameInset" width="342" height="43.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="P6O-Zb-fXj">
@@ -143,7 +147,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="gT1-la-Vl6" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2039" y="1109"/>
+            <point key="canvasLocation" x="2038" y="921"/>
         </scene>
         <!--Poll Results View Controller-->
         <scene sceneID="O0q-rU-CGA">
@@ -154,7 +158,7 @@
                         <viewControllerLayoutGuide type="bottom" id="Pj4-bS-rGY"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="43D-6A-sz2">
-                        <rect key="frame" x="0.0" y="64" width="375" height="603"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="eW4-me-ABX" customClass="BarChartView" customModule="Charts">
@@ -179,7 +183,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4qQ-ur-PiV" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2888.8000000000002" y="1108.6956521739132"/>
+            <point key="canvasLocation" x="2889" y="921"/>
         </scene>
         <!--Create a Poll-->
         <scene sceneID="QIm-ai-Smx">
@@ -403,8 +407,12 @@
             <point key="canvasLocation" x="192.80000000000001" y="138.98050974512745"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="alreadyVoted" width="24" height="24"/>
+    </resources>
     <inferredMetricsTieBreakers>
         <segue reference="0ax-dP-m4K"/>
         <segue reference="GpN-vB-uDn"/>
+        <segue reference="8nh-ZK-kTL"/>
     </inferredMetricsTieBreakers>
 </document>

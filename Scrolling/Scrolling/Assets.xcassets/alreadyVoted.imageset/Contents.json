@@ -2,6 +2,7 @@
   "images" : [
     {
       "idiom" : "universal",
+      "filename" : "ic_equalizer.png",
       "scale" : "1x"
     },
     {
@@ -10,7 +11,6 @@
     },
     {
       "idiom" : "universal",
-      "filename" : "Screen Shot 2016-11-07 at 10.40.46 AM.png",
       "scale" : "3x"
     }
   ],

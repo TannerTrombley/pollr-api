@@ -31,6 +31,11 @@ class PollQuestionTableViewCell: UITableViewCell {
 		}
 	}
 	
+	@IBAction func showPollResults(_ sender: UIButton) {
+		print("Show the results")
+	}
+	
+	
 	func watchFrameChanges() {
 		addObserver(self, forKeyPath: "frame", options: .new, context: nil)
 		observerAdded = true
@@ -48,11 +53,6 @@ class PollQuestionTableViewCell: UITableViewCell {
 		if keyPath == "frame" {
 			 checkHeight()
 		}
-	}
-	
-	@IBAction func takeUserToResults(_ sender: UIButton) {
-		
-	
 	}
 	
 	

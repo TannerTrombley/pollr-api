@@ -42,6 +42,20 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
 		}
 	}
 	
+	
+	override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+		
+		if segue.identifier == "showPollResults",
+			let destination = segue.destination as? PollResultsViewController
+		{
+			if let row = table.indexPathForSelectedRow?.row {
+				let pollId = polls[row].getId()
+				destination.pollId = pollId
+			}
+		}
+	}
+	
+	
 	override func didReceiveMemoryWarning() {
 		super.didReceiveMemoryWarning()
 		// Dispose of any resources that can be recreated.
