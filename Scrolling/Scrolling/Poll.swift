@@ -9,9 +9,9 @@
 class Poll {
 	var id : Int?
 	var question: String?
-	var answers: [String]?
+	var answers: [String: Int]?
 	
-	init(id: Int, question: String, answers: [String]) {
+	init(id: Int, question: String, answers: [String: Int]) {
 		self.id = id
 		self.question = question
 		self.answers = answers
@@ -25,7 +25,7 @@ class Poll {
 		return question!
 	}
 	
-	func getAnswers() -> [String] {
+	func getAnswers() -> [String: Int] {
 		return answers!
 	}
 }

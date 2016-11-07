@@ -14,7 +14,7 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "3FACD98C3F38E35524A0C6D4474ECC5B"
+               BlueprintIdentifier = "18162B97AEB7B28FB077417A6B1A3E2E"
                BuildableName = "Pods_Scrolling.framework"
                BlueprintName = "Pods-Scrolling"
                ReferencedContainer = "container:Pods.xcodeproj">
@@ -45,7 +45,7 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "3FACD98C3F38E35524A0C6D4474ECC5B"
+            BlueprintIdentifier = "18162B97AEB7B28FB077417A6B1A3E2E"
             BuildableName = "Pods_Scrolling.framework"
             BlueprintName = "Pods-Scrolling"
             ReferencedContainer = "container:Pods.xcodeproj">

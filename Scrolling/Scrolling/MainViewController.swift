@@ -40,14 +40,21 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
 			let client = clientAPI(token: idToken!)
 			client.getDemoPolls(done: done)
 		}
-		
-		
-		
-//		client.getPoll(pollId: 5649391675244544) { (Poll) in
-//		}
-//		client.voteOnPoll(pollId: 5639445604728832, userVote: "noV")
 	}
 
+	// Function that disables voting buttons on polls that have already been voted on
+//	func disableVotingButtons(pollId: Int) {
+//		// Get index of the poll in the polls array
+//		
+//		for i in 0..<polls.count {
+//			if polls[i].getId() == pollId {
+//				let path = [NSIndexPath(item: i, section: 0)]
+//				self.polls.remove(at: i)
+//				self.table.deleteRows(at: path as [IndexPath], with: UITableViewRowAnimation.left)
+//			}
+//		}
+//	}
+	
 	
 	override func didReceiveMemoryWarning() {
 		super.didReceiveMemoryWarning()
@@ -98,16 +105,10 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
 		// Only add the buttons for voting if they haven't already been loaded
 		if responseStack.subviews.isEmpty {
 			
-//			let numAnswers : CGFloat = CGFloat(polls[row].getAnswers().count)
-//			let oldFrame = responseStack.frame
-//			let newHeight : CGFloat = numAnswers * CGFloat(44)
-//			let newFrame = CGRect(x: 0, y: 44, width: oldFrame.width, height: newHeight)
-//			responseStack.frame = newFrame
-			
 			for answer in polls[row].getAnswers() {
 				// Create button
 				let button = UIButton(type: UIButtonType.system)
-				button.setTitle(answer, for: UIControlState.normal)
+				button.setTitle(answer.key, for: UIControlState.normal)
 				
 				// Set the tag to the poll ID so the action knows which poll to set the vote to
 				button.tag = polls[row].getId()

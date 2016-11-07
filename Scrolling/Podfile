@@ -12,6 +12,7 @@ target 'Scrolling' do
   pod 'SwiftyJSON'
 	pod 'Firebase/Core'
 	pod 'Firebase/Auth'
+	pod 'Charts'
 
   target 'ScrollingTests' do
     inherit! :search_paths

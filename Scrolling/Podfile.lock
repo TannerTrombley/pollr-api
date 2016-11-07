@@ -1,5 +1,8 @@
 PODS:
   - Alamofire (4.0.1)
+  - Charts (3.0.0):
+    - Charts/Core (= 3.0.0)
+  - Charts/Core (3.0.0)
   - Firebase/Auth (3.9.0):
     - Firebase/Core
     - FirebaseAuth (= 3.0.6)
@@ -38,12 +41,14 @@ PODS:
 
 DEPENDENCIES:
   - Alamofire (~> 4.0)
+  - Charts
   - Firebase/Auth
   - Firebase/Core
   - SwiftyJSON
 
 SPEC CHECKSUMS:
   Alamofire: 7682d43245de14874acd142ec137b144aa1dd335
+  Charts: beb341928d2135613b4325a6c6aff9f2f6de895e
   Firebase: ff77ffb77b317c3720fef57a60e9335cebf962e6
   FirebaseAnalytics: 6e58fc9b397664369ac7617fb0ba93fab6ba7b5b
   FirebaseAuth: 96e9674ff31d6e1f826d53e26aa003a57cab0295
@@ -55,6 +60,6 @@ SPEC CHECKSUMS:
   GTMSessionFetcher: a1f8ed39e4fe21c68957daed472c7afbcdf29166
   SwiftyJSON: f0be2e604f83e8405a624e9f891898bf6ed4e019
 
-PODFILE CHECKSUM: c6a881023dc79f366d58bf94b5a3640f4f603de7
+PODFILE CHECKSUM: 6db5e86939f95e0faca679187349829c0ef84840
 
 COCOAPODS: 1.1.0.rc.2

@@ -54,12 +54,18 @@ class PollQuestionTableViewCell: UITableViewCell {
 		let selectedAnswer = sender.titleLabel?.text
 		let pollId = sender.tag
 		
+		for view in responseStack.subviews {
+			if let button = view as? UIButton {
+				button.titleLabel?.text = "You have already voted"
+			}
+		}
+		
 //		print("The user voted for \((sender.titleLabel?.text)!) on poll \(sender.tag)")
 		
 		let currentUser = FIRAuth.auth()?.currentUser
 		currentUser?.getTokenForcingRefresh(true) {idToken, error in
 			if let error = error {
-				// Handle error
+				print(error)
 				return;
 			}
 			

@@ -33,13 +33,13 @@ class clientAPI {
 				
 				for p in jsonPolls {
 					
-					var responses = [String]()
-					for answer in p.1["answers"] {
-						responses.append(answer.1["answer_text"].stringValue)
-					}
-					
 					let pollId = p.1["id"].intValue
 					let question = p.1["question"].stringValue
+					
+					var responses = [String: Int]()
+					for answer in p.1["answers"] {
+						responses[answer.1["answer_text"].stringValue] = p.1["answer_count"].intValue
+					}
 					
 					let newPoll = Poll(id: pollId, question: question, answers: responses)
 					polls.append(newPoll)
@@ -71,7 +71,7 @@ class clientAPI {
 			"answer_counts": answers_counts
 		]
 		
-		Alamofire.request("https://pollr-api.appspot.com/api/v1.0/demo", method: .post, parameters: parameters, encoding: JSONEncoding.default, headers: headers)
+		Alamofire.request("https://pollr-api.appspot.com/api/v1.0/polls", method: .post, parameters: parameters, encoding: JSONEncoding.default, headers: headers)
 	}
 	
 	func getPoll(pollId: Int, done: @escaping (Poll) -> Void) {
@@ -86,9 +86,9 @@ class clientAPI {
 //				print("Json \(json)")
 				let poll = json["result"]
 			
-				var responses = [String]()
+				var responses = [String: Int]()
 				for answer in poll["answers"] {
-					responses.append(answer.1["answer_text"].stringValue)
+					responses[(answer.1["answer_text"].stringValue)] = answer.1["answer_count"].intValue
 				}
 				
 				let pollId = poll["id"].intValue
@@ -97,7 +97,7 @@ class clientAPI {
 				let newPoll = Poll(id: pollId, question: question, answers: responses)
 				
 				print("Newly created poll: \(pollId), \(question), \(responses)")
-//				done(newPoll)
+				done(newPoll)
 			}
 		}
 	}
