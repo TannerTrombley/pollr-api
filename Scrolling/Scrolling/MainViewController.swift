@@ -10,7 +10,7 @@ import UIKit
 import Alamofire
 import Firebase
 
-class MainViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+class MainViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, VotedOn {
 
 	var cellTapped = true
 	var selectedIndexPath: IndexPath?
@@ -33,7 +33,7 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
 		let currentUser = FIRAuth.auth()?.currentUser
 		currentUser?.getTokenForcingRefresh(true) {idToken, error in
 			if let error = error {
-				// Handle error
+				print(error)
 				return;
 			}
 			
@@ -43,15 +43,18 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
 	}
 	
 	
+	func didVoteOnPoll(row: Int) {
+		polls[row].setVote(vote: true)
+	}
+	
 	override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
 		
 		if segue.identifier == "showPollResults",
+			let button = sender as? UIButton,
 			let destination = segue.destination as? PollResultsViewController
 		{
-			if let row = table.indexPathForSelectedRow?.row {
-				let pollId = polls[row].getId()
-				destination.pollId = pollId
-			}
+			destination.pollId = button.tag
+			print("Setting the poll id")
 		}
 	}
 	
@@ -63,6 +66,7 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
 
 	func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
 		let previousIndexPath = selectedIndexPath
+		
 		if indexPath == selectedIndexPath {
 			selectedIndexPath = nil
 		} else {
@@ -82,6 +86,11 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
 //			print("Need to reload rows: \(indexPaths)")
 			tableView.reloadRows(at: indexPaths, with: UITableViewRowAnimation.automatic)
 		}
+		
+		// Depending on this to change the participated flag to true
+//		if previousIndexPath == selectedIndexPath {
+//			didVoteOnPoll(row: indexPath.row)
+//		}
 	}
 	
 	
@@ -95,10 +104,9 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
 		let cell = tableView.dequeueReusableCell(withIdentifier: "PollQuestionTableViewCell", for: indexPath) as? PollQuestionTableViewCell
 		let responseStack = cell?.contentView.subviews[1] as! UIStackView
 		let row = indexPath.row
+		cell?.resultsButton.tag = polls[row].getId()
 		
 		if !(polls[row].didVote()) {
-//			var imageView = UIImageView(image: UIImage(named: "alreadyVoted"))
-//			cell?.accessoryView = imageView
 			cell?.resultsButton.isHidden = true
 		}
 		
@@ -146,11 +154,13 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
 	
 	// Return the cell's height
 	func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+		
 		if indexPath == selectedIndexPath {
 			if let row = selectedIndexPath?.row, !(polls[row].hasVoted) {
 				return PollQuestionTableViewCell.expandedHeight
 			}
 		}
+		
 		return PollQuestionTableViewCell.defaultHeight
 	}
 }

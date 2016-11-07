@@ -13,6 +13,7 @@ import Charts
 class PollResultsViewController: UIViewController {
 	
 	@IBOutlet weak var barChartView: BarChartView!
+	@IBOutlet weak var pollTitle: UILabel!
 	
 	var pollId = Int()
 	
@@ -46,6 +47,7 @@ class PollResultsViewController: UIViewController {
 			voteCounts.append(answer.1)
 		}
 		
+		self.pollTitle.text = question
 		setChart(title: question, dataPoints: answers, values: voteCounts)
 	}
 	
@@ -65,10 +67,9 @@ class PollResultsViewController: UIViewController {
 			dataEntries.append(dataEntry)
 		}
 		
-		let chartDataSet = BarChartDataSet(values: dataEntries, label: title)
-		chartDataSet.colors = ChartColorTemplates.liberty()
+		let chartDataSet = BarChartDataSet(values: dataEntries, label: "")
+		chartDataSet.colors = ChartColorTemplates.colorful()
 		let chartData = BarChartData(dataSet: chartDataSet)
-		
 		
 		xaxis.valueFormatter = formatter
 		barChartView.xAxis.valueFormatter = xaxis.valueFormatter
@@ -80,9 +81,11 @@ class PollResultsViewController: UIViewController {
 		barChartView.xAxis.granularity = 1.0
 		barChartView.xAxis.decimals = 0
 		
+		self.barChartView.legend.enabled = false
+		
 		barChartView.chartDescription?.enabled = false
 		barChartView.rightAxis.enabled = false
-		barChartView.xAxis.labelRotationAngle = 270.0
+//		barChartView.xAxis.labelRotationAngle = 270.0
 		barChartView.animate(xAxisDuration: 2.0, yAxisDuration: 2.0)
 	}
 	

@@ -34,5 +34,13 @@ class Poll {
 	func didVote() -> Bool {
 		return hasVoted
 	}
+	
+	func setVote(vote : Bool) {
+		self.hasVoted = vote
+	}
+	
+	func setTitle(title : String) {
+		self.question = title
+	}
 }
 

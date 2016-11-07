@@ -32,7 +32,7 @@ class PollQuestionTableViewCell: UITableViewCell {
 	}
 	
 	@IBAction func showPollResults(_ sender: UIButton) {
-		print("Show the results")
+		
 	}
 	
 	
@@ -59,14 +59,13 @@ class PollQuestionTableViewCell: UITableViewCell {
 	func userCastedVote(_ sender: UIButton) {
 		let selectedAnswer = sender.titleLabel?.text
 		let pollId = sender.tag
+		self.resultsButton.isHidden = false
 		
-//		for view in responseStack.subviews {
-//			if let button = view as? UIButton {
-//				button.titleLabel?.text = "You have already voted"
-//			}
-//		}
+		if let table = self.superview as? UITableView {
+			print("Changing the status of the poll")
+//			table.didVoteOnPoll(pollId: pollId)
+		}
 		
-//		print("The user voted for \((sender.titleLabel?.text)!) on poll \(sender.tag)")
 		
 		let currentUser = FIRAuth.auth()?.currentUser
 		currentUser?.getTokenForcingRefresh(true) {idToken, error in
