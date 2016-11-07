@@ -222,9 +222,6 @@
                                             <action selector="userWantsFourResponses:" destination="ck8-x3-Grj" eventType="touchUpInside" id="SBP-vh-Zht"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0d2-UL-V2m">
-                                        <state key="normal" title="5"/>
-                                    </button>
                                 </subviews>
                             </stackView>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="XfO-Hm-1ZC">
@@ -244,7 +241,7 @@
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits"/>
                                     </textField>
-                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="LiK-W5-OcP">
+                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" verticalCompressionResistancePriority="751" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="LiK-W5-OcP">
                                         <nil key="textColor"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits"/>
@@ -265,29 +262,46 @@
                                     <segue destination="OlB-98-xEx" kind="show" id="GpN-vB-uDn"/>
                                 </connections>
                             </button>
+                            <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="XSY-wB-AGp">
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="216" id="Zk1-n6-ZDk"/>
+                                </constraints>
+                            </pickerView>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="K9R-WF-imv">
+                                <frame key="frameInset" minX="240" minY="566" width="119" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Check Location..."/>
+                                <connections>
+                                    <action selector="checkLocation:" destination="ck8-x3-Grj" eventType="touchUpInside" id="lXO-Ft-Y9X"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <gestureRecognizers/>
                         <constraints>
+                            <constraint firstItem="XSY-wB-AGp" firstAttribute="centerX" secondItem="AJd-U3-dJB" secondAttribute="centerX" id="0Js-oo-LQw"/>
                             <constraint firstItem="fda-dB-Rry" firstAttribute="leading" secondItem="4D2-ux-xzb" secondAttribute="leading" id="3j6-KD-cim"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="XfO-Hm-1ZC" secondAttribute="trailing" constant="80" id="4Ov-IA-rL0"/>
-                            <constraint firstItem="XfO-Hm-1ZC" firstAttribute="top" secondItem="rGH-62-hYK" secondAttribute="bottom" constant="8" symbolic="YES" id="HZT-Mf-U8D"/>
+                            <constraint firstItem="XfO-Hm-1ZC" firstAttribute="top" secondItem="KtX-Qy-ZMa" secondAttribute="top" constant="235" id="Gcn-y9-NfO"/>
+                            <constraint firstItem="XSY-wB-AGp" firstAttribute="leading" secondItem="KtX-Qy-ZMa" secondAttribute="leading" id="Me1-a0-Q9u"/>
                             <constraint firstItem="4D2-ux-xzb" firstAttribute="trailing" secondItem="KtX-Qy-ZMa" secondAttribute="trailingMargin" id="NbK-Ow-OuJ"/>
+                            <constraint firstItem="XfO-Hm-1ZC" firstAttribute="leading" secondItem="KtX-Qy-ZMa" secondAttribute="leadingMargin" constant="63" id="Np4-DM-Ror"/>
                             <constraint firstItem="4D2-ux-xzb" firstAttribute="top" secondItem="fda-dB-Rry" secondAttribute="bottom" constant="4" id="POu-80-cpn"/>
                             <constraint firstItem="Dyh-2y-I0m" firstAttribute="top" secondItem="MO9-bo-u0s" secondAttribute="bottom" constant="5" id="YJF-Ig-Ngm"/>
                             <constraint firstItem="fda-dB-Rry" firstAttribute="leading" secondItem="KtX-Qy-ZMa" secondAttribute="leadingMargin" id="Yoe-SY-nfI"/>
-                            <constraint firstItem="rGH-62-hYK" firstAttribute="leading" secondItem="XfO-Hm-1ZC" secondAttribute="leading" id="c4b-K9-DNM"/>
-                            <constraint firstItem="XfO-Hm-1ZC" firstAttribute="leading" secondItem="KtX-Qy-ZMa" secondAttribute="leadingMargin" constant="63" id="evB-is-HbM"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="XfO-Hm-1ZC" secondAttribute="trailing" constant="80" id="ePQ-dg-QBd"/>
+                            <constraint firstItem="XfO-Hm-1ZC" firstAttribute="top" secondItem="rGH-62-hYK" secondAttribute="bottom" constant="8" symbolic="YES" id="gaq-VE-JNa"/>
+                            <constraint firstItem="AJd-U3-dJB" firstAttribute="centerX" secondItem="Dyh-2y-I0m" secondAttribute="centerX" id="jgZ-6C-qbW"/>
+                            <constraint firstAttribute="bottom" secondItem="AJd-U3-dJB" secondAttribute="bottom" constant="20" symbolic="YES" id="kb6-oG-bmE"/>
                             <constraint firstItem="uUD-mZ-rwr" firstAttribute="top" secondItem="Dyh-2y-I0m" secondAttribute="bottom" constant="7" id="lLT-eG-61M"/>
+                            <constraint firstItem="XfO-Hm-1ZC" firstAttribute="leading" secondItem="rGH-62-hYK" secondAttribute="leading" id="leo-Rs-2fM"/>
                             <constraint firstItem="MO9-bo-u0s" firstAttribute="top" secondItem="4D2-ux-xzb" secondAttribute="bottom" constant="7" id="oGJ-2e-0CZ"/>
                             <constraint firstItem="4D2-ux-xzb" firstAttribute="trailing" secondItem="Dyh-2y-I0m" secondAttribute="trailing" id="oQT-ha-VyF"/>
                             <constraint firstItem="Dyh-2y-I0m" firstAttribute="leading" secondItem="uUD-mZ-rwr" secondAttribute="leading" id="oYP-4s-IjN"/>
-                            <constraint firstItem="AJd-U3-dJB" firstAttribute="centerX" secondItem="Dyh-2y-I0m" secondAttribute="centerX" id="ppH-em-tNd"/>
                             <constraint firstItem="fda-dB-Rry" firstAttribute="top" secondItem="muC-vf-xSw" secondAttribute="bottom" constant="8" symbolic="YES" id="w1d-Qs-Sh1"/>
-                            <constraint firstItem="Odo-c4-Gvk" firstAttribute="top" secondItem="AJd-U3-dJB" secondAttribute="bottom" constant="60" id="wC6-54-2yo"/>
                             <constraint firstItem="MO9-bo-u0s" firstAttribute="leading" secondItem="Dyh-2y-I0m" secondAttribute="leading" id="wOV-rY-jt6"/>
                             <constraint firstItem="rGH-62-hYK" firstAttribute="top" secondItem="Dyh-2y-I0m" secondAttribute="bottom" constant="8" symbolic="YES" id="y1o-F1-7fa"/>
                             <constraint firstItem="4D2-ux-xzb" firstAttribute="leading" secondItem="MO9-bo-u0s" secondAttribute="leading" id="zXu-vU-bU7"/>
+                            <constraint firstAttribute="bottom" secondItem="XSY-wB-AGp" secondAttribute="bottom" constant="71" id="zoL-d5-7sN"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Create a Poll" id="JnW-E5-rZI">
@@ -302,6 +316,7 @@
                         <outlet property="firstResponse" destination="7bh-h3-qiU" id="ZEd-dp-dXn"/>
                         <outlet property="fourthResponse" destination="LiK-W5-OcP" id="PIX-Tc-Eys"/>
                         <outlet property="numberReponseSelectionRow" destination="rGH-62-hYK" id="aak-2v-gVz"/>
+                        <outlet property="pickerView" destination="XSY-wB-AGp" id="M0s-Kn-31w"/>
                         <outlet property="questionText" destination="4D2-ux-xzb" id="BeX-S3-9Qx"/>
                         <outlet property="responseStack" destination="XfO-Hm-1ZC" id="4Pi-WA-4wv"/>
                         <outlet property="secondResponse" destination="ZbX-G3-1Ne" id="q50-2y-6NN"/>

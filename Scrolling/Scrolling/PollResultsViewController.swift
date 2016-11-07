@@ -25,6 +25,8 @@ class PollResultsViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 		
+		barChartView.noDataText = "Loading results..."
+		
 		let currentUser = FIRAuth.auth()?.currentUser
 		currentUser?.getTokenForcingRefresh(true) {idToken, error in
 			if let error = error {

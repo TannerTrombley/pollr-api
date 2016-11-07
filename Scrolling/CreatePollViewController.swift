@@ -7,9 +7,10 @@
 //
 
 import UIKit
+import MapKit
 import Firebase
 
-class CreatePollViewController: UIViewController, UITextFieldDelegate {
+class CreatePollViewController: UIViewController, UITextFieldDelegate, UIPickerViewDelegate, UIPickerViewDataSource {
 
 	// MARK: View Outlets
 	@IBOutlet weak var questionText: UITextField!
@@ -17,10 +18,35 @@ class CreatePollViewController: UIViewController, UITextFieldDelegate {
 	// Row of number of responses the user selects from
 	@IBOutlet weak var numberReponseSelectionRow: UIStackView!
 	
+	@IBOutlet weak var pickerView: UIPickerView!
+	var pickerData = [String]()
+	
 	// The stack the user's reponses are contained in
 	@IBOutlet weak var responseStack: UIStackView!
 
+	// Call the Map View with the currently selected city's location
+	@IBAction func checkLocation(_ sender: UIButton) {
+		let cities = [[42.2808, -83.7430, 0.1],
+		              [10.4806, -66.9036, 0.1],
+		              [43.6157, -84.2472, 3.0],
+		              [40.7128, -74.0059, 0.1],
+		              [37.4419, -122.1430, 0.1],
+		              [37.0902,-95.7129, 25.0]]
+		
+		//Get the picker's city
+		let location = cities[pickerView.selectedRow(inComponent: 0)]
+		
+		pinMap(pinLatitude: location[0] as! Double, pinLongitude: location[1] as! Double, radius: MKCoordinateSpanMake(location[2], location[2]))
+	}
+	
+//	func centerMapOnLocation(location: CLLocation) {
+//		let coordinateRegion = MKCoordinateRegionMakeWithDistance(location.coordinate, regionRadius * 2.0, regionRadius * 2.0)
+//		LocationMap.setRegion(coordinateRegion, animated: true)
+//	}
+	
+	
 	@IBOutlet weak var submitButton: UIButton!
+	
 	
 	// MARK: Text Fields
 	@IBOutlet weak var fourthResponse: UITextField!
@@ -121,6 +147,21 @@ class CreatePollViewController: UIViewController, UITextFieldDelegate {
 		}
 	}
 	
+	// Redirects to the map and places a pin in it
+	func pinMap(pinLatitude: Double, pinLongitude: Double, radius: MKCoordinateSpan){
+		
+		let coordinate = CLLocationCoordinate2DMake(pinLatitude, pinLongitude)
+		let region = MKCoordinateRegionMake(coordinate, radius)
+		let placemark = MKPlacemark(coordinate: coordinate, addressDictionary: nil)
+		let mapItem = MKMapItem(placemark: placemark)
+		let options = [
+			MKLaunchOptionsMapCenterKey: NSValue(mkCoordinate: region.center),
+			MKLaunchOptionsMapSpanKey: NSValue(mkCoordinateSpan: region.span)
+		]
+		//mapItem.name = theLocationName
+		mapItem.openInMaps(launchOptions: options)
+	}
+	
     override func viewDidLoad() {
         super.viewDidLoad()
 		
@@ -134,13 +175,36 @@ class CreatePollViewController: UIViewController, UITextFieldDelegate {
 		secondResponse.delegate = self
 		thirdResponse.delegate = self
 		fourthResponse.delegate = self
+		
+		self.pickerView.delegate = self
+		self.pickerView.dataSource = self
+		
+		pickerData = ["Ann Arbor", "Caracas", "Michigan", "New York City", "Palo Alto", "USA"]
     }
 
+	public func numberOfComponents(in pickerView: UIPickerView) -> Int {
+		return 1
+	}
+	
+	public func pickerView(_ pickerView: UIPickerView,
+	                       numberOfRowsInComponent component: Int) -> Int {
+		return pickerData.count
+	}
+	
+	public func pickerView(_ pickerView: UIPickerView,
+	                       titleForRow row: Int,
+	                       forComponent component: Int) -> String? {
+		return pickerData[row]
+	}
+
+	
+	
+	
+	
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
-    }
-    
+	}
 
     /*
     // MARK: - Navigation
