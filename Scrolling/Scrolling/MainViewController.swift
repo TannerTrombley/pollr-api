@@ -41,20 +41,6 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
 			client.getDemoPolls(done: done)
 		}
 	}
-
-	// Function that disables voting buttons on polls that have already been voted on
-//	func disableVotingButtons(pollId: Int) {
-//		// Get index of the poll in the polls array
-//		
-//		for i in 0..<polls.count {
-//			if polls[i].getId() == pollId {
-//				let path = [NSIndexPath(item: i, section: 0)]
-//				self.polls.remove(at: i)
-//				self.table.deleteRows(at: path as [IndexPath], with: UITableViewRowAnimation.left)
-//			}
-//		}
-//	}
-	
 	
 	override func didReceiveMemoryWarning() {
 		super.didReceiveMemoryWarning()
@@ -95,6 +81,12 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
 		let cell = tableView.dequeueReusableCell(withIdentifier: "PollQuestionTableViewCell", for: indexPath) as? PollQuestionTableViewCell
 		let responseStack = cell?.contentView.subviews[1] as! UIStackView
 		let row = indexPath.row
+		
+		if !(polls[row].didVote()) {
+//			var imageView = UIImageView(image: UIImage(named: "alreadyVoted"))
+//			cell?.accessoryView = imageView
+			cell?.resultsButton.isHidden = true
+		}
 		
 		// Just remove all subviews to be sure
 		let subViews = responseStack.subviews
@@ -141,10 +133,11 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
 	// Return the cell's height
 	func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
 		if indexPath == selectedIndexPath {
-			return PollQuestionTableViewCell.expandedHeight
-		} else {
-			return PollQuestionTableViewCell.defaultHeight
+			if let row = selectedIndexPath?.row, !(polls[row].hasVoted) {
+				return PollQuestionTableViewCell.expandedHeight
+			}
 		}
+		return PollQuestionTableViewCell.defaultHeight
 	}
 }
 

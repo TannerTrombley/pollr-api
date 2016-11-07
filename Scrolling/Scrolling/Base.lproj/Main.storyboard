@@ -26,7 +26,7 @@
                                         <rect key="frame" x="0.0" y="92" width="375" height="200"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="tTx-Bj-oBU" id="BFT-EA-OEe">
-                                            <frame key="frameInset" width="375" height="199.5"/>
+                                            <frame key="frameInset" width="375" height="200"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="B4p-09-LtP">
@@ -35,8 +35,16 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" translatesAutoresizingMaskIntoConstraints="NO" id="CFH-Dy-NWV"/>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="N0o-rH-FIl">
+                                                    <state key="normal" title="Results"/>
+                                                    <connections>
+                                                        <action selector="takeUserToResults:" destination="tTx-Bj-oBU" eventType="touchUpInside" id="YKT-HL-n9V"/>
+                                                    </connections>
+                                                </button>
                                             </subviews>
                                             <constraints>
+                                                <constraint firstItem="N0o-rH-FIl" firstAttribute="trailing" secondItem="CFH-Dy-NWV" secondAttribute="trailing" id="3JY-3v-L2I"/>
+                                                <constraint firstItem="N0o-rH-FIl" firstAttribute="top" secondItem="BFT-EA-OEe" secondAttribute="topMargin" id="6rr-6K-YDu"/>
                                                 <constraint firstItem="CFH-Dy-NWV" firstAttribute="leading" secondItem="B4p-09-LtP" secondAttribute="leading" id="G9M-fy-SEx"/>
                                                 <constraint firstItem="B4p-09-LtP" firstAttribute="top" secondItem="BFT-EA-OEe" secondAttribute="topMargin" constant="8" id="afR-at-veC"/>
                                                 <constraint firstItem="CFH-Dy-NWV" firstAttribute="top" secondItem="B4p-09-LtP" secondAttribute="bottom" constant="8" symbolic="YES" id="bzj-UM-fEA"/>
@@ -48,6 +56,7 @@
                                         <connections>
                                             <outlet property="pollTitle" destination="B4p-09-LtP" id="Yin-kZ-uKh"/>
                                             <outlet property="responseStack" destination="CFH-Dy-NWV" id="cAt-4O-ZId"/>
+                                            <outlet property="resultsButton" destination="N0o-rH-FIl" id="aqq-Ze-p6x"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
@@ -99,7 +108,7 @@
                                 <rect key="frame" x="0.0" y="92" width="375" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="li9-NA-BxQ" id="fRJ-o2-7cr">
-                                    <frame key="frameInset" width="342" height="43.5"/>
+                                    <frame key="frameInset" width="342" height="44"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="P6O-Zb-fXj">

@@ -21,7 +21,7 @@ class PollQuestionTableViewCell: UITableViewCell {
 	// MARK: Cell Contents
 	@IBOutlet weak var pollTitle: UILabel!
 	@IBOutlet weak var responseStack: UIStackView!
-	
+	@IBOutlet weak var resultsButton: UIButton!
 	
 	func checkHeight() {
 		if frame.size.height < PollQuestionTableViewCell.expandedHeight {
@@ -50,15 +50,21 @@ class PollQuestionTableViewCell: UITableViewCell {
 		}
 	}
 	
+	@IBAction func takeUserToResults(_ sender: UIButton) {
+		
+	
+	}
+	
+	
 	func userCastedVote(_ sender: UIButton) {
 		let selectedAnswer = sender.titleLabel?.text
 		let pollId = sender.tag
 		
-		for view in responseStack.subviews {
-			if let button = view as? UIButton {
-				button.titleLabel?.text = "You have already voted"
-			}
-		}
+//		for view in responseStack.subviews {
+//			if let button = view as? UIButton {
+//				button.titleLabel?.text = "You have already voted"
+//			}
+//		}
 		
 //		print("The user voted for \((sender.titleLabel?.text)!) on poll \(sender.tag)")
 		

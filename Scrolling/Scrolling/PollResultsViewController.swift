@@ -15,13 +15,14 @@ class PollResultsViewController: UIViewController {
 	@IBOutlet weak var barChartView: BarChartView!
 	
 	var pollId = Int()
-	var answers = [String]()
-	var voteCounts = [Int]()
-	var question = String()
 	
-//	override func viewWillAppear(_ animated: Bool) {
-//		print("The pollID is \(pollId)")
-//	}
+	func fakeItTillYouMakeIt(answer : String) -> Int {
+		switch answer {
+			case "imma": return 35
+			case "starboy": return 69
+			default: return 10
+		}
+	}
 	
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -37,30 +38,32 @@ class PollResultsViewController: UIViewController {
 			client.getPoll(pollId: self.pollId, done: self.done)
 		}
 		
-		answers = ["First", "Second", "Third"]
-		voteCounts = [2, 25, 14]
-		
-		setChart(dataPoints: answers, values: voteCounts)
+//		answers = ["First", "Second", "Third"]
+//		voteCounts = [2, 25, 14]
+	
     }
 
 	
 	func done(poll: Poll) {
-		self.question = poll.getQuestion()
-		print("The question is -> \(self.question)")
+		var question = poll.getQuestion()
 		
 		let results = poll.getAnswers()
+		print("Results in 'done' -> \(results)")
+		
+		var answers = [String]()
+		var voteCounts = [Int]()
+		
 		for answer in results {
 			answers.append(answer.0)
 			voteCounts.append(answer.1)
 		}
 		
-//		print("The answers are: \(answers)")
-//		print("With vote counts: \(voteCounts)")
+		setChart(title: question, dataPoints: answers, values: voteCounts)
 	}
 	
 	
 	// MARK: Setting up the Chart
-	func setChart(dataPoints: [String], values: [Int]) {
+	func setChart(title: String, dataPoints: [String], values: [Int]) {
 		barChartView.noDataText = "Loading data..."
 		
 		let formatter = BarChartFormatter()
@@ -74,7 +77,7 @@ class PollResultsViewController: UIViewController {
 			dataEntries.append(dataEntry)
 		}
 		
-		let chartDataSet = BarChartDataSet(values: dataEntries, label: self.question)
+		let chartDataSet = BarChartDataSet(values: dataEntries, label: title)
 		chartDataSet.colors = ChartColorTemplates.liberty()
 		let chartData = BarChartData(dataSet: chartDataSet)
 		

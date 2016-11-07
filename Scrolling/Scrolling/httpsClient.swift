@@ -27,6 +27,7 @@ class clientAPI {
 			
 			if let result = response.result.value {
 				let json = JSON(result)
+				
 				let jsonPolls = json["result"]
 				
 				var polls = [Poll]()
@@ -35,13 +36,14 @@ class clientAPI {
 					
 					let pollId = p.1["id"].intValue
 					let question = p.1["question"].stringValue
+					let voted = p.1["voted"].boolValue
 					
 					var responses = [String: Int]()
 					for answer in p.1["answers"] {
-						responses[answer.1["answer_text"].stringValue] = p.1["answer_count"].intValue
+						responses[answer.1["answer_text"].stringValue] = p.1["answers_count"].intValue
 					}
 					
-					let newPoll = Poll(id: pollId, question: question, answers: responses)
+					let newPoll = Poll(id: pollId, question: question, answers: responses, voted: voted)
 					polls.append(newPoll)
 				}
 				
@@ -49,6 +51,42 @@ class clientAPI {
 			}
 		}
 	}
+	
+	func getMyPolls(done:@escaping ([Poll]) -> Void) {
+		let header : HTTPHeaders = [
+			"Authorization": authToken,
+			]
+		
+		Alamofire.request("https://pollr-api.appspot.com/api/v1.0/user/polls", headers: header).responseJSON { response in
+			
+			if let result = response.result.value {
+				let json = JSON(result)
+				
+				let jsonPolls = json["result"]
+				
+				var polls = [Poll]()
+				
+				for p in jsonPolls {
+					
+					let pollId = p.1["id"].intValue
+					let question = p.1["question"].stringValue
+					let voted = p.1["voted"].boolValue
+					
+					var responses = [String: Int]()
+					for answer in p.1["answers"] {
+						responses[answer.1["answer_text"].stringValue] = p.1["answers_count"].intValue
+					}
+					
+					let newPoll = Poll(id: pollId, question: question, answers: responses, voted: voted)
+					polls.append(newPoll)
+				}
+				
+				done(polls)
+			}
+		}
+	}
+
+	
 	
 	func createPoll(question : String, answers : [String]) {
 		
@@ -83,20 +121,19 @@ class clientAPI {
 			
 			if let result = response.result.value {
 				let json = JSON(result)
-//				print("Json \(json)")
 				let poll = json["result"]
 			
 				var responses = [String: Int]()
 				for answer in poll["answers"] {
-					responses[(answer.1["answer_text"].stringValue)] = answer.1["answer_count"].intValue
+					print("Answer json... \(answer)")
+					responses[(answer.1["answer_text"].stringValue)] = answer.1["count"].intValue
 				}
 				
 				let pollId = poll["id"].intValue
 				let question = poll["question"].stringValue
 				
-				let newPoll = Poll(id: pollId, question: question, answers: responses)
-				
-				print("Newly created poll: \(pollId), \(question), \(responses)")
+				let newPoll = Poll(id: pollId, question: question, answers: responses, voted: false)
+
 				done(newPoll)
 			}
 		}

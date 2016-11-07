@@ -10,11 +10,13 @@ class Poll {
 	var id : Int?
 	var question: String?
 	var answers: [String: Int]?
+	var hasVoted : Bool
 	
-	init(id: Int, question: String, answers: [String: Int]) {
+	init(id: Int, question: String, answers: [String: Int], voted: Bool) {
 		self.id = id
 		self.question = question
 		self.answers = answers
+		self.hasVoted = voted
 	}
 	
 	func getId() -> Int {
@@ -28,17 +30,9 @@ class Poll {
 	func getAnswers() -> [String: Int] {
 		return answers!
 	}
-}
-
-class Simple {
-	var id : Int?
-	var question : String?
-	var answers : [String]?
 	
-	init(first: Int, second: String, third: [String]) {
-		id = first
-		question = second
-		answers = third
+	func didVote() -> Bool {
+		return hasVoted
 	}
 }
 

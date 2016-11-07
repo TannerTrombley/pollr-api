@@ -46,7 +46,7 @@ class MyPollsTableViewController: UITableViewController {
 			}
 			
 			let client = clientAPI(token: idToken!)
-			client.getDemoPolls(done: done)
+			client.getMyPolls(done: done)
 		}
     }
 	
