@@ -21,10 +21,10 @@ R = 6373000.0
 
 def distance_ll(lat1, lon1, lat2, lon2):
 
-    lat1 = radians(lat1)
-    lon1 = radians(lon1)
-    lat2 = radians(lat2)
-    lon2 = radians(lon2)
+    lat1 = radians(float(lat1))
+    lon1 = radians(float(lon1))
+    lat2 = radians(float(lat2))
+    lon2 = radians(float(lon2))
 
     dlon = lon2 - lon1
     dlat = lat2 - lat1
@@ -33,5 +33,7 @@ def distance_ll(lat1, lon1, lat2, lon2):
     c = 2 * atan2(sqrt(a), sqrt(1 - a))
 
     distance = R * c
+    print("P1: {}, {} -- {}, {}".format(lat1, lon1, lat2, lon2))
+    print("Distance between points: {}".format(distance))
 
     return distance

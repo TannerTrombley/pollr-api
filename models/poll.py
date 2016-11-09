@@ -45,10 +45,11 @@ class Poll(ndb.Model):
     lon = ndb.FloatProperty(required=True)
     radius = ndb.IntegerProperty(required=True)
 
-    def serialize(self):
+    def serialize(self, **kwargs):
         # print("date", self.created_date)
         # print("loc", self.location.__dict__)
         d = self.to_dict()
+        d.update(kwargs)
         d['id'] = self._entity_key.id()
         # d['id'] = id
         # d['location'] = {

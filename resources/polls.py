@@ -1,10 +1,11 @@
 from flask_restful import Resource
 from flask import request
-from common import auth, AuthException, distance_ll
+from common import auth, AuthException, distance_ll, did_user_vote
 from models import Poll, Answer
-# from google.appengine.ext import ndb
+from google.appengine.ext import ndb
 from google.appengine.api import search
 import logging
+import random
 
 
 
@@ -30,7 +31,7 @@ class Specific_Poll(Resource):
         result_poll = Poll.get_by_id(int(poll_id))
         if not result_poll:
             return {"error": "Poll does not exist"}, 401
-        return {"result": result_poll.serialize()}, 200
+        return {"result": result_poll.serialize(voted=did_user_vote(claims['sub'], result_poll.participants))}, 200
 
     def post(self, poll_id):
         '''
@@ -56,6 +57,12 @@ class Specific_Poll(Resource):
 
         # if not data['answer_id'] and data['answer_id']
         #     return {"error": "answer_id must be the index to the answer to vote in"}, 401
+        #####
+        # #TEMP
+        # for i in range(len(result_poll.answers)):
+        #     result_poll.answers[i].count = random.randint(result_poll.answers[i].count + 1, result_poll.answers[i].count + 151)
+        # result_poll.put()
+        #####
 
         # Check if the uer can vote
         if claims['sub'] is result_poll.created_by:
@@ -71,6 +78,11 @@ class Specific_Poll(Resource):
                 id = i
                 break
 
+        if id is None:
+            return {"error": "Did not provide a valid answer option"}, 401
+
+
+
         # the user can vote at this point
         result_poll.participants.append(claims['sub'])
         try:
@@ -80,7 +92,7 @@ class Specific_Poll(Resource):
 
         result_poll.put()
 
-        return {"result": result_poll.serialize()}, 201
+        return {"result": result_poll.serialize(voted=did_user_vote(claims['sub'], result_poll.participants))}, 201
 
 
 
@@ -119,13 +131,15 @@ class Post_poll(Resource):
             radius=data['radius']
         )
 
+        for i in range(len(newPoll.answers)):
+            newPoll.answers[i].count = random.randint(newPoll.answers[i].count, newPoll.answers[i].count + 151)
+
         poll_key = newPoll.put()
 
         logging.info("Created the pool and put it in the datastore")
 
         #
         fields = [
-            search.TextField(name="poll_id", value=str(poll_key.id())),
             search.NumberField(name="radius", value=data['radius']),
             search.GeoField(name="location", value=search.GeoPoint(data['lat'], data['lon']))
         ]
@@ -147,7 +161,7 @@ class Post_poll(Resource):
         logging.info("poll id ")
         logging.info(poll_key.id())
 
-        return {"result": newPoll.serialize()}, 201
+        return {"result": newPoll.serialize(voted=did_user_vote(claims['sub'], newPoll.participants))}, 201
 
 class User_polls(Resource):
     '''
@@ -167,15 +181,13 @@ class User_polls(Resource):
 
         result = []
         for i in res:
-            result.append(i.serialize())
+            result.append(i.serialize(voted=did_user_vote(claims['sub'], i.participants)))
         return {"result": result}, 200
 
 
 class Location_polls(Resource):
     '''
-    pass along JSON:
-    lat: float
-    lon: float
+    This function takes agruments in the URI parameters lat and lon. They should be double values representing degrees
     '''
     def get(self):
         claims = None
@@ -184,32 +196,52 @@ class Location_polls(Resource):
         except AuthException as e:
             return {"error": "Unauthorized"}, 401
 
-        # logging.info(claims)
+        # Validate the lat lon
+        # if request.args.get('lat') < -90.0 or request.args.get('lat') > 90.0 or request.args.get('lon') < -180.0 or request.args.get('lon') > 180.0:
+        #     logging.error("invalid lat lon: {} {}".format(request.args.get('lat'), request.args.get('lon')))
+        #     return {"error": "Invalid lat lon values"}
 
-        query = "distance(location, geopoint({}, {})) < 160000".format(request.args.get('lat'), request.args.get('lon'))
+        #Set up the response array. This will contain and series of ints representing IDs in sorted order
+        near = []
 
-
-        # preform the search
-        result = []
+        # This is the distance in meters of the diameter of detroit -- our maximum radius to query for
+        max_dist = 32200
         try:
-            index = search.Index('Polls')
-            search_results = index.search(query)
-            for doc in search_results:
-                print(doc.location)
-                if distance_ll(request.args.get('lat'), request.args.get('lon'), doc)
+            # Build the query object here
+            query = "distance(location, geopoint({}, {})) < {}".format(request.args.get('lat'),
+                                                                          request.args.get('lon'), max_dist)
+            loc_expr = "distance(location, geopoint({}, {}))".format(request.args.get('lat'), request.args.get('lon'))
+            sortexpr = search.SortExpression(expression=loc_expr, direction=search.SortExpression.ASCENDING, default_value=max_dist+1)
+            search_query = search.Query(query_string=query, options=search.QueryOptions(sort_options=search.SortOptions(expressions=[sortexpr])))
 
+            # get the index and execute the query
+            index = search.Index('Polls')
+            search_results = index.search(search_query)
+            for doc in search_results:
+                # index.delete(doc.doc_id)
+
+                if distance_ll(request.args.get('lat'), request.args.get('lon'), doc.fields[1].value.latitude, doc.fields[1].value.longitude) <= doc.fields[0].value:
+                    near.append(int(doc.doc_id))
+
+            # Get the actual polls based on the ids that we put in the search results
+            polls_near = ndb.get_multi([ndb.Key(Poll, k) for k in near])
+
+            # Proccess the results and convert to a json object and return
+            result = []
+            for i in polls_near:
+                if not i:
+                    continue
+                result.append(i.serialize(voted=did_user_vote(claims['sub'], i.participants)))
+            return {"result": result}, 200
+
+
+
+        # If there is an error searching we will be bumped out here
         except search.Error as e:
             logging.error("Error tryin to search for polls")
             logging.error(e)
+            return {"error": "Error while searching for polls"}, 400
 
-
-
-        # query
-
-        # result = []
-        # for i in res:
-        #     result.append(i.serialize())
-        # return {"result": result}, 200
 
 class Demo_polls(Resource):
     '''
@@ -231,7 +263,7 @@ class Demo_polls(Resource):
 
         result = []
         for i in res:
-            result.append(i.serialize())
+            result.append(i.serialize(voted=did_user_vote(claims['sub'], i.participants)))
         return {"result": result}, 200
 
     def post(self):
@@ -267,4 +299,4 @@ class Demo_polls(Resource):
 
         newPoll.put()
 
-        return {"result": newPoll.serialize()}, 201
+        return {"result": newPoll.serialize(voted=did_user_vote(claims['sub'], newPoll  .participants))}, 201
