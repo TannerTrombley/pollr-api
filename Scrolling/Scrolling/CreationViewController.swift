@@ -7,8 +7,11 @@
 //
 
 import UIKit
+import MapKit
+import CoreLocation
 
-class CreationViewController: UIViewController, UITextFieldDelegate, UIPickerViewDelegate, UIPickerViewDataSource {
+class CreationViewController: UIViewController, UITextFieldDelegate, MKMapViewDelegate, CLLocationManagerDelegate
+{
 
 	// MARK: Outlets
 	@IBOutlet weak var questionView: UIView!
@@ -23,14 +26,17 @@ class CreationViewController: UIViewController, UITextFieldDelegate, UIPickerVie
 	
 
 	@IBOutlet weak var locationView: UIView!
-	@IBOutlet weak var cityPicker: UIPickerView!
+	@IBOutlet weak var mapView: MKMapView!
 
 	
 	@IBOutlet weak var submissionView: UIView!
 	
 	
+	
 	// MARK: Member Variables
-	var cities = ["Ann Arbor", "Detroit", "Grand Rapids", "Lansing", "Mackinac City"]
+	let locationManager = CLLocationManager()
+	
+	
 	
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -50,26 +56,40 @@ class CreationViewController: UIViewController, UITextFieldDelegate, UIPickerVie
 		
 		// Location View Setup
 		self.locationView.alpha = 0.0
-		self.cityPicker.delegate = self
-		self.cityPicker.dataSource = self
+		
+		self.locationManager.delegate = self
+		self.locationManager.desiredAccuracy = kCLLocationAccuracyBest
+		self.locationManager.requestWhenInUseAuthorization()
+		self.locationManager.startUpdatingLocation()
+		self.mapView.showsUserLocation = true
 		
 		// Submission View Setup
 		self.submissionView.alpha = 0.0
     }
 	
 	
-	// MARK: Picker View Setup
-	func numberOfComponents(in pickerView: UIPickerView) -> Int {
-		return 1
+	// MARK: Location Delegate Methods
+	func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+		
+		// Get the most recent location
+		let location = locations.last
+		
+		// Get the 'center' of that location
+		let center = CLLocationCoordinate2D(latitude: (location?.coordinate.latitude)!, longitude: (location?.coordinate.longitude)!)
+		
+		// Create a region that the map will zoom too
+		let region = MKCoordinateRegion(center: center, span: MKCoordinateSpan(latitudeDelta: 1, longitudeDelta: 1))
+		
+		self.mapView.setRegion(region, animated: true)
+		self.locationManager.stopUpdatingLocation()
 	}
 	
-	func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-		return cities.count
+	func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
+		print("Errors: \(error.localizedDescription)")
 	}
 	
-	func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-		return cities[row]
-	}
+	
+	
 	
 	// MARK: Text Field Handling
 	
