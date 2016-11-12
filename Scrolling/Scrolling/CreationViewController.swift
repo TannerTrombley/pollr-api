@@ -10,6 +10,8 @@ import UIKit
 import MapKit
 import CoreLocation
 
+import Firebase
+
 class CreationViewController: UIViewController, UITextFieldDelegate, MKMapViewDelegate, CLLocationManagerDelegate
 {
 
@@ -54,8 +56,15 @@ class CreationViewController: UIViewController, UITextFieldDelegate, MKMapViewDe
 		self.secondAnswerField.delegate = self
 		self.secondAnswerField.tag = 3
 		
+		self.thirdAnswerField.delegate = self
+		self.thirdAnswerField.tag = 4
+		
+		self.fourthAnswerField.delegate = self
+		self.fourthAnswerField.tag = 5
+		
 		// Location View Setup
 		self.locationView.alpha = 0.0
+		self.mapView.delegate = self
 		
 		self.locationManager.delegate = self
 		self.locationManager.desiredAccuracy = kCLLocationAccuracyBest
@@ -63,10 +72,14 @@ class CreationViewController: UIViewController, UITextFieldDelegate, MKMapViewDe
 		self.locationManager.startUpdatingLocation()
 		self.mapView.showsUserLocation = true
 		
+		let lpgr = UILongPressGestureRecognizer(target: self, action: #selector(self.handleLongPress))
+		lpgr.minimumPressDuration = 1.0
+		self.mapView.addGestureRecognizer(lpgr)
+		
 		// Submission View Setup
 		self.submissionView.alpha = 0.0
     }
-	
+
 	
 	// MARK: Location Delegate Methods
 	func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
@@ -89,54 +102,123 @@ class CreationViewController: UIViewController, UITextFieldDelegate, MKMapViewDe
 	}
 	
 	
+	// MARK: Map Delegation Methods
+	func handleLongPress(_ gestureRecognizer: UIGestureRecognizer) {
+		if gestureRecognizer.state != .began {
+			return
+		}
+		
+		// Remove any existing pins
+		if !mapView.annotations.isEmpty {
+			mapView.removeAnnotations(mapView.annotations)
+		}
+		
+		let touchPoint = gestureRecognizer.location(in: self.mapView)
+		let touchMapCoordinate = self.mapView.convert(touchPoint, toCoordinateFrom: self.mapView)
+		let annot = MKPointAnnotation()
+		annot.coordinate = touchMapCoordinate
+		self.mapView.addAnnotation(annot)
+	}
+	
+	// Animates the annotation
+//	func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
+//		print("It's a animatin")
+//		
+//		if let pin = annotation as? MKPinAnnotationView {
+//			print("It's a pin")
+//			pin.animatesDrop = true
+//			return pin
+//		}
+//		print("Return a generic annotation view")
+//		return MKAnnotationView()
+//	}
+	
+	
 	
 	
 	// MARK: Text Field Handling
-	
-	func textFieldShouldEndEditing(_ textField: UITextField) -> Bool {
-		print("asking if we should stop editing?")
-		return textField.text != ""
-	}
-	
-	func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-		
-		switch textField.tag {
-			case 1:
-				print("The question text is done editing")
-				if textField.text != "" {
-					self.questionText.resignFirstResponder()
-					return true
-				}
-				return false
-			case 2, 3:
-				print("Typing in a response")
-				if (firstAnswerField.text != "") && (secondAnswerField.text != "") {
-					print("At least the first two are non-empty so animate")
-					UIView.animate(withDuration: 0.5, animations: {
-						self.locationView.alpha = 1.0
-						self.submissionView.alpha = 1.0
-					})
-					return true
-				}
-				return false
-			default:
-				break
-		}
-		return false
-	}
-	
-	
 	func textFieldDidEndEditing(_ textField: UITextField) {
-		
-		print("The user stopped typing")
-		
+
 		if textField.text != "" {
+			textField.resignFirstResponder()
 			UIView.animate(withDuration: 0.5, animations: {
 				self.responseView.alpha = 1.0
 			})
 		}
 	}
 
+	func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+		textField.resignFirstResponder()
+		return true
+	}
+	
+	func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+		
+		if (firstAnswerField.text != "") && (secondAnswerField.text != "") {
+
+			UIView.animate(withDuration: 0.5, animations: {
+				self.locationView.alpha = 1.0
+				self.submissionView.alpha = 1.0
+			})
+		}
+		return true
+	}
+	
+	
+	
+	// MARK: Validate input and send to server
+	
+	@IBAction func submitPoll(_ sender: UIButton) {
+		let lastAnnotation = self.mapView.annotations.last
+		let lastCoordinate = lastAnnotation?.coordinate
+		
+		print("The poll will be placed at \(lastCoordinate?.latitude), \(lastCoordinate?.longitude)")
+		
+		if questionText.text != "" && atLeastTwoResponsesPopualted() && locationPicked() {
+			print("Allow submission")
+			
+			let question = questionText.text
+			
+			var answers = [String]()
+			let fields = [self.firstAnswerField, self.secondAnswerField, self.thirdAnswerField, self.fourthAnswerField]
+			
+			for field in fields {
+				if field?.text != "" {
+					answers.append((field?.text)!)
+				}
+			}
+		
+			let currentUser = FIRAuth.auth()?.currentUser
+			currentUser?.getTokenForcingRefresh(true) {idToken, error in
+				if let error = error {
+					print("Error: \(error)")
+					return;
+				}
+				
+				let client = clientAPI(token: idToken!)
+				client.createPoll(question: question!, answers: answers, latitude: (lastCoordinate?.latitude)!, longitude: (lastCoordinate?.longitude)!)
+			}
+			
+		}
+		
+		
+	}
+	
+	func atLeastTwoResponsesPopualted() -> Bool {
+		let responses = [self.firstAnswerField, self.secondAnswerField, self.thirdAnswerField, self.fourthAnswerField]
+		
+		func isNonEmpty(textField : UITextField?) -> Bool {
+			return !((textField?.text?.isEmpty)!)
+		}
+		
+		return responses.filter(isNonEmpty).count >= 2
+	}
+	
+	
+	func locationPicked() -> Bool {
+		return self.mapView.annotations.count > 1
+	}
+	
 	
 	
 	

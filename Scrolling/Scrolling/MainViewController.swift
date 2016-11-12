@@ -38,7 +38,7 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
 			}
 			
 			let client = clientAPI(token: idToken!)
-			client.getDemoPolls(done: done)
+			client.getPolls(latitude: 42.2808, longitude: 83.7430, done: done)
 		}
 	}
 	

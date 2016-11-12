@@ -36,13 +36,8 @@ class CreatePollViewController: UIViewController, UITextFieldDelegate, UIPickerV
 		//Get the picker's city
 		let location = cities[pickerView.selectedRow(inComponent: 0)]
 		
-		pinMap(pinLatitude: location[0] as! Double, pinLongitude: location[1] as! Double, radius: MKCoordinateSpanMake(location[2], location[2]))
+		pinMap(pinLatitude: location[0], pinLongitude: location[1], radius: MKCoordinateSpanMake(location[2], location[2]))
 	}
-	
-//	func centerMapOnLocation(location: CLLocation) {
-//		let coordinateRegion = MKCoordinateRegionMakeWithDistance(location.coordinate, regionRadius * 2.0, regionRadius * 2.0)
-//		LocationMap.setRegion(coordinateRegion, animated: true)
-//	}
 	
 	
 	@IBOutlet weak var submitButton: UIButton!
@@ -112,14 +107,8 @@ class CreatePollViewController: UIViewController, UITextFieldDelegate, UIPickerV
 	
 	
 	@IBAction func submitPoll(_ sender: UIButton) {
-		// validate user data
-//		print("User's chosen repsonses:")
-//		print("\(firstResponse.text)")
-//		print("\(secondResponse.text)")
-//		print("\(thirdResponse.text)")
-//		print("\(fourthResponse.text)")
 
-		var question = questionText.text
+		let question = questionText.text
 		var answers = [String]()
 		
 		if !((firstResponse?.isHidden)!) {
@@ -138,12 +127,12 @@ class CreatePollViewController: UIViewController, UITextFieldDelegate, UIPickerV
 		let currentUser = FIRAuth.auth()?.currentUser
 		currentUser?.getTokenForcingRefresh(true) {idToken, error in
 			if let error = error {
-				// Handle error
+				print("Error: \(error)")
 				return;
 			}
 			
-			var client = clientAPI(token: idToken!)
-			client.createPoll(question: question!, answers: answers)
+			let client = clientAPI(token: idToken!)
+			client.createPoll(question: question!, answers: answers, latitude: 42.2808, longitude: 83.7430)
 		}
 	}
 	

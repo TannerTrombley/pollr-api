@@ -85,10 +85,49 @@ class clientAPI {
 			}
 		}
 	}
+	
+	func getPolls(latitude: Double, longitude: Double, done:@escaping ([Poll]) -> Void) {
+		let header : HTTPHeaders = [
+			"Authorization": authToken,
+			]
+		
+		let parameters : Parameters = [
+			"lat": latitude,
+			"lon": longitude
+		]
+		
+		Alamofire.request("https://pollr-api.appspot.com/api/v1.0/location/polls", parameters: parameters, headers: header).responseJSON { response in
+			
+			if let result = response.result.value {
+				let json = JSON(result)
+				
+				let jsonPolls = json["result"]
+				
+				var polls = [Poll]()
+				
+				for p in jsonPolls {
+					
+					let pollId = p.1["id"].intValue
+					let question = p.1["question"].stringValue
+					let voted = p.1["voted"].boolValue
+					
+					var responses = [String: Int]()
+					for answer in p.1["answers"] {
+						responses[answer.1["answer_text"].stringValue] = p.1["answers_count"].intValue
+					}
+					
+					let newPoll = Poll(id: pollId, question: question, answers: responses, voted: voted)
+					polls.append(newPoll)
+				}
+				
+				done(polls)
+			}
+		}
+	}
 
 	
 	
-	func createPoll(question : String, answers : [String]) {
+	func createPoll(question : String, answers : [String], latitude: Double, longitude: Double) {
 		
 		let headers : HTTPHeaders = [
 			"Authorization": authToken,
@@ -102,8 +141,8 @@ class clientAPI {
 		
 		let parameters : Parameters = [
 			"question": question,
-			"lat": 42.2808,
-			"lon": -83.743,
+			"lat": latitude,
+			"lon": longitude,
 			"radius": 1610,
 			"answers": answers,
 			"answer_counts": answers_counts
