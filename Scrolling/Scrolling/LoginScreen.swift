@@ -29,7 +29,7 @@ class LoginScreen: UIViewController, FBSDKLoginButtonDelegate {
 			if let user = user {
 
 				let mainStoryBoard : UIStoryboard  = UIStoryboard(name: "Main", bundle: nil)
-				let homeViewController : UIViewController = mainStoryBoard.instantiateViewController(withIdentifier: "mainNavigationController")
+				let homeViewController : UIViewController = mainStoryBoard.instantiateViewController(withIdentifier: "mainTabBarController")
 				
 				self.present(homeViewController, animated: true, completion: nil)
 

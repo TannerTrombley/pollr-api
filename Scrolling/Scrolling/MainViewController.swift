@@ -17,11 +17,13 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
 	
 	var polls = [Poll]()
 	
+	
 	@IBOutlet weak var table: UITableView!
 	
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		
+
 		func done(polls: [Poll]) {
 			self.polls = polls.reversed()
 			

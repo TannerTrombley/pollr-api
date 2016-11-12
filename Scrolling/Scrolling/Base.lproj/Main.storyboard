@@ -10,27 +10,46 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Polls Near You-->
+        <!--Tab Bar Controller-->
+        <scene sceneID="Vfy-MS-fMv">
+            <objects>
+                <tabBarController storyboardIdentifier="mainTabBarController" id="1jP-cX-vZn" sceneMemberID="viewController">
+                    <tabBar key="tabBar" contentMode="scaleToFill" id="eA6-iD-RKR">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="49"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    </tabBar>
+                    <connections>
+                        <segue destination="dAi-8Z-0fb" kind="relationship" relationship="viewControllers" id="o3S-eW-M2g"/>
+                        <segue destination="IXX-1C-q6Y" kind="relationship" relationship="viewControllers" id="hW3-Nb-cc6"/>
+                        <segue destination="eog-Pr-xrR" kind="relationship" relationship="viewControllers" id="lfb-z5-hDs"/>
+                    </connections>
+                </tabBarController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="G5E-Z6-hDK" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3822" y="139"/>
+        </scene>
+        <!--mainViewController-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="MainViewController" customModule="Scrolling" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="mainViewController" title="mainViewController" id="BYZ-38-t0r" customClass="MainViewController" customModule="Scrolling" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
                         <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
                     </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
+                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC" userLabel="View">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="145" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="GlG-Kl-2MO">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="618"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="PollQuestionTableViewCell" rowHeight="200" id="tTx-Bj-oBU" userLabel="PollQuestionTableViewCell" customClass="PollQuestionTableViewCell" customModule="Scrolling" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="375" height="200"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="tTx-Bj-oBU" id="BFT-EA-OEe">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="200"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="199"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="B4p-09-LtP">
@@ -85,30 +104,20 @@
                             <constraint firstItem="GlG-Kl-2MO" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="1AP-mk-2bP"/>
                             <constraint firstItem="GlG-Kl-2MO" firstAttribute="bottom" secondItem="wfy-db-euE" secondAttribute="top" id="Knc-un-X7K"/>
                             <constraint firstAttribute="trailing" secondItem="GlG-Kl-2MO" secondAttribute="trailing" id="LVF-Aw-sOq"/>
+                            <constraint firstItem="GlG-Kl-2MO" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="Shf-KL-dg9"/>
                             <constraint firstItem="GlG-Kl-2MO" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="gXh-Nw-4Dv"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="Polls Near You" id="jyL-LQ-OhV">
-                        <barButtonItem key="leftBarButtonItem" title="My Polls" id="B5P-hf-5tL">
-                            <connections>
-                                <segue destination="sYx-V7-5Q9" kind="show" customClass="SegueFromLeft" customModule="Scrolling" customModuleProvider="target" id="lJU-64-3C0"/>
-                            </connections>
-                        </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" title="Create" id="dnv-ix-w3a">
-                            <connections>
-                                <segue destination="r2T-8J-WGZ" kind="show" id="Poe-39-Kt8"/>
-                            </connections>
-                        </barButtonItem>
-                    </navigationItem>
+                    <navigationItem key="navigationItem" title="Polls Near You" id="jyL-LQ-OhV"/>
                     <connections>
                         <outlet property="table" destination="GlG-Kl-2MO" id="ggO-nL-heQ"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1983" y="139"/>
+            <point key="canvasLocation" x="5700" y="138.98050974512745"/>
         </scene>
-        <!--My Polls Table View Controller-->
+        <!--My Polls-->
         <scene sceneID="t6D-Dr-xEV">
             <objects>
                 <tableViewController id="sYx-V7-5Q9" customClass="MyPollsTableViewController" customModule="Scrolling" customModuleProvider="target" sceneMemberID="viewController">
@@ -121,7 +130,7 @@
                                 <rect key="frame" x="0.0" y="28" width="375" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="li9-NA-BxQ" id="fRJ-o2-7cr">
-                                    <rect key="frame" x="0.0" y="0.0" width="342" height="44"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="342" height="43"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="P6O-Zb-fXj">
@@ -150,14 +159,14 @@
                         </connections>
                     </tableView>
                     <toolbarItems/>
-                    <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
+                    <navigationItem key="navigationItem" title="My Polls" id="tZ3-1e-bs1"/>
                     <connections>
                         <outlet property="myPollsTable" destination="Wk4-y1-qDd" id="Oei-DJ-FO1"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="gT1-la-Vl6" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2038" y="921"/>
+            <point key="canvasLocation" x="4760.8000000000002" y="1070.9145427286358"/>
         </scene>
         <!--Poll Results View Controller-->
         <scene sceneID="O0q-rU-CGA">
@@ -168,18 +177,18 @@
                         <viewControllerLayoutGuide type="bottom" id="Pj4-bS-rGY"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="43D-6A-sz2">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="64" width="375" height="603"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="eW4-me-ABX" customClass="BarChartView" customModule="Charts">
-                                <rect key="frame" x="16" y="49" width="343" height="598"/>
+                                <rect key="frame" x="16" y="29" width="343" height="554"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <accessibility key="accessibilityConfiguration">
                                     <accessibilityTraits key="traits" notEnabled="YES"/>
                                 </accessibility>
                             </view>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Kkg-aQ-1gk">
-                                <rect key="frame" x="16" y="21" width="343" height="21"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Kkg-aQ-1gk">
+                                <rect key="frame" x="16" y="0.0" width="343" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -204,9 +213,9 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4qQ-ur-PiV" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2888.8000000000002" y="920.68965517241384"/>
+            <point key="canvasLocation" x="5700" y="1070.9145427286358"/>
         </scene>
-        <!--Creation View Controller-->
+        <!--Create a Poll-->
         <scene sceneID="IjD-Jh-EcX">
             <objects>
                 <viewController id="r2T-8J-WGZ" customClass="CreationViewController" customModule="Scrolling" customModuleProvider="target" sceneMemberID="viewController">
@@ -219,16 +228,16 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="g9Q-rl-JnF" userLabel="QuestionView">
-                                <rect key="frame" x="16" y="64" width="343" height="74.5"/>
+                                <rect key="frame" x="16" y="64" width="343" height="75"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1. Ask Your Question" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0Q2-Fy-jqO">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="749" text="1. Ask Your Question" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0Q2-Fy-jqO">
                                         <rect key="frame" x="8" y="8" width="157" height="20.5"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="bRy-cB-Ak9">
-                                        <rect key="frame" x="8" y="36.5" width="327" height="30"/>
+                                        <rect key="frame" x="8" y="36.5" width="327" height="30.5"/>
                                         <nil key="textColor"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits"/>
@@ -245,27 +254,8 @@
                                     <constraint firstItem="0Q2-Fy-jqO" firstAttribute="leading" secondItem="g9Q-rl-JnF" secondAttribute="leadingMargin" id="pbA-IY-xLE"/>
                                 </constraints>
                             </view>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Zh8-eh-YU2" userLabel="SubmissionView">
-                                <rect key="frame" x="16" y="598" width="343" height="49"/>
-                                <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2Jc-UD-SEN">
-                                        <rect key="frame" x="145" y="9" width="53" height="30"/>
-                                        <state key="normal" title="Submit!"/>
-                                        <connections>
-                                            <action selector="submitPoll:" destination="r2T-8J-WGZ" eventType="touchUpInside" id="Q8g-Xk-scj"/>
-                                            <segue destination="BYZ-38-t0r" kind="show" customClass="SegueFromLeft" customModule="Scrolling" customModuleProvider="target" id="XfS-mr-BPj"/>
-                                        </connections>
-                                    </button>
-                                </subviews>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <constraints>
-                                    <constraint firstItem="2Jc-UD-SEN" firstAttribute="centerX" secondItem="Zh8-eh-YU2" secondAttribute="centerX" id="Yrs-ZG-5Xi"/>
-                                    <constraint firstItem="2Jc-UD-SEN" firstAttribute="centerY" secondItem="Zh8-eh-YU2" secondAttribute="centerY" id="kRK-Pm-tgN"/>
-                                    <constraint firstItem="2Jc-UD-SEN" firstAttribute="top" secondItem="Zh8-eh-YU2" secondAttribute="top" constant="9" id="wvh-K4-7LL"/>
-                                </constraints>
-                            </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="LfM-yN-C0L" userLabel="ResponsesView">
-                                <rect key="frame" x="16" y="146" width="343" height="233"/>
+                                <rect key="frame" x="16" y="147" width="343" height="233"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="2. Choose the Responses" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DQf-bZ-y6M">
                                         <rect key="frame" x="8" y="9" width="195" height="33"/>
@@ -326,7 +316,7 @@
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="BnE-5I-7ZH" userLabel="LocationView">
-                                <rect key="frame" x="16" y="387" width="343" height="197"/>
+                                <rect key="frame" x="16" y="388" width="343" height="197"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" verticalCompressionResistancePriority="751" text="3. Pick a Location" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Lz9-bW-Ooy">
                                         <rect key="frame" x="8" y="8" width="134.5" height="20.5"/>
@@ -334,8 +324,8 @@
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="UmP-wX-yrc">
-                                        <rect key="frame" x="8" y="35.5" width="327" height="153.5"/>
+                                    <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="UmP-wX-yrc">
+                                        <rect key="frame" x="8" y="36" width="327" height="154"/>
                                     </mapView>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -348,26 +338,41 @@
                                     <constraint firstItem="UmP-wX-yrc" firstAttribute="trailing" secondItem="BnE-5I-7ZH" secondAttribute="trailingMargin" id="uhR-xN-X4B"/>
                                 </constraints>
                             </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Zh8-eh-YU2" userLabel="SubmissionView">
+                                <rect key="frame" x="16" y="579" width="343" height="39"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2Jc-UD-SEN">
+                                        <rect key="frame" x="145" y="4" width="53" height="30"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <state key="normal" title="Submit!"/>
+                                        <connections>
+                                            <action selector="submitPoll:" destination="r2T-8J-WGZ" eventType="touchUpInside" id="Q8g-Xk-scj"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="g9Q-rl-JnF" firstAttribute="trailing" secondItem="LfM-yN-C0L" secondAttribute="trailing" id="5Lo-Lw-y4M"/>
-                            <constraint firstItem="LfM-yN-C0L" firstAttribute="top" secondItem="6rc-us-TS3" secondAttribute="top" constant="146" id="5tL-Xf-QvQ"/>
+                            <constraint firstItem="LfM-yN-C0L" firstAttribute="top" secondItem="6rc-us-TS3" secondAttribute="top" constant="147" id="5tL-Xf-QvQ"/>
+                            <constraint firstItem="Zh8-eh-YU2" firstAttribute="bottom" secondItem="Iz7-YU-cL0" secondAttribute="top" id="9Xj-hw-C1X"/>
                             <constraint firstItem="g9Q-rl-JnF" firstAttribute="leading" secondItem="6rc-us-TS3" secondAttribute="leadingMargin" id="Bl5-wx-fGe"/>
                             <constraint firstItem="BnE-5I-7ZH" firstAttribute="top" secondItem="LfM-yN-C0L" secondAttribute="bottom" constant="8" symbolic="YES" id="Qcc-WZ-peV"/>
-                            <constraint firstItem="BnE-5I-7ZH" firstAttribute="top" secondItem="6rc-us-TS3" secondAttribute="top" constant="387" id="S1q-aM-Qqe"/>
-                            <constraint firstItem="BnE-5I-7ZH" firstAttribute="leading" secondItem="Zh8-eh-YU2" secondAttribute="leading" id="Vsk-iR-Ye1"/>
+                            <constraint firstItem="BnE-5I-7ZH" firstAttribute="top" secondItem="6rc-us-TS3" secondAttribute="top" constant="388" id="S1q-aM-Qqe"/>
+                            <constraint firstItem="Zh8-eh-YU2" firstAttribute="leading" secondItem="BnE-5I-7ZH" secondAttribute="leading" id="UKd-J8-Hn4"/>
+                            <constraint firstItem="Zh8-eh-YU2" firstAttribute="trailing" secondItem="BnE-5I-7ZH" secondAttribute="trailing" id="VnT-Kw-pWZ"/>
                             <constraint firstItem="LfM-yN-C0L" firstAttribute="leading" secondItem="BnE-5I-7ZH" secondAttribute="leading" id="b7a-HI-cnJ"/>
-                            <constraint firstItem="BnE-5I-7ZH" firstAttribute="trailing" secondItem="Zh8-eh-YU2" secondAttribute="trailing" id="cFR-Ig-9Lj"/>
-                            <constraint firstAttribute="bottom" secondItem="Zh8-eh-YU2" secondAttribute="bottom" constant="20" symbolic="YES" id="dfA-ng-KwG"/>
-                            <constraint firstItem="Zh8-eh-YU2" firstAttribute="top" secondItem="BnE-5I-7ZH" secondAttribute="bottom" constant="14" id="jSr-Ra-SCq"/>
+                            <constraint firstItem="Zh8-eh-YU2" firstAttribute="top" secondItem="6rc-us-TS3" secondAttribute="top" constant="579" id="huG-aK-tP5"/>
                             <constraint firstItem="g9Q-rl-JnF" firstAttribute="top" secondItem="RVb-un-faD" secondAttribute="bottom" id="jpz-it-Qhh"/>
                             <constraint firstItem="g9Q-rl-JnF" firstAttribute="trailing" secondItem="6rc-us-TS3" secondAttribute="trailingMargin" id="lTy-ZL-WYV"/>
                             <constraint firstItem="LfM-yN-C0L" firstAttribute="trailing" secondItem="BnE-5I-7ZH" secondAttribute="trailing" id="oY1-rU-3HH"/>
+                            <constraint firstItem="Iz7-YU-cL0" firstAttribute="top" secondItem="BnE-5I-7ZH" secondAttribute="bottom" constant="33" id="prJ-rl-HW0"/>
                             <constraint firstItem="g9Q-rl-JnF" firstAttribute="leading" secondItem="LfM-yN-C0L" secondAttribute="leading" id="wu9-AT-L9E"/>
                         </constraints>
                     </view>
-                    <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
+                    <navigationItem key="navigationItem" title="Create a Poll" id="0nq-yS-fz1"/>
                     <connections>
                         <outlet property="firstAnswerField" destination="HEM-he-ycx" id="GRj-ug-uOq"/>
                         <outlet property="fourthAnswerField" destination="AVm-3d-fUO" id="hqB-f4-0Nx"/>
@@ -383,26 +388,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="i0o-wn-4dO" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2889" y="139"/>
-        </scene>
-        <!--Navigation Controller-->
-        <scene sceneID="omO-yd-vYJ">
-            <objects>
-                <navigationController storyboardIdentifier="mainNavigationController" automaticallyAdjustsScrollViewInsets="NO" id="OlB-98-xEx" sceneMemberID="viewController">
-                    <toolbarItems/>
-                    <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="zjC-dq-OBM">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                    </navigationBar>
-                    <nil name="viewControllers"/>
-                    <connections>
-                        <segue destination="BYZ-38-t0r" kind="relationship" relationship="rootViewController" id="qM3-qZ-dIz"/>
-                    </connections>
-                </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="sxl-UX-lb6" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="1100" y="138.98050974512745"/>
+            <point key="canvasLocation" x="5700" y="-655.32233883058473"/>
         </scene>
         <!--Login Screen-->
         <scene sceneID="Hs4-LT-cpW">
@@ -447,7 +433,64 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="3Ei-K7-q7W" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="192.80000000000001" y="138.98050974512745"/>
+            <point key="canvasLocation" x="2796" y="139"/>
+        </scene>
+        <!--My Polls-->
+        <scene sceneID="ecu-a1-g31">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="dAi-8Z-0fb" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="My Polls" id="03B-3v-5hu"/>
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="zbH-UO-9N1">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="sYx-V7-5Q9" kind="relationship" relationship="rootViewController" id="XXs-Fe-BRv"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="pP8-Qd-lbN" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3821.5999999999999" y="1070.9145427286358"/>
+        </scene>
+        <!--Polls Around You-->
+        <scene sceneID="42r-MS-Xdw">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="IXX-1C-q6Y" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Polls Around You" id="GZf-U7-9Qf"/>
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="u05-NK-r8P">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="BYZ-38-t0r" kind="relationship" relationship="rootViewController" id="c6b-lK-tvQ"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="oPy-6S-aBn" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="4760.8000000000002" y="138.98050974512745"/>
+        </scene>
+        <!--Create Poll-->
+        <scene sceneID="2Lt-gY-LbG">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="eog-Pr-xrR" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Create Poll" id="8f0-S8-WQF"/>
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="rLL-oB-kWN">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="r2T-8J-WGZ" kind="relationship" relationship="rootViewController" id="WUe-Sf-bZ4"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="1uz-8N-deE" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="4760.8000000000002" y="-655.32233883058473"/>
         </scene>
     </scenes>
     <resources>
@@ -455,6 +498,5 @@
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="8nh-ZK-kTL"/>
-        <segue reference="XfS-mr-BPj"/>
     </inferredMetricsTieBreakers>
 </document>
