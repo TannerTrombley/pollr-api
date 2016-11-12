@@ -1,7 +1,7 @@
 from flask_restful import Resource
 from flask import request
 from common import auth, AuthException, distance_ll, did_user_vote
-from models import Poll, Answer
+from models import Poll, Answer, get_or_create_points, Points
 from google.appengine.ext import ndb
 from google.appengine.api import search
 import logging
@@ -92,10 +92,19 @@ class Specific_Poll(Resource):
 
         result_poll.put()
 
+        # Give points to the voter
+        user_points = get_or_create_points(claims["sub"])
+        user_points.update_points(2)
+
+        #give points to the poll creator
+        user_points = get_or_create_points(int(result_poll.created_by))
+        user_points.update_points()
+
+
         return {"result": result_poll.serialize(voted=did_user_vote(claims['sub'], result_poll.participants))}, 201
 
 
-
+#########################################################################################################################
 
 
 class Post_poll(Resource):
@@ -161,7 +170,13 @@ class Post_poll(Resource):
         logging.info("poll id ")
         logging.info(poll_key.id())
 
+        user_points = get_or_create_points(claims["sub"])
+        user_points.update_points()
+
         return {"result": newPoll.serialize(voted=did_user_vote(claims['sub'], newPoll.participants))}, 201
+
+
+########################################################################################################################
 
 class User_polls(Resource):
     '''
@@ -184,6 +199,8 @@ class User_polls(Resource):
             result.append(i.serialize(voted=did_user_vote(claims['sub'], i.participants)))
         return {"result": result}, 200
 
+
+########################################################################################################################
 
 class Location_polls(Resource):
     '''
@@ -242,6 +259,8 @@ class Location_polls(Resource):
             logging.error(e)
             return {"error": "Error while searching for polls"}, 400
 
+
+########################################################################################################################
 
 class Demo_polls(Resource):
     '''
