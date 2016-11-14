@@ -82,7 +82,16 @@ class CreationViewController: UIViewController, UITextFieldDelegate, MKMapViewDe
 		self.submissionView.layer.shadowColor = UIColor.black.cgColor
 		self.submissionView.layer.shadowRadius = 5.0
 		self.submissionView.clipsToBounds = false
-    }
+		
+	
+		// Navigation Bar
+		if let navBar = self.navigationController?.navigationBar {
+//			navBar.tintColor = UIColor(red: CGFloat(230), green: CGFloat(230), blue: CGFloat(250), alpha: 1.0)
+			navBar.barTintColor = UIColor(red: CGFloat(230), green: CGFloat(230), blue: CGFloat(250), alpha: CGFloat(1.0))
+//			navBar.barTintColor = UIColor.green
+		}
+	
+	}
 
 	
 	// MARK: Location Delegate Methods

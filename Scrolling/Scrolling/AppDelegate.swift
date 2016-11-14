@@ -21,7 +21,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 		// Use Firebase library to configure APIs
 		FIRApp.configure()
 		FBSDKApplicationDelegate.sharedInstance().application(application, didFinishLaunchingWithOptions: launchOptions)
-	
+		
 		return true
 	}
 

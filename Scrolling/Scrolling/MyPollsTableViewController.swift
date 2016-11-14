@@ -15,6 +15,16 @@ class MyPollsTableViewController: UITableViewController {
 	
 	var polls = [Poll]()
 	
+	
+	
+	func done(polls: [Poll]) {
+		self.polls = polls.reversed()
+		
+		DispatchQueue.main.async {
+			self.myPollsTable.reloadData()
+		}
+	}
+	
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -30,14 +40,6 @@ class MyPollsTableViewController: UITableViewController {
 //		self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Polls", style: UIBarButtonItemStyle.plain, target: self, action: "segueBackToMain")
 		
 		
-		func done(polls: [Poll]) {
-			self.polls = polls.reversed()
-			
-			DispatchQueue.main.async {
-				self.myPollsTable.reloadData()
-			}
-		}
-		
 		let currentUser = FIRAuth.auth()?.currentUser
 		currentUser?.getTokenForcingRefresh(true) {idToken, error in
 			if let error = error {
@@ -46,9 +48,22 @@ class MyPollsTableViewController: UITableViewController {
 			}
 			
 			let client = clientAPI(token: idToken!)
-			client.getMyPolls(done: done)
+			client.getMyPolls(done: self.done)
 		}
     }
+	
+	override func viewWillAppear(_ animated: Bool) {
+		let currentUser = FIRAuth.auth()?.currentUser
+		currentUser?.getTokenForcingRefresh(true) {idToken, error in
+			if let error = error {
+				print("Error: \(error)")
+				return;
+			}
+			
+			let client = clientAPI(token: idToken!)
+			client.getMyPolls(done: self.done)
+		}
+	}
 	
 	override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
 		

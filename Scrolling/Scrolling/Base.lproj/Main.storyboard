@@ -181,7 +181,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="eW4-me-ABX" customClass="BarChartView" customModule="Charts">
-                                <rect key="frame" x="16" y="29" width="343" height="554"/>
+                                <rect key="frame" x="16" y="29" width="343" height="517"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <accessibility key="accessibilityConfiguration">
                                     <accessibilityTraits key="traits" notEnabled="YES"/>
@@ -197,12 +197,12 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="Kkg-aQ-1gk" firstAttribute="top" secondItem="F5Q-8q-Tem" secondAttribute="bottom" id="0Zy-4o-kIo"/>
-                            <constraint firstItem="Kkg-aQ-1gk" firstAttribute="trailing" secondItem="eW4-me-ABX" secondAttribute="trailing" id="507-PU-pz7"/>
+                            <constraint firstItem="eW4-me-ABX" firstAttribute="leading" secondItem="Kkg-aQ-1gk" secondAttribute="leading" id="E7a-7s-m4f"/>
+                            <constraint firstItem="eW4-me-ABX" firstAttribute="trailing" secondItem="Kkg-aQ-1gk" secondAttribute="trailing" id="EGH-bR-F3k"/>
                             <constraint firstItem="Kkg-aQ-1gk" firstAttribute="leading" secondItem="43D-6A-sz2" secondAttribute="leadingMargin" id="Ffg-3Z-wQh"/>
-                            <constraint firstAttribute="bottom" secondItem="eW4-me-ABX" secondAttribute="bottom" constant="20" symbolic="YES" id="orA-6Q-6pb"/>
-                            <constraint firstItem="eW4-me-ABX" firstAttribute="top" secondItem="Kkg-aQ-1gk" secondAttribute="bottom" constant="8" symbolic="YES" id="p1w-1x-7qc"/>
+                            <constraint firstItem="Pj4-bS-rGY" firstAttribute="top" secondItem="eW4-me-ABX" secondAttribute="bottom" constant="8" symbolic="YES" id="KKi-G1-Z9f"/>
+                            <constraint firstItem="eW4-me-ABX" firstAttribute="top" secondItem="Kkg-aQ-1gk" secondAttribute="bottom" constant="8" symbolic="YES" id="mYa-1t-anN"/>
                             <constraint firstItem="Kkg-aQ-1gk" firstAttribute="trailing" secondItem="43D-6A-sz2" secondAttribute="trailingMargin" id="qjP-VX-bfA"/>
-                            <constraint firstItem="Kkg-aQ-1gk" firstAttribute="leading" secondItem="eW4-me-ABX" secondAttribute="leading" id="t4p-Ki-XEc"/>
                         </constraints>
                     </view>
                     <extendedEdge key="edgesForExtendedLayout" bottom="YES"/>
@@ -345,21 +345,21 @@
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Zh8-eh-YU2" userLabel="SubmissionView">
                                 <rect key="frame" x="25" y="570" width="325" height="40"/>
-                                <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2Jc-UD-SEN">
-                                        <rect key="frame" x="145" y="4" width="53" height="30"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <state key="normal" title="Submit!"/>
-                                        <connections>
-                                            <action selector="submitPoll:" destination="r2T-8J-WGZ" eventType="touchUpInside" id="Q8g-Xk-scj"/>
-                                        </connections>
-                                    </button>
-                                </subviews>
-                                <color key="backgroundColor" red="1" green="0.30103893430000001" blue="0.18800176129999999" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="backgroundColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="325" id="twm-8A-YUB"/>
                                 </constraints>
                             </view>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2Jc-UD-SEN">
+                                <rect key="frame" x="161" y="575" width="53" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Submit!">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="submitPoll:" destination="r2T-8J-WGZ" eventType="touchUpInside" id="Q8g-Xk-scj"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
@@ -446,7 +446,7 @@
         <scene sceneID="ecu-a1-g31">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="dAi-8Z-0fb" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="My Polls" id="03B-3v-5hu"/>
+                    <tabBarItem key="tabBarItem" title="My Polls" image="alreadyVoted" id="03B-3v-5hu"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="zbH-UO-9N1">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
@@ -465,7 +465,7 @@
         <scene sceneID="42r-MS-Xdw">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="IXX-1C-q6Y" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Polls Around You" id="GZf-U7-9Qf"/>
+                    <tabBarItem key="tabBarItem" title="Polls Around You" image="PollsNearMe" selectedImage="PollsNearMe" id="GZf-U7-9Qf"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="u05-NK-r8P">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
@@ -484,7 +484,7 @@
         <scene sceneID="2Lt-gY-LbG">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="eog-Pr-xrR" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Create Poll" id="8f0-S8-WQF"/>
+                    <tabBarItem key="tabBarItem" title="Create Poll" image="addPoll" selectedImage="addPoll" id="8f0-S8-WQF"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="rLL-oB-kWN">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
@@ -501,9 +501,11 @@
         </scene>
     </scenes>
     <resources>
+        <image name="PollsNearMe" width="24" height="24"/>
+        <image name="addPoll" width="24" height="24"/>
         <image name="alreadyVoted" width="24" height="24"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="8nh-ZK-kTL"/>
+        <segue reference="reF-9N-svy"/>
     </inferredMetricsTieBreakers>
 </document>

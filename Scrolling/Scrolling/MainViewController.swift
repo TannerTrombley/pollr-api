@@ -20,17 +20,16 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
 	
 	@IBOutlet weak var table: UITableView!
 	
+	func done(polls: [Poll]) {
+		self.polls = polls.reversed()
+		
+		DispatchQueue.main.async {
+			self.table.reloadData()
+		}
+	}
+	
 	override func viewDidLoad() {
 		super.viewDidLoad()
-		
-
-		func done(polls: [Poll]) {
-			self.polls = polls.reversed()
-			
-			DispatchQueue.main.async {
-				self.table.reloadData()
-			}
-		}
 		
 		let currentUser = FIRAuth.auth()?.currentUser
 		currentUser?.getTokenForcingRefresh(true) {idToken, error in
@@ -40,7 +39,20 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
 			}
 			
 			let client = clientAPI(token: idToken!)
-			client.getPolls(latitude: 42.2808, longitude: 83.7430, done: done)
+			client.getPolls(latitude: 42.2808, longitude: 83.7430, done: self.done)
+		}
+	}
+	
+	override func viewWillAppear(_ animated: Bool) {
+		let currentUser = FIRAuth.auth()?.currentUser
+		currentUser?.getTokenForcingRefresh(true) {idToken, error in
+			if let error = error {
+				print(error)
+				return;
+			}
+			
+			let client = clientAPI(token: idToken!)
+			client.getPolls(latitude: 42.2808, longitude: 83.7430, done: self.done)
 		}
 	}
 	

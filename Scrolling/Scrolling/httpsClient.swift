@@ -93,13 +93,16 @@ class clientAPI {
 		
 		let parameters : Parameters = [
 			"lat": latitude,
-			"lon": longitude
+			"lon": -longitude
 		]
+		
+		print("Querying for polls at lat: \(latitude) and long: \(-longitude)")
 		
 		Alamofire.request("https://pollr-api.appspot.com/api/v1.0/location/polls", parameters: parameters, headers: header).responseJSON { response in
 			
 			if let result = response.result.value {
 				let json = JSON(result)
+				print("The response from the server is: \(json)")
 				
 				let jsonPolls = json["result"]
 				
