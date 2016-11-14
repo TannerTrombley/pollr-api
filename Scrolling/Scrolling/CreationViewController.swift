@@ -78,6 +78,10 @@ class CreationViewController: UIViewController, UITextFieldDelegate, MKMapViewDe
 		
 		// Submission View Setup
 		self.submissionView.alpha = 0.0
+		self.submissionView.layer.cornerRadius = 10.0
+		self.submissionView.layer.shadowColor = UIColor.black.cgColor
+		self.submissionView.layer.shadowRadius = 5.0
+		self.submissionView.clipsToBounds = false
     }
 
 	
@@ -197,12 +201,38 @@ class CreationViewController: UIViewController, UITextFieldDelegate, MKMapViewDe
 				
 				let client = clientAPI(token: idToken!)
 				client.createPoll(question: question!, answers: answers, latitude: (lastCoordinate?.latitude)!, longitude: (lastCoordinate?.longitude)!)
+				
+				self.clearSelf()
+				self.goHome(sender: self)
 			}
 			
 		}
 		
 		
 	}
+	
+	func clearSelf() {
+
+		self.questionText.text = ""
+		
+		self.firstAnswerField.text = ""
+		self.secondAnswerField.text = ""
+		self.thirdAnswerField.text = ""
+		self.fourthAnswerField.text = ""
+		
+		self.mapView.removeAnnotations(self.mapView.annotations)
+		
+		self.responseView.alpha = 0.0
+		self.locationView.alpha = 0.0
+		self.submissionView.alpha = 0.0
+
+	}
+	
+	func goHome(sender: AnyObject) {
+		tabBarController?.selectedIndex = 1
+	}
+	
+	
 	
 	func atLeastTwoResponsesPopualted() -> Bool {
 		let responses = [self.firstAnswerField, self.secondAnswerField, self.thirdAnswerField, self.fourthAnswerField]

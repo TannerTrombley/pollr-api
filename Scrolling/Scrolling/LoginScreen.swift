@@ -27,7 +27,8 @@ class LoginScreen: UIViewController, FBSDKLoginButtonDelegate {
 		FIRAuth.auth()?.addStateDidChangeListener { auth, user in
 			// User is signed in.
 			if let user = user {
-
+				print("User \(user) is signed in")
+				
 				let mainStoryBoard : UIStoryboard  = UIStoryboard(name: "Main", bundle: nil)
 				let homeViewController : UIViewController = mainStoryBoard.instantiateViewController(withIdentifier: "mainTabBarController")
 				

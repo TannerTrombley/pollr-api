@@ -135,7 +135,7 @@ class clientAPI {
 		]
 		
 		var answers_counts = [Int]()
-		for i in 0..<answers.count {
+		for _ in 0..<answers.count {
 			answers_counts.append(0)
 		}
 		
