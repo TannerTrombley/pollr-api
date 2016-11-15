@@ -158,7 +158,7 @@ class Post_poll(Resource):
         d = search.Document(doc_id=str(poll_key.id()), fields=fields)
         logging.info("Created the searc.document")
         try:
-            add_result = search.Index(name="Polls").put(d)
+            add_result = search.Index(name="Polls_v.1").put(d)
             logging.info('added the document to the index')
         except search.Error:
             logging.error("error creating index of poll")
@@ -197,6 +197,9 @@ class User_polls(Resource):
         result = []
         for i in res:
             result.append(i.serialize(voted=did_user_vote(claims['sub'], i.participants)))
+        logging.info(result)
+        result.sort(key=lambda v: v['created_date'],reverse=True)
+        logging.info(result)
         return {"result": result}, 200
 
 
@@ -232,11 +235,11 @@ class Location_polls(Resource):
             search_query = search.Query(query_string=query, options=search.QueryOptions(sort_options=search.SortOptions(expressions=[sortexpr])))
 
             # get the index and execute the query
-            index = search.Index('Polls')
+            index = search.Index('Polls_v.1')
             search_results = index.search(search_query)
             for doc in search_results:
                 # index.delete(doc.doc_id)
-
+                logging.info(doc)
                 if distance_ll(request.args.get('lat'), request.args.get('lon'), doc.fields[1].value.latitude, doc.fields[1].value.longitude) <= doc.fields[0].value:
                     near.append(int(doc.doc_id))
 
@@ -246,7 +249,7 @@ class Location_polls(Resource):
             # Proccess the results and convert to a json object and return
             result = []
             for i in polls_near:
-                if not i:
+                if not i or i.created_by == claims["sub"]:
                     continue
                 result.append(i.serialize(voted=did_user_vote(claims['sub'], i.participants)))
             return {"result": result}, 200
