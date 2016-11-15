@@ -451,7 +451,7 @@
         <scene sceneID="ecu-a1-g31">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="dAi-8Z-0fb" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="My Polls" image="alreadyVoted" id="03B-3v-5hu"/>
+                    <tabBarItem key="tabBarItem" title="My Polls" image="MyPolls" id="03B-3v-5hu"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="zbH-UO-9N1">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
@@ -488,7 +488,7 @@
         <!--Create Poll-->
         <scene sceneID="2Lt-gY-LbG">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="eog-Pr-xrR" sceneMemberID="viewController">
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="eog-Pr-xrR" customClass="Navigation" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Create Poll" image="addPoll" selectedImage="addPoll" id="8f0-S8-WQF"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="rLL-oB-kWN">
@@ -506,6 +506,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="MyPolls" width="24" height="24"/>
         <image name="PollsNearMe" width="24" height="24"/>
         <image name="addPoll" width="24" height="24"/>
         <image name="alreadyVoted" width="24" height="24"/>

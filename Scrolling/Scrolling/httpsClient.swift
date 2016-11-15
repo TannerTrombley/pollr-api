@@ -144,7 +144,7 @@ class clientAPI {
 			"question": question,
 			"lat": latitude,
 			"lon": longitude,
-			"radius": 1610,
+			"radius": 8000,
 			"answers": answers,
 			"answer_counts": answers_counts
 		]
@@ -190,6 +190,22 @@ class clientAPI {
 		]
 		
 		Alamofire.request("https://pollr-api.appspot.com/api/v1.0/polls/" + String(pollId), method: .post, parameters: parameters, encoding: JSONEncoding.default, headers: headers).responseJSON { response in
+		}
+	}
+	
+	func getPoints(done: @escaping (Int) -> Void) {
+		
+		let headers : HTTPHeaders = [
+			"Authorization": authToken,
+		]
+		
+		Alamofire.request("https://pollr-api.appspot.com/api/v1.0/user", method: .get, headers: headers).responseJSON { response in
+			if let result = response.result.value {
+				let json = JSON(result)
+				let points = json["result"]["user_points"].intValue
+				
+				done(points)
+			}
 		}
 	}
 }

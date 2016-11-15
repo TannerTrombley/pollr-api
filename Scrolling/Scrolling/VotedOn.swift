@@ -7,5 +7,5 @@
 //
 
 protocol VotedOn {
-	func didVoteOnPoll(row: Int) -> Void
+	func didVoteOnPoll(id: Int) -> Void
 }

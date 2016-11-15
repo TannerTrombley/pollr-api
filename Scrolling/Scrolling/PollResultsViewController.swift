@@ -86,7 +86,7 @@ class PollResultsViewController: UIViewController {
 		barChartView.chartDescription?.enabled = false
 		barChartView.rightAxis.enabled = false
 //		barChartView.xAxis.labelRotationAngle = 270.0
-		barChartView.animate(xAxisDuration: 2.0, yAxisDuration: 2.0)
+		barChartView.animate(yAxisDuration: 2.0)
 	}
 	
 	

@@ -90,9 +90,74 @@ class CreationViewController: UIViewController, UITextFieldDelegate, MKMapViewDe
 			navBar.barTintColor = UIColor(red: CGFloat(230), green: CGFloat(230), blue: CGFloat(250), alpha: CGFloat(1.0))
 //			navBar.barTintColor = UIColor.green
 		}
+
+		if let navigationBar = self.navigationController?.navigationBar {
+			
+			func done(points: Int) {
+				
+				let buttonFrame = CGRect(x: navigationBar.frame.width - navigationBar.frame.width/4, y: 1, width: navigationBar.frame.width/2, height: navigationBar.frame.height)
+				
+				let firstLabel = UILabel(frame: buttonFrame)
+				firstLabel.text = "Points: \(points)"
+				firstLabel.alpha = 0.0
+				navigationBar.addSubview(firstLabel)
+				
+				UIView.animate(withDuration: 0.5, animations: {
+					firstLabel.alpha = 1.0
+				})
+			}
+			
+			let currentUser = FIRAuth.auth()?.currentUser
+			currentUser?.getTokenForcingRefresh(true) {idToken, error in
+				if let error = error {
+					print(error)
+					return;
+				}
+				
+				let client = clientAPI(token: idToken!)
+				client.getPoints(done: done)
+			}
+		}
+		
+	}
 	
+	override func viewWillAppear(_ animated: Bool) {
+		let currentUser = FIRAuth.auth()?.currentUser
+		currentUser?.getTokenForcingRefresh(true) {idToken, error in
+			if let error = error {
+				print(error)
+				return;
+			}
+			
+			let client = clientAPI(token: idToken!)
+			client.getPoints(done: self.done)
+		}
 	}
 
+	func done(points: Int) {
+		
+		if let navBar = self.navigationController?.navigationBar {
+			for view in navBar.subviews {
+				if let label = view as? UILabel {
+					label.text = "Points: \(points)"
+					
+					if label.alpha == 0.0 {
+						UIView.animate(withDuration: 0.5, animations: {
+							label.alpha = 1.0
+						})
+					} else {
+						let pulseAnimation:CABasicAnimation = CABasicAnimation(keyPath: "transform.scale")
+						pulseAnimation.duration = 1.0
+						pulseAnimation.toValue = NSNumber(value: 1.0)
+						pulseAnimation.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseInEaseOut)
+						pulseAnimation.autoreverses = true
+						pulseAnimation.repeatCount = FLT_MAX
+						label.layer.add(pulseAnimation, forKey: nil)
+					}
+				}
+			}
+		}
+	}
 	
 	// MARK: Location Delegate Methods
 	func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {

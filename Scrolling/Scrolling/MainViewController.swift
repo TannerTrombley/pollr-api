@@ -21,15 +21,68 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
 	@IBOutlet weak var table: UITableView!
 	
 	func done(polls: [Poll]) {
-		self.polls = polls.reversed()
+		self.polls = polls
 		
 		DispatchQueue.main.async {
 			self.table.reloadData()
 		}
 	}
 	
+	// Once the points are retrieved from the server update the button
+	func done(points: Int) {
+		
+		if let navBar = self.navigationController?.navigationBar {
+			for view in navBar.subviews {
+				if let label = view as? UILabel {
+					label.text = "Points: \(points)"
+					
+					if label.alpha == 0.0 {
+						UIView.animate(withDuration: 0.5, animations: {
+							label.alpha = 1.0
+						})
+					} else {
+						let pulseAnimation:CABasicAnimation = CABasicAnimation(keyPath: "transform.scale")
+						pulseAnimation.duration = 1.0
+						pulseAnimation.toValue = NSNumber(value: 1.0)
+						pulseAnimation.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseInEaseOut)
+						pulseAnimation.autoreverses = true
+						pulseAnimation.repeatCount = FLT_MAX
+						label.layer.add(pulseAnimation, forKey: nil)
+					}
+				}
+			}
+		}
+	}
+	
 	override func viewDidLoad() {
 		super.viewDidLoad()
+		
+	
+//		self.navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.action, target: nil, action: nil)
+
+		if let navigationBar = self.navigationController?.navigationBar {
+			
+			let buttonFrame = CGRect(x: navigationBar.frame.width - navigationBar.frame.width/4, y: 1, width: navigationBar.frame.width/2, height: navigationBar.frame.height)
+			
+			let firstLabel = UILabel(frame: buttonFrame)
+			firstLabel.text = "Points: "
+			firstLabel.alpha = 0.0
+			navigationBar.addSubview(firstLabel)
+			
+			
+			
+			let currentUser = FIRAuth.auth()?.currentUser
+			currentUser?.getTokenForcingRefresh(true) {idToken, error in
+				if let error = error {
+					print(error)
+					return;
+				}
+				
+				let client = clientAPI(token: idToken!)
+				client.getPoints(done: self.done)
+			}
+		}
+		
 		
 		let currentUser = FIRAuth.auth()?.currentUser
 		currentUser?.getTokenForcingRefresh(true) {idToken, error in
@@ -53,12 +106,56 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
 			
 			let client = clientAPI(token: idToken!)
 			client.getPolls(latitude: 42.2808, longitude: 83.7430, done: self.done)
+			client.getPoints(done: self.done)
 		}
 	}
 	
 	
-	func didVoteOnPoll(row: Int) {
-		polls[row].setVote(vote: true)
+	func didVoteOnPoll(id: Int) {
+		for i in 0..<polls.count {
+			if polls[i].getId() == id {
+				polls[i].setVote(vote: true)
+				if let path = self.selectedIndexPath {
+					table.reloadRows(at: [path], with: UITableViewRowAnimation.automatic)
+				}
+			}
+		}
+		
+		func refreshPoints(points: Int) {
+			
+			if let navBar = navigationController?.navigationBar {
+				for view in navBar.subviews {
+					if let label = view as? UILabel {
+						let newPoints = points + 2
+						label.text = "Points: \(newPoints)"
+						
+						UIView.animate(withDuration: 0.5, animations: {
+							print("Animate 1")
+							label.isHighlighted = true
+						})
+						
+//						UIView.animate(withDuration: 0.5, animations: {
+//							print("Animate 2")
+//							label.isHighlighted = false
+//						})
+					}
+				}
+			}
+		}
+
+		// UPDATE POINTS
+		let currentUser = FIRAuth.auth()?.currentUser
+		currentUser?.getTokenForcingRefresh(true) {idToken, error in
+			
+			if let error = error {
+				print(error)
+				return;
+			}
+			
+			let client = clientAPI(token: idToken!)
+			client.getPoints(done: refreshPoints)
+		}
+		
 	}
 	
 	override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -68,7 +165,6 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
 			let destination = segue.destination as? PollResultsViewController
 		{
 			destination.pollId = button.tag
-			print("Setting the poll id")
 		}
 	}
 	
@@ -97,14 +193,8 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
 		}
 		
 		if indexPaths.count > 0 {
-//			print("Need to reload rows: \(indexPaths)")
 			tableView.reloadRows(at: indexPaths, with: UITableViewRowAnimation.automatic)
 		}
-		
-		// Depending on this to change the participated flag to true
-//		if previousIndexPath == selectedIndexPath {
-//			didVoteOnPoll(row: indexPath.row)
-//		}
 	}
 	
 	
@@ -116,12 +206,16 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
 	func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 
 		let cell = tableView.dequeueReusableCell(withIdentifier: "PollQuestionTableViewCell", for: indexPath) as? PollQuestionTableViewCell
+		cell?.cellDelegate = self
+		
 		let responseStack = cell?.contentView.subviews[1] as! UIStackView
 		let row = indexPath.row
 		cell?.resultsButton.tag = polls[row].getId()
 		
 		if !(polls[row].didVote()) {
 			cell?.resultsButton.isHidden = true
+		} else {
+			cell?.resultsButton.isHidden = false
 		}
 		
 		// Just remove all subviews to be sure

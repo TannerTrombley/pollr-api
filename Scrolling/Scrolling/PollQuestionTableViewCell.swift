@@ -11,6 +11,8 @@ import Firebase
 
 class PollQuestionTableViewCell: UITableViewCell {
 	
+	var cellDelegate : VotedOn?
+	
 	// Used to supress NSException thrown when you try to removeObserver before addObvserver gets called
 	var observerAdded = false
 	
@@ -61,11 +63,7 @@ class PollQuestionTableViewCell: UITableViewCell {
 		let pollId = sender.tag
 		self.resultsButton.isHidden = false
 		
-		if let table = self.superview as? UITableView {
-			print("Changing the status of the poll")
-//			table.didVoteOnPoll(pollId: pollId)
-		}
-		
+		cellDelegate?.didVoteOnPoll(id: pollId)
 		
 		let currentUser = FIRAuth.auth()?.currentUser
 		currentUser?.getTokenForcingRefresh(true) {idToken, error in

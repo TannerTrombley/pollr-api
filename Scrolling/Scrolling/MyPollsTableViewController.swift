@@ -18,7 +18,7 @@ class MyPollsTableViewController: UITableViewController {
 	
 	
 	func done(polls: [Poll]) {
-		self.polls = polls.reversed()
+		self.polls = polls
 		
 		DispatchQueue.main.async {
 			self.myPollsTable.reloadData()
@@ -50,6 +50,35 @@ class MyPollsTableViewController: UITableViewController {
 			let client = clientAPI(token: idToken!)
 			client.getMyPolls(done: self.done)
 		}
+		
+		if let navigationBar = self.navigationController?.navigationBar {
+			
+			func done(points: Int) {
+				
+				let buttonFrame = CGRect(x: navigationBar.frame.width - navigationBar.frame.width/4, y: 1, width: navigationBar.frame.width/2, height: navigationBar.frame.height)
+				
+				let firstLabel = UILabel(frame: buttonFrame)
+				firstLabel.text = "Points: \(points)"
+				firstLabel.tag = 1
+				firstLabel.alpha = 0.0
+				navigationBar.addSubview(firstLabel)
+				
+				UIView.animate(withDuration: 0.5, animations: {
+					firstLabel.alpha = 1.0
+				})
+			}
+			
+			let currentUser = FIRAuth.auth()?.currentUser
+			currentUser?.getTokenForcingRefresh(true) {idToken, error in
+				if let error = error {
+					print(error)
+					return;
+				}
+				
+				let client = clientAPI(token: idToken!)
+				client.getPoints(done: done)
+			}
+		}
     }
 	
 	override func viewWillAppear(_ animated: Bool) {
@@ -62,14 +91,38 @@ class MyPollsTableViewController: UITableViewController {
 			
 			let client = clientAPI(token: idToken!)
 			client.getMyPolls(done: self.done)
+			client.getPoints(done: self.refreshPoints)
+
+		}
+	}
+
+	func refreshPoints(points: Int) {
+		
+		if let navBar = self.navigationController?.navigationBar {
+			for view in navBar.subviews {
+				if let label = view as? UILabel {
+					label.text = "Points: \(points)"
+					
+					if label.alpha == 0.0 {
+						UIView.animate(withDuration: 0.5, animations: {
+							label.alpha = 1.0
+						})
+					} else {
+						let pulseAnimation:CABasicAnimation = CABasicAnimation(keyPath: "transform.scale")
+						pulseAnimation.duration = 1.0
+						pulseAnimation.toValue = NSNumber(value: 1.0)
+						pulseAnimation.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseInEaseOut)
+						pulseAnimation.autoreverses = true
+						pulseAnimation.repeatCount = FLT_MAX
+						label.layer.add(pulseAnimation, forKey: nil)
+					}
+				}
+			}
 		}
 	}
 	
 	override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-		
-//		print("The segue is \(segue.identifier)")
-//		print("Going to view controller \(segue.destination)")
-		
+
 		if segue.identifier == "ShowResults",
 			let destination = segue.destination as? PollResultsViewController
 		{
