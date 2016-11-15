@@ -1,7 +1,7 @@
 from flask_restful import Resource
 from flask import request
 from common import auth, AuthException, distance_ll, did_user_vote
-from models import Poll, Answer, get_or_create_points, Points
+from models import Poll, Answer, get_or_create_points, Points, Comment
 from google.appengine.ext import ndb
 from google.appengine.api import search
 import logging
@@ -102,6 +102,39 @@ class Specific_Poll(Resource):
 
 
         return {"result": result_poll.serialize(voted=did_user_vote(claims['sub'], result_poll.participants))}, 201
+
+class Post_comment(Resource):
+    def post(self, poll_id):
+        '''
+        this function takes a request and posts a comment onto the poll
+        :param poll_id:
+        :return: poll data
+        '''
+
+        # authorize the request
+        claims = None
+        try:
+            claims = auth(request)
+        except AuthException as e:
+            return {"error": "Unauthorized"}, 401
+        if not poll_id:
+            return {"error": "Invalid poll id"}, 401
+
+        result_poll = Poll.get_by_id(int(poll_id))
+        if not result_poll:
+            return {"error": "Poll does not exist"}, 401
+
+
+        # GEt the JSON data
+        data = request.get_json()
+
+        new_comment = Comment(answer_text=data["text"], created_by=claims['sub'])
+
+        result_poll.comments.append(new_comment)
+        result_poll.put()
+
+        return {"result": result_poll.serialize(voted=did_user_vote(claims['sub'], result_poll.participants))}, 201
+
 
 
 #########################################################################################################################

@@ -23,6 +23,14 @@ class Answer(ndb.Model):
     answer_text = ndb.StringProperty(required=True)
 
 
+class Comment(ndb.Model):
+    '''
+    Representation of a comment on a poll
+    '''
+    created_by = ndb.StringProperty(required=True)
+    comment_text = ndb.TextProperty(required=True)
+
+
 
 
 class Poll(ndb.Model):
@@ -40,6 +48,7 @@ class Poll(ndb.Model):
     # Actual Poll information
     question = ndb.TextProperty(required=True)
     answers = ndb.StructuredProperty(Answer, repeated=True)
+    comments = ndb.StringProperty(Comment, repeated=True)
     # location = ndb.GeoPtProperty(required=True)
     lat = ndb.FloatProperty(required=True)
     lon = ndb.FloatProperty(required=True)

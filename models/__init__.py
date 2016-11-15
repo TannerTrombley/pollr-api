@@ -1,2 +1,2 @@
-from poll import Poll, Answer
+from poll import Poll, Answer, Comment
 from points import *

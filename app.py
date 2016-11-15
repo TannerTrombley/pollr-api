@@ -1,7 +1,7 @@
 from flask import Flask
 from flask_restful import Api
 import flask_cors
-from resources import Test_route, Post_poll, Specific_Poll, User_polls, Location_polls, Demo_polls, Get_user
+from resources import Test_route, Post_poll, Specific_Poll, User_polls, Location_polls, Demo_polls, Get_user, Post_comment
 
 app = Flask(__name__)
 flask_cors.CORS(app)
@@ -16,3 +16,4 @@ api.add_resource(User_polls, prefix + "/user/polls")
 api.add_resource(Location_polls, prefix + "/location/polls")
 api.add_resource(Demo_polls, prefix + "/demo")
 api.add_resource(Get_user, prefix + "/user")
+api.add_resource(Post_comment, prefix +"/polls/<poll_id>/comment")
