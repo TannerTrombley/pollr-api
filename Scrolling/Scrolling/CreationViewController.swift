@@ -72,8 +72,8 @@ class CreationViewController: UIViewController, UITextFieldDelegate, MKMapViewDe
 		self.locationManager.startUpdatingLocation()
 		self.mapView.showsUserLocation = true
 		
-		let lpgr = UILongPressGestureRecognizer(target: self, action: #selector(self.handleLongPress))
-		lpgr.minimumPressDuration = 1.0
+	
+		let lpgr = UITapGestureRecognizer(target: self, action: #selector(self.handleLongPress))
 		self.mapView.addGestureRecognizer(lpgr)
 		
 		// Submission View Setup
@@ -182,8 +182,12 @@ class CreationViewController: UIViewController, UITextFieldDelegate, MKMapViewDe
 	
 	// MARK: Map Delegation Methods
 	func handleLongPress(_ gestureRecognizer: UIGestureRecognizer) {
-		if gestureRecognizer.state != .began {
+		if gestureRecognizer.state != .recognized {
 			return
+		}
+		
+		if self.mapView.showsUserLocation {
+			self.mapView.showsUserLocation = false
 		}
 		
 		// Remove any existing pins
@@ -199,31 +203,16 @@ class CreationViewController: UIViewController, UITextFieldDelegate, MKMapViewDe
 	}
 	
 	// Animates the annotation
-//	func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
-//		print("It's a animatin")
-//		
-//		if let pin = annotation as? MKPinAnnotationView {
-//			print("It's a pin")
-//			pin.animatesDrop = true
-//			return pin
-//		}
-//		print("Return a generic annotation view")
-//		return MKAnnotationView()
-//	}
+	func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
+		let pin = MKPinAnnotationView()
+		pin.animatesDrop = true
+		return pin
+	}
 	
 	
 	
 	
 	// MARK: Text Field Handling
-	func textFieldDidEndEditing(_ textField: UITextField) {
-
-		if textField.text != "" {
-			textField.resignFirstResponder()
-			UIView.animate(withDuration: 0.5, animations: {
-				self.responseView.alpha = 1.0
-			})
-		}
-	}
 
 	func textFieldShouldReturn(_ textField: UITextField) -> Bool {
 		textField.resignFirstResponder()
@@ -231,6 +220,12 @@ class CreationViewController: UIViewController, UITextFieldDelegate, MKMapViewDe
 	}
 	
 	func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+		
+		if textField.tag == 1 {
+			UIView.animate(withDuration: 0.5, animations: {
+				self.responseView.alpha = 1.0
+			})
+		}
 		
 		if (firstAnswerField.text != "") && (secondAnswerField.text != "") {
 
@@ -320,7 +315,7 @@ class CreationViewController: UIViewController, UITextFieldDelegate, MKMapViewDe
 	
 	
 	func locationPicked() -> Bool {
-		return self.mapView.annotations.count > 1
+		return self.mapView.annotations.count > 0
 	}
 	
 	
