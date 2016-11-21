@@ -48,7 +48,7 @@ class Poll(ndb.Model):
     # Actual Poll information
     question = ndb.TextProperty(required=True)
     answers = ndb.StructuredProperty(Answer, repeated=True)
-    comments = ndb.StringProperty(Comment, repeated=True)
+    comments = ndb.StructuredProperty(Comment, repeated=True)
     # location = ndb.GeoPtProperty(required=True)
     lat = ndb.FloatProperty(required=True)
     lon = ndb.FloatProperty(required=True)

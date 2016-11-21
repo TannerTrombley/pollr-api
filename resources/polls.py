@@ -7,6 +7,7 @@ from google.appengine.api import search
 import logging
 import random
 
+INDEX = "Polls_v.4"
 
 
 class Specific_Poll(Resource):
@@ -128,7 +129,7 @@ class Post_comment(Resource):
         # GEt the JSON data
         data = request.get_json()
 
-        new_comment = Comment(answer_text=data["text"], created_by=claims['sub'])
+        new_comment = Comment(comment_text=data["text"], created_by=claims['sub'])
 
         result_poll.comments.append(new_comment)
         result_poll.put()
@@ -191,7 +192,7 @@ class Post_poll(Resource):
         d = search.Document(doc_id=str(poll_key.id()), fields=fields)
         logging.info("Created the searc.document")
         try:
-            add_result = search.Index(name="Polls_v.1").put(d)
+            add_result = search.Index(name=INDEX).put(d)
             logging.info('added the document to the index')
         except search.Error:
             logging.error("error creating index of poll")
@@ -268,7 +269,7 @@ class Location_polls(Resource):
             search_query = search.Query(query_string=query, options=search.QueryOptions(sort_options=search.SortOptions(expressions=[sortexpr])))
 
             # get the index and execute the query
-            index = search.Index('Polls_v.1')
+            index = search.Index(INDEX)
             search_results = index.search(search_query)
             for doc in search_results:
                 # index.delete(doc.doc_id)
