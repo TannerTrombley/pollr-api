@@ -57,8 +57,8 @@
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="199.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="B4p-09-LtP">
-                                                    <rect key="frame" x="8" y="16" width="42" height="21"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Question" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="B4p-09-LtP">
+                                                    <rect key="frame" x="8" y="16" width="69" height="21"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
@@ -171,7 +171,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="gT1-la-Vl6" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4760.8000000000002" y="1070.9145427286358"/>
+            <point key="canvasLocation" x="4761" y="866"/>
         </scene>
         <!--Poll Results View Controller-->
         <scene sceneID="O0q-rU-CGA">
@@ -192,7 +192,7 @@
                                     <accessibilityTraits key="traits" notEnabled="YES"/>
                                 </accessibility>
                             </view>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Kkg-aQ-1gk">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Question" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Kkg-aQ-1gk">
                                 <rect key="frame" x="16" y="0.0" width="343" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
@@ -218,7 +218,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4qQ-ur-PiV" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="5700" y="1070.9145427286358"/>
+            <point key="canvasLocation" x="5700" y="866"/>
         </scene>
         <!--Create a Poll-->
         <scene sceneID="IjD-Jh-EcX">
@@ -402,7 +402,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="i0o-wn-4dO" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="5700" y="-655.32233883058473"/>
+            <point key="canvasLocation" x="5700" y="-567"/>
         </scene>
         <!--Login Screen-->
         <scene sceneID="Hs4-LT-cpW">
@@ -447,7 +447,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="3Ei-K7-q7W" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2796" y="139"/>
+            <point key="canvasLocation" x="3079" y="139"/>
         </scene>
         <!--My Polls-->
         <scene sceneID="ecu-a1-g31">
@@ -466,7 +466,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="pP8-Qd-lbN" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3821.5999999999999" y="1070.9145427286358"/>
+            <point key="canvasLocation" x="3822" y="866"/>
         </scene>
         <!--Polls Around You-->
         <scene sceneID="42r-MS-Xdw">
@@ -504,7 +504,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="1uz-8N-deE" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4760.8000000000002" y="-655.32233883058473"/>
+            <point key="canvasLocation" x="4761" y="-567"/>
         </scene>
     </scenes>
     <resources>
@@ -514,6 +514,6 @@
         <image name="alreadyVoted" width="24" height="24"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="8nh-ZK-kTL"/>
+        <segue reference="reF-9N-svy"/>
     </inferredMetricsTieBreakers>
 </document>
