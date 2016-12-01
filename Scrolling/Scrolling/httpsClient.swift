@@ -41,10 +41,11 @@ class clientAPI {
 	// Parses the JSON and returns a list of the found Polls
 	func parsePolls(serverResponse: JSON) -> [Poll] {
 		
-		let pollData = serverResponse["results"]
+		let pollData = serverResponse["result"]
 		var polls = [Poll]()
 		
 		for p in pollData {
+			
 			let pollId = p.1["id"].intValue
 			let question = p.1["question"].stringValue
 			let voted = p.1["voted"].boolValue
@@ -96,19 +97,43 @@ class clientAPI {
 	}
 	
 	// Retrieve a particular poll for further analysis
-	func getPoll(pollId: Int, done: @escaping (Poll) -> Void) {
+	func getPoll(pollId: Int, done: @escaping (Poll, [String]) -> Void) {
 		let header : HTTPHeaders = [
 			"Authorization": authToken
 			]
 		
 		Alamofire.request("https://pollr-api.appspot.com/api/v1.0/polls/" + String(pollId), headers: header).responseJSON { response in
 			if let result = response.result.value {
-				let polls = self.parsePolls(serverResponse: JSON(result))
-				if let poll = polls.first {
-					done(poll)
-				}
+				let poll = self.parsePoll(serverResponse: JSON(result))
+				let comments = self.parseComments(serverResponse: JSON(result))
+				done(poll, comments)
 			}
 		}
+	}
+	
+	func parsePoll(serverResponse: JSON) -> Poll {
+		let pollData = serverResponse["result"]
+
+		let question = pollData["question"].stringValue
+		
+		var responses = [String: Int]()
+		for answer in pollData["answers"] {
+			responses[answer.1["answer_text"].stringValue] = answer.1["count"].intValue
+		}
+		
+		let newPoll = Poll(id: 0, question: question, answers: responses, voted: true)
+		return newPoll
+	}
+	
+	func parseComments(serverResponse: JSON) -> [String] {
+		var comments = [String]()
+		
+		let commentData = serverResponse["result"]["comments"]
+		for comment in commentData {
+			print("Comment -> \(comment.0)  and \(comment.1)")
+		}
+		
+		return comments
 	}
 	
 	// Retrieve the user's points
@@ -126,8 +151,6 @@ class clientAPI {
 			}
 		}
 	}
-	
-	
 	
 	
 	// MARK: POST requests

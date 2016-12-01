@@ -10,15 +10,21 @@ import UIKit
 import Firebase
 import Charts
 
-class PollResultsViewController: UIViewController {
+class PollResultsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
 	
 	@IBOutlet weak var barChartView: BarChartView!
 	@IBOutlet weak var pollTitle: UILabel!
+	@IBOutlet weak var commentsTable: UITableView!
 	
 	var pollId = Int()
+	var comments = ["Hello", "World", "How", "are", "you", "doing"]
 	
     override func viewDidLoad() {
         super.viewDidLoad()
+		
+		commentsTable.delegate = self
+		commentsTable.dataSource = self
+		
 		
 		let currentUser = FIRAuth.auth()?.currentUser
 		currentUser?.getTokenForcingRefresh(true) {idToken, error in
@@ -28,13 +34,16 @@ class PollResultsViewController: UIViewController {
 			}
 			
 			let client = clientAPI(token: idToken!)
-			client.getPoll(pollId: self.pollId, done: self.done)
+			client.getPoll(pollId: self.pollId, done: self.receivedPolls)
 		}
 
     }
 
 	
-	func done(poll: Poll) {
+	func receivedPolls(poll: Poll, comments: [String]) {
+		
+		self.comments = comments
+
 		let question = poll.getQuestion()
 		
 		let results = poll.getAnswers()
@@ -51,6 +60,9 @@ class PollResultsViewController: UIViewController {
 		setChart(title: question, dataPoints: answers, values: voteCounts)
 	}
 	
+	func receivedComments(comments: [String]) {
+		self.comments = comments
+	}
 	
 	// MARK: Setting up the Chart
 	func setChart(title: String, dataPoints: [String], values: [Int]) {
@@ -91,8 +103,20 @@ class PollResultsViewController: UIViewController {
 	
 	
 	
-	
+	// MARK: Comments Table Functions
+	func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+		return comments.count
+	}
 
+	func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+		let cell = UITableViewCell()
+		
+		if indexPath.row < comments.count {
+			cell.textLabel?.text = comments[indexPath.row]
+		}
+		
+		return cell
+	}
 	
 	
 	
