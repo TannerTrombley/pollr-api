@@ -130,9 +130,9 @@ class clientAPI {
 		
 		let commentData = serverResponse["result"]["comments"]
 		for comment in commentData {
-			print("Comment -> \(comment.0)  and \(comment.1)")
+			comments.append(comment.1["comment_text"].stringValue)
 		}
-		
+
 		return comments
 	}
 	

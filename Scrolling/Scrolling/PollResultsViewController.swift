@@ -17,7 +17,8 @@ class PollResultsViewController: UIViewController, UITableViewDelegate, UITableV
 	@IBOutlet weak var commentsTable: UITableView!
 	
 	var pollId = Int()
-	var comments = ["Hello", "World", "How are you doing? Is this resizing?", "What about down here? Dynamically resized cells are new in iOS8"]
+	var comments = [String]()
+//		= ["Hello", "World", "How are you doing? Is this resizing?", "What about down here? Dynamically resized cells are new in iOS8"]
 	let sections = ["Comments", "Submit A Comment"]
 	
     override func viewDidLoad() {
@@ -43,9 +44,9 @@ class PollResultsViewController: UIViewController, UITableViewDelegate, UITableV
 
 	
 	func receivedPolls(poll: Poll, comments: [String]) {
-		
 		self.comments = comments
-
+		self.commentsTable.reloadData()
+		
 		let question = poll.getQuestion()
 		
 		let results = poll.getAnswers()
@@ -60,10 +61,6 @@ class PollResultsViewController: UIViewController, UITableViewDelegate, UITableV
 		
 		self.pollTitle.text = question
 		setChart(title: question, dataPoints: answers, values: voteCounts)
-	}
-	
-	func receivedComments(comments: [String]) {
-		self.comments = comments
 	}
 	
 	// MARK: Setting up the Chart
