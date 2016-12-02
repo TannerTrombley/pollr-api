@@ -192,5 +192,20 @@ class clientAPI {
 		Alamofire.request("https://pollr-api.appspot.com/api/v1.0/polls/" + String(pollId), method: .post, parameters: parameters, encoding: JSONEncoding.default, headers: headers).responseJSON { response in
 		}
 	}
+	
+	
+	func submitComment(pollId: Int, userComment: String) {
+		let headers : HTTPHeaders = [
+			"Authorization": authToken,
+			"Content-Type": "application/json"
+		]
+		
+		let parameters : Parameters = [
+			"text": userComment
+		]
+		
+		Alamofire.request("https://pollr-api.appspot.com/api/v1.0/comment/" + String(pollId), method: .post, parameters: parameters, encoding: JSONEncoding.default, headers: headers).responseJSON { response in
+		}
+	}
 }
 

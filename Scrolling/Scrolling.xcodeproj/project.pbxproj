@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		620111591DF1044A0069FA93 /* CommentTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 620111581DF1044A0069FA93 /* CommentTableViewCell.swift */; };
 		6228B21B1DCFF59A00404D05 /* MyPollsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6228B21A1DCFF59A00404D05 /* MyPollsTableViewCell.swift */; };
 		6228B21D1DCFF97A00404D05 /* PollResultsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6228B21C1DCFF97A00404D05 /* PollResultsViewController.swift */; };
 		623C5C7C1DCD032500FBDA71 /* Poll.swift in Sources */ = {isa = PBXBuildFile; fileRef = 623C5C7B1DCD032500FBDA71 /* Poll.swift */; };
@@ -29,6 +30,8 @@
 		62CF9B121DCE42BD00B66099 /* Bolts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 62CF9B111DCE42BD00B66099 /* Bolts.framework */; };
 		62E7DBF51DC8D92400105009 /* SegueFromLeft.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E7DBF41DC8D92400105009 /* SegueFromLeft.swift */; };
 		62E7DBF71DC9021A00105009 /* SegueFromRight.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E7DBF61DC9021A00105009 /* SegueFromRight.swift */; };
+		62E905751DF22EA000221E4D /* CommentsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E905741DF22EA000221E4D /* CommentsTableViewController.swift */; };
+		62E905771DF22F6D00221E4D /* SubmitCommentTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E905761DF22F6D00221E4D /* SubmitCommentTableViewCell.swift */; };
 		62F8AAD51DCCE17A00AADC85 /* httpsClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62F8AAD41DCCE17A00AADC85 /* httpsClient.swift */; };
 		71D22215D401B675B4858E1D /* Pods_ScrollingTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F92F55576A2817C430A93C94 /* Pods_ScrollingTests.framework */; };
 		86352343D9F18CC2C78F956B /* Pods_Scrolling.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A24573A56C052AA2C5EFA9BF /* Pods_Scrolling.framework */; };
@@ -46,6 +49,7 @@
 
 /* Begin PBXFileReference section */
 		53C9D1D189F3B273351907DE /* Pods-ScrollingTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ScrollingTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-ScrollingTests/Pods-ScrollingTests.release.xcconfig"; sourceTree = "<group>"; };
+		620111581DF1044A0069FA93 /* CommentTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommentTableViewCell.swift; sourceTree = "<group>"; };
 		6228B21A1DCFF59A00404D05 /* MyPollsTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyPollsTableViewCell.swift; sourceTree = "<group>"; };
 		6228B21C1DCFF97A00404D05 /* PollResultsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PollResultsViewController.swift; sourceTree = "<group>"; };
 		623C5C7B1DCD032500FBDA71 /* Poll.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Poll.swift; sourceTree = "<group>"; };
@@ -74,6 +78,8 @@
 		62CF9B111DCE42BD00B66099 /* Bolts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Bolts.framework; sourceTree = "<group>"; };
 		62E7DBF41DC8D92400105009 /* SegueFromLeft.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SegueFromLeft.swift; sourceTree = "<group>"; };
 		62E7DBF61DC9021A00105009 /* SegueFromRight.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SegueFromRight.swift; sourceTree = "<group>"; };
+		62E905741DF22EA000221E4D /* CommentsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommentsTableViewController.swift; sourceTree = "<group>"; };
+		62E905761DF22F6D00221E4D /* SubmitCommentTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SubmitCommentTableViewCell.swift; sourceTree = "<group>"; };
 		62F8AAD41DCCE17A00AADC85 /* httpsClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = httpsClient.swift; sourceTree = "<group>"; };
 		A24573A56C052AA2C5EFA9BF /* Pods_Scrolling.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Scrolling.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		BD68415B4AA7D8940B2CDCC2 /* Pods-Scrolling.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Scrolling.release.xcconfig"; path = "Pods/Target Support Files/Pods-Scrolling/Pods-Scrolling.release.xcconfig"; sourceTree = "<group>"; };
@@ -160,9 +166,12 @@
 				62E7DBF41DC8D92400105009 /* SegueFromLeft.swift */,
 				62E7DBF61DC9021A00105009 /* SegueFromRight.swift */,
 				624A6C011DC24EE600EF38A2 /* Main.storyboard */,
+				62E905741DF22EA000221E4D /* CommentsTableViewController.swift */,
+				620111581DF1044A0069FA93 /* CommentTableViewCell.swift */,
 				62A2395C1DD38FFF00D6AC92 /* CreationViewController.swift */,
 				6276EF8F1DD03BF200FF4E8A /* ChartsAxisFormatter.swift */,
 				6228B21C1DCFF97A00404D05 /* PollResultsViewController.swift */,
+				62E905761DF22F6D00221E4D /* SubmitCommentTableViewCell.swift */,
 				628310B01DCFE0EA0019F2BE /* MyPollsTableViewController.swift */,
 				6228B21A1DCFF59A00404D05 /* MyPollsTableViewCell.swift */,
 				62CF9B011DCE3A9C00B66099 /* LoginScreen.swift */,
@@ -399,11 +408,14 @@
 				6276EF901DD03BF200FF4E8A /* ChartsAxisFormatter.swift in Sources */,
 				624A6C1E1DC2523B00EF38A2 /* PollQuestionTableViewCell.swift in Sources */,
 				62CF9B021DCE3A9C00B66099 /* LoginScreen.swift in Sources */,
+				62E905771DF22F6D00221E4D /* SubmitCommentTableViewCell.swift in Sources */,
 				62A2395D1DD38FFF00D6AC92 /* CreationViewController.swift in Sources */,
 				62E7DBF51DC8D92400105009 /* SegueFromLeft.swift in Sources */,
+				620111591DF1044A0069FA93 /* CommentTableViewCell.swift in Sources */,
 				6228B21D1DCFF97A00404D05 /* PollResultsViewController.swift in Sources */,
 				623C5C7C1DCD032500FBDA71 /* Poll.swift in Sources */,
 				62B720661DD104FA00C6B897 /* VotedOn.swift in Sources */,
+				62E905751DF22EA000221E4D /* CommentsTableViewController.swift in Sources */,
 				6228B21B1DCFF59A00404D05 /* MyPollsTableViewCell.swift in Sources */,
 				62F8AAD51DCCE17A00AADC85 /* httpsClient.swift in Sources */,
 				62E7DBF71DC9021A00105009 /* SegueFromRight.swift in Sources */,

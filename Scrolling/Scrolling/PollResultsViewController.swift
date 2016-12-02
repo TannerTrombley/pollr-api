@@ -10,21 +10,23 @@ import UIKit
 import Firebase
 import Charts
 
-class PollResultsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+class PollResultsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UITextFieldDelegate {
 	
 	@IBOutlet weak var barChartView: BarChartView!
 	@IBOutlet weak var pollTitle: UILabel!
 	@IBOutlet weak var commentsTable: UITableView!
 	
 	var pollId = Int()
-	var comments = ["Hello", "World", "How", "are", "you", "doing"]
+	var comments = ["Hello", "World", "How are you doing? Is this resizing?", "What about down here? Dynamically resized cells are new in iOS8"]
+	let sections = ["Comments", "Submit A Comment"]
 	
     override func viewDidLoad() {
         super.viewDidLoad()
 		
 		commentsTable.delegate = self
 		commentsTable.dataSource = self
-		
+		commentsTable.estimatedRowHeight = 44.0
+		commentsTable.rowHeight = UITableViewAutomaticDimension
 		
 		let currentUser = FIRAuth.auth()?.currentUser
 		currentUser?.getTokenForcingRefresh(true) {idToken, error in
@@ -103,23 +105,82 @@ class PollResultsViewController: UIViewController, UITableViewDelegate, UITableV
 	
 	
 	
+	
 	// MARK: Comments Table Functions
+	func numberOfSections(in tableView: UITableView) -> Int {
+		return 2
+	}
+	
 	func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+		switch section {
+			case 0:
+				return 1
+			case 1:
+				return comments.count
+			default:
+				return 0
+		}
 		return comments.count
 	}
 
+//	func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+//		if section == 0 {
+//			return "Add Your Own Comment"
+//		} else {
+//			return "Comments"
+//		}
+//	}
+	
 	func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-		let cell = UITableViewCell()
 		
-		if indexPath.row < comments.count {
-			cell.textLabel?.text = comments[indexPath.row]
+		switch indexPath.section {
+			case 0:
+				return configureInputCell(indexPath: indexPath)
+			case 1:
+				return configureCommentCell(indexPath: indexPath)
+			default:
+				return UITableViewCell()
 		}
-		
+	}
+	
+	func configureCommentCell(indexPath: IndexPath) -> UITableViewCell {
+		let cell = commentsTable.dequeueReusableCell(withIdentifier: "commentCell", for: indexPath) as! CommentTableViewCell
+		if indexPath.row < comments.count {
+			cell.comment.text = comments[indexPath.row]
+		}
 		return cell
 	}
 	
+	func configureInputCell(indexPath: IndexPath) -> UITableViewCell {
+		let cell = commentsTable.dequeueReusableCell(withIdentifier: "submitCommentCell", for: indexPath) as! SubmitCommentTableViewCell
+		cell.userComment.delegate = self
+		return cell
+	}
 	
+	func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+		if string == "\n" {
+			textField.resignFirstResponder()
+			
+			let currentUser = FIRAuth.auth()?.currentUser
+			currentUser?.getTokenForcingRefresh(true) {idToken, error in
+				if let error = error {
+					print(error)
+					return;
+				}
+				
+				let client = clientAPI(token: idToken!)
+				client.submitComment(pollId: self.pollId, userComment: textField.text!)
+			}
+			
+		}
+		return true
+	}
 	
+	// Clears the default text
+	func textFieldDidBeginEditing(_ textField: UITextField) {
+		textField.text = ""
+	}
+
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
