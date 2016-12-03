@@ -40,8 +40,8 @@ class PollResultsViewController: UIViewController, UITableViewDelegate, UITableV
 			client.getPoll(pollId: self.pollId, done: self.receivedPolls)
 		}
 
-    }
-
+	}
+	
 	
 	func receivedPolls(poll: Poll, comments: [String]) {
 		self.comments = comments
@@ -79,6 +79,8 @@ class PollResultsViewController: UIViewController, UITableViewDelegate, UITableV
 		}
 		
 		let chartDataSet = BarChartDataSet(values: dataEntries, label: "")
+		chartDataSet.drawValuesEnabled = false
+		
 		chartDataSet.colors = ChartColorTemplates.colorful()
 		let chartData = BarChartData(dataSet: chartDataSet)
 		
@@ -86,17 +88,18 @@ class PollResultsViewController: UIViewController, UITableViewDelegate, UITableV
 		barChartView.xAxis.valueFormatter = xaxis.valueFormatter
 		
 		barChartView.data = chartData
-		barChartView.xAxis.labelPosition = .bottom
+		barChartView.xAxis.labelPosition = .bottomInside
 		barChartView.xAxis.drawGridLinesEnabled = false
 		barChartView.xAxis.granularityEnabled = true
 		barChartView.xAxis.granularity = 1.0
 		barChartView.xAxis.decimals = 0
+		barChartView.xAxis.wordWrapEnabled = true
 		
 		self.barChartView.legend.enabled = false
 		
 		barChartView.chartDescription?.enabled = false
 		barChartView.rightAxis.enabled = false
-//		barChartView.xAxis.labelRotationAngle = 270.0
+		barChartView.xAxis.labelRotationAngle = 270.0
 		barChartView.animate(yAxisDuration: 2.0)
 	}
 	
