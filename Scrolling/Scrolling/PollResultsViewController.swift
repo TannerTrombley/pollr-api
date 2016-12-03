@@ -119,14 +119,6 @@ class PollResultsViewController: UIViewController, UITableViewDelegate, UITableV
 		}
 		return comments.count
 	}
-
-//	func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-//		if section == 0 {
-//			return "Add Your Own Comment"
-//		} else {
-//			return "Comments"
-//		}
-//	}
 	
 	func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 		
@@ -158,19 +150,26 @@ class PollResultsViewController: UIViewController, UITableViewDelegate, UITableV
 		if string == "\n" {
 			textField.resignFirstResponder()
 			
-			let currentUser = FIRAuth.auth()?.currentUser
-			currentUser?.getTokenForcingRefresh(true) {idToken, error in
-				if let error = error {
-					print(error)
-					return;
+			if textField.text != "" {
+				let currentUser = FIRAuth.auth()?.currentUser
+				currentUser?.getTokenForcingRefresh(true) {idToken, error in
+					if let error = error {
+						print(error)
+						return;
+					}
+					
+					let client = clientAPI(token: idToken!)
+					client.submitComment(pollId: self.pollId, commentTextField: textField, done: self.done)
 				}
-				
-				let client = clientAPI(token: idToken!)
-				client.submitComment(pollId: self.pollId, userComment: textField.text!)
 			}
-			
 		}
 		return true
+	}
+	
+	func done(textField: UITextField) {
+		comments.append(textField.text!)
+		textField.text = "Add another comment..."
+		commentsTable.reloadData()
 	}
 	
 	// Clears the default text

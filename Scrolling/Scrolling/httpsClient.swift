@@ -194,17 +194,18 @@ class clientAPI {
 	}
 	
 	
-	func submitComment(pollId: Int, userComment: String) {
+	func submitComment(pollId: Int, commentTextField: UITextField, done: @escaping (UITextField) -> Void) {
 		let headers : HTTPHeaders = [
 			"Authorization": authToken,
 			"Content-Type": "application/json"
 		]
 		
 		let parameters : Parameters = [
-			"text": userComment
+			"text": commentTextField.text
 		]
 		
 		Alamofire.request("https://pollr-api.appspot.com/api/v1.0/comment/" + String(pollId), method: .post, parameters: parameters, encoding: JSONEncoding.default, headers: headers).responseJSON { response in
+				done(commentTextField)
 		}
 	}
 }
