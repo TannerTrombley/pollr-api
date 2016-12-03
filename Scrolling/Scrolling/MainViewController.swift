@@ -246,6 +246,13 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
 			}
 		}
 		
+		// Add dummy buttons for spacing
+		for i in 0..<(4 - responseStack.subviews.count) {
+			let button = UIButton(type: UIButtonType.system)
+			button.isUserInteractionEnabled = false
+			responseStack.addArrangedSubview(button)
+		}
+		
 		cell?.pollTitle.text = polls[row].getQuestion()
 		return cell!
 	}
